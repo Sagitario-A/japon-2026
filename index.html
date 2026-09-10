@@ -1,0 +1,688 @@
+<title>21 Noches en Japón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#F4F6FA;
+  --paper:#FFFFFF;
+  --sunken:#EBEFF6;
+  --ink:#141E33;
+  --slate:#57678A;
+  --faint:#8896B1;
+  --mist:#D8E0EC;
+  --hair:#E6EBF3;
+  --ai:#22406E;
+  --ai-soft:#3B6098;
+  --torii:#BE3A26;
+  --torii-soft:#F2E2DE;
+  --gold:#8A6A2F;
+  --gold-soft:#F3EDE0;
+  --snow:#4A7FA8;
+  --snow-soft:#E2ECF4;
+
+  --f-disp:"Shippori Mincho",Georgia,"Times New Roman",serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --wrap:74rem;
+  --read:64ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1420;
+    --paper:#151E2D;
+    --sunken:#1B2536;
+    --ink:#E6ECF7;
+    --slate:#9DACC6;
+    --faint:#6F7F9B;
+    --mist:#2A3548;
+    --hair:#232E3F;
+    --ai:#8FB4E4;
+    --ai-soft:#7A9FD0;
+    --torii:#F0705A;
+    --torii-soft:#39221E;
+    --gold:#D6B571;
+    --gold-soft:#302818;
+    --snow:#8FC0E0;
+    --snow-soft:#182734;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1420;
+  --paper:#151E2D;
+  --sunken:#1B2536;
+  --ink:#E6ECF7;
+  --slate:#9DACC6;
+  --faint:#6F7F9B;
+  --mist:#2A3548;
+  --hair:#232E3F;
+  --ai:#8FB4E4;
+  --ai-soft:#7A9FD0;
+  --torii:#F0705A;
+  --torii-soft:#39221E;
+  --gold:#D6B571;
+  --gold-soft:#302818;
+  --snow:#8FC0E0;
+  --snow-soft:#182734;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:var(--wrap);
+  margin-inline:auto;
+  padding-inline:clamp(1rem,4vw,3rem);
+  padding-block:0;
+}
+h1,h2,h3,h4{font-family:var(--f-disp);text-wrap:balance;margin:0;line-height:1.22}
+p{margin:0}
+a{color:var(--ai);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--torii);outline-offset:3px;border-radius:2px}
+
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:.688rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--faint);
+  font-weight:600;
+}
+.jp{font-family:var(--f-disp);font-weight:500}
+
+/* ── Cabecera ────────────────────────────────── */
+.hero{
+  border-bottom:1px solid var(--mist);
+  background:var(--paper);
+}
+.hero-in{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(1.5rem,4vw,4rem);
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-block:clamp(2.5rem,6vw,4rem) clamp(2rem,4vw,2.75rem);
+}
+.hero-l{flex:1 1 22rem;display:flex;flex-direction:column;gap:1rem}
+.hero h1{
+  font-size:clamp(2.6rem,7vw,4.4rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.hero h1 em{
+  font-style:normal;
+  display:block;
+  font-size:.42em;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:var(--slate);
+  margin-top:.5rem;
+}
+.route{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.5rem .75rem;
+  font-family:var(--f-mono);
+  font-size:.813rem;
+  color:var(--slate);
+}
+.route b{color:var(--ink);font-weight:600}
+.route i{font-style:normal;color:var(--faint)}
+
+.hero-r{
+  flex:0 1 20rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:.4rem 1.25rem;
+  align-items:baseline;
+  font-size:.875rem;
+  padding-bottom:.4rem;
+}
+.hero-r dt{font-family:var(--f-mono);font-size:.688rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.hero-r dd{margin:0;font-variant-numeric:tabular-nums}
+
+/* ── Aviso ───────────────────────────────────── */
+.alert{
+  margin-block:clamp(2rem,5vw,3rem);
+  border:1px solid var(--torii);
+  border-left-width:4px;
+  background:var(--torii-soft);
+  padding:clamp(1.25rem,3vw,1.75rem);
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+.alert h2{font-size:clamp(1.25rem,3vw,1.6rem);color:var(--torii);font-weight:700}
+.alert p{max-width:var(--read)}
+.alert .cols{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:1rem 2rem;
+  margin-top:.25rem;
+}
+.alert .cols div{display:flex;flex-direction:column;gap:.2rem}
+.alert .cols strong{font-size:.813rem;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--torii)}
+.alert .cols span{font-size:.938rem}
+
+/* ── Secciones ───────────────────────────────── */
+section{padding-block:clamp(2.5rem,6vw,4rem)}
+section + section{border-top:1px solid var(--hair)}
+.sec-head{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;max-width:var(--read)}
+.sec-head h2{font-size:clamp(1.75rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em}
+.sec-head p{color:var(--slate)}
+
+/* ── Bloques del itinerario ──────────────────── */
+.legs{display:flex;flex-direction:column;gap:1.25rem}
+.leg{
+  background:var(--paper);
+  border:1px solid var(--mist);
+  border-top:3px solid var(--accent,var(--ai));
+  break-inside:avoid;
+}
+.leg-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.5rem 1.25rem;
+  padding:1.25rem clamp(1.1rem,3vw,1.75rem);
+  border-bottom:1px solid var(--hair);
+}
+.leg-num{
+  font-family:var(--f-mono);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  color:var(--accent,var(--ai));
+}
+.leg-head h3{font-size:1.5rem;font-weight:700;margin-right:auto}
+.leg-head h3 span{font-family:var(--f-body);font-size:.75rem;font-weight:500;color:var(--faint);letter-spacing:.04em;display:block;margin-top:.15rem}
+.leg-meta{
+  display:flex;
+  gap:1.25rem;
+  font-family:var(--f-mono);
+  font-size:.75rem;
+  font-variant-numeric:tabular-nums;
+  color:var(--slate);
+}
+.leg-meta b{color:var(--ink);font-weight:600}
+.leg-note{
+  padding:.9rem clamp(1.1rem,3vw,1.75rem);
+  background:var(--sunken);
+  border-bottom:1px solid var(--hair);
+  font-size:.938rem;
+  color:var(--slate);
+}
+.leg-note b{color:var(--ink);font-weight:700}
+
+.days{list-style:none;margin:0;padding:0}
+.day{
+  display:grid;
+  grid-template-columns:8.5rem 1fr;
+  gap:0 1.5rem;
+  padding:1rem clamp(1.1rem,3vw,1.75rem);
+  align-items:baseline;
+}
+.day + .day{border-top:1px solid var(--hair)}
+.day-when{
+  font-family:var(--f-mono);
+  font-size:.75rem;
+  font-variant-numeric:tabular-nums;
+  color:var(--faint);
+  letter-spacing:.02em;
+  padding-top:.15rem;
+}
+.day-when b{display:block;color:var(--ink);font-size:.875rem;font-weight:600;letter-spacing:0}
+.day-body{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.day-body h4{font-size:1.063rem;font-weight:700}
+.day-body p{font-size:.938rem;color:var(--slate);max-width:var(--read)}
+.day-body p b{color:var(--ink);font-weight:700}
+
+.tag{
+  display:inline-block;
+  font-family:var(--f-mono);
+  font-size:.625rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:.15rem .45rem;
+  border:1px solid currentColor;
+  vertical-align:.1em;
+  margin-left:.4rem;
+  white-space:nowrap;
+}
+.t-book{color:var(--torii)}
+.t-early{color:var(--gold)}
+.t-move{color:var(--snow)}
+
+/* ── Alojamiento ─────────────────────────────── */
+.beds{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1.25rem}
+.bed{
+  background:var(--paper);
+  border:1px solid var(--mist);
+  padding:1.25rem 1.4rem;
+  display:flex;
+  flex-direction:column;
+  gap:.65rem;
+  break-inside:avoid;
+}
+.bed-rank{
+  font-family:var(--f-mono);
+  font-size:.688rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--torii);
+}
+.bed h3{font-size:1.25rem;font-weight:700}
+.bed h3 span{display:block;font-family:var(--f-mono);font-size:.75rem;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-top:.25rem}
+.bed .where{font-size:.938rem}
+.bed .where b{color:var(--ai);font-weight:700}
+.bed p{font-size:.875rem;color:var(--slate)}
+.bed ul{margin:0;padding-left:1.1rem;font-size:.875rem;color:var(--slate);display:flex;flex-direction:column;gap:.3rem}
+
+/* ── Práctica ────────────────────────────────── */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:2rem 2.5rem}
+.fact{display:flex;flex-direction:column;gap:.6rem;break-inside:avoid}
+.fact h3{
+  font-family:var(--f-body);
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--faint);
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--mist);
+}
+.fact p{font-size:.938rem;color:var(--slate)}
+.fact p b,.fact li b{color:var(--ink);font-weight:700}
+.fact ul{margin:0;padding-left:1.1rem;font-size:.938rem;color:var(--slate);display:flex;flex-direction:column;gap:.45rem}
+.no{color:var(--torii);font-weight:700}
+
+/* ── Tarjeta recortable ──────────────────────── */
+.cut{
+  margin-top:2rem;
+  border:2px dashed var(--mist);
+  padding:.6rem;
+  break-inside:avoid;
+}
+.cut-in{
+  background:var(--paper);
+  border:1px solid var(--mist);
+  padding:clamp(1.25rem,3vw,1.75rem);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
+  gap:1.75rem 2.5rem;
+}
+.cut-card{display:flex;flex-direction:column;gap:.6rem}
+.cut-card .eyebrow{color:var(--torii)}
+.cut-card.pref .eyebrow{color:var(--snow)}
+.cut-jp{
+  font-family:var(--f-disp);
+  font-size:clamp(1.125rem,2.6vw,1.375rem);
+  font-weight:700;
+  line-height:1.75;
+  color:var(--ink);
+}
+.cut-es{font-size:.813rem;color:var(--slate);font-style:italic;max-width:var(--read)}
+.cut-tip{
+  grid-column:1/-1;
+  border-top:1px solid var(--hair);
+  padding-top:1rem;
+  font-size:.875rem;
+  color:var(--slate);
+}
+.cut-tip b{color:var(--ink)}
+.cut-mark{
+  font-family:var(--f-mono);
+  font-size:.625rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--faint);
+  padding:0 0 .5rem .2rem;
+}
+
+/* ── Checklist ───────────────────────────────── */
+.todo{width:100%;border-collapse:collapse;font-size:.938rem}
+.todo th{
+  text-align:left;
+  font-family:var(--f-mono);
+  font-size:.688rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--faint);
+  font-weight:600;
+  padding:0 1rem .6rem 0;
+  border-bottom:1px solid var(--mist);
+}
+.todo td{padding:.7rem 1rem .7rem 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.todo td:first-child{font-weight:700}
+.todo td:nth-child(2){font-family:var(--f-mono);font-size:.813rem;font-variant-numeric:tabular-nums;color:var(--slate);white-space:nowrap}
+.todo .now{color:var(--torii);font-weight:600}
+.scroll{overflow-x:auto}
+
+/* ── Pie ─────────────────────────────────────── */
+footer{
+  border-top:1px solid var(--mist);
+  padding-block:2rem 3rem;
+  font-size:.813rem;
+  color:var(--faint);
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem 2rem;
+  justify-content:space-between;
+}
+footer .key{display:flex;flex-wrap:wrap;gap:1.25rem}
+footer b{color:var(--slate);font-weight:600}
+
+@media (max-width:38rem){
+  .day{grid-template-columns:1fr;gap:.5rem}
+  .day-when{display:flex;align-items:baseline;gap:.5rem;padding-top:0}
+  .day-when b{display:inline}
+  .leg-meta{width:100%;gap:1rem}
+}
+
+@media print{
+  :root{
+    --ground:#fff;--paper:#fff;--sunken:#F4F6FA;--ink:#111;--slate:#333;
+    --faint:#666;--mist:#bbb;--hair:#ddd;
+  }
+  body{font-size:10.5pt;line-height:1.5}
+  .hero,.leg,.bed,.cut-in{background:#fff}
+  section{padding-block:1.25rem}
+  .leg,.bed,.fact,.cut,.alert,.day{break-inside:avoid}
+  .sec-head h2{font-size:16pt}
+  .hero h1{font-size:26pt}
+  a{color:#111;text-decoration:none}
+  footer{page-break-before:avoid}
+  @page{margin:14mm}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-l">
+      <p class="eyebrow">14 dic 2026 — 4 ene 2027</p>
+      <h1>21 Noches en Japón<em>Invierno, nieve y Año Nuevo</em></h1>
+      <p class="route">
+        <b>Tokio</b> <i>7</i> <i>→</i> <b>Kioto</b> <i>6</i> <i>→</i> <b>Hakuba</b> <i>3</i> <i>→</i> <b>Tokio</b> <i>5</i>
+      </p>
+    </div>
+    <dl class="hero-r">
+      <dt>Grupo</dt><dd>3 desde Madrid + 1 en Tokio</dd>
+      <dt>Ida</dt><dd>IB0281 · MAD 20:20 → NRT 18:30</dd>
+      <dt>Vuelta</dt><dd>IB0282 · NRT 22:10 → MAD 05:45</dd>
+      <dt>Alojamiento</dt><dd>4 bases · 3 traslados largos</dd>
+    </dl>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="alert">
+    <p class="eyebrow">Lo que decide todo el viaje</p>
+    <h2>Caemos de lleno en el Año Nuevo japonés</h2>
+    <p>Del <b>29 de diciembre al 3 de enero</b> Japón se para: cierran bancos, correos, administraciones, muchos museos y buena parte de restaurantes y comercios. Y el transporte se satura en dos oleadas — medio Tokio se va a su pueblo, y vuelve justo <b>del 2 al 4 de enero</b>, el día de nuestro vuelo.</p>
+    <div class="cols">
+      <div>
+        <strong>Sigue abierto</strong>
+        <span>Konbinis 24 h, cadenas, restaurantes de hotel, y los templos en su mejor momento del año.</span>
+      </div>
+      <div>
+        <strong>Por eso</strong>
+        <span>Año Nuevo en Tokio, vuelta el 30 de diciembre a contracorriente, y la nieve antes de que suban los precios.</span>
+      </div>
+      <div>
+        <strong>Y encima</strong>
+        <span>El <em>hatsumōde</em> y las campanadas de Nochevieja son de lo mejor que se puede ver en Japón. Se planifica, no se sufre.</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Itinerario</p>
+      <h2>Los 21 días</h2>
+      <p>Mañanas para ver cosas, tardes de calle y tiendas. Cuatro alojamientos en tres semanas: cada cambio de hotel cuesta media jornada, y con este plan no compensa.</p>
+    </div>
+
+    <div class="legs">
+
+      <article class="leg" style="--accent:var(--ai)">
+        <div class="leg-head">
+          <h3>Tokio <span>Aclimatación · Akihabara · una excursión</span></h3>
+          <span class="leg-num">BLOQUE I</span>
+          <p class="leg-meta"><span>14 → 21 dic</span> <span><b>7</b> noches</span> <span><b>3</b> personas</span></p>
+        </div>
+        <p class="leg-note">Aquí dormimos <b>3</b>: nuestro amigo japonés se queda en casa de su madre. Basta una habitación triple.</p>
+        <ul class="days">
+          <li class="day"><p class="day-when">lun<b>14 dic</b></p><div class="day-body"><h4>Llegada y nada más</h4><p>Aterrizamos a las 18:30; fuera del aeropuerto sobre las 20:00. Konbini y dormir. Venimos de 15 horas de vuelo y 8 de diferencia horaria.</p></div></li>
+          <li class="day"><p class="day-when">mar<b>15 dic</b></p><div class="day-body"><h4>Shibuya y Shinjuku</h4><p>El cruce, Hachikō y Shibuya Sky al atardecer<span class="tag t-book">reservar</span>. De noche, Omoide Yokochō y Golden Gai. Empezar por aquí quita de golpe el «estoy en Japón y no sé por dónde empezar».</p></div></li>
+          <li class="day"><p class="day-when">mié<b>16 dic</b></p><div class="day-body"><h4>Asakusa y primer roce con Akihabara</h4><p>Sensō-ji a las 8 está casi vacío; a las 11 es impracticable<span class="tag t-early">madrugar</span>. Nakamise, Skytree, y por la tarde Akihabara, que queda a quince minutos.</p></div></li>
+          <li class="day"><p class="day-when">jue<b>17 dic</b></p><div class="day-body"><h4>Akihabara a fondo</h4><p>Día entero. Gachapon Kaikan, Super Potato, Mandarake, los arcades de GiGO y Taito, Yodobashi Akiba. <b>Llevad efectivo</b>: los gachapon y muchos arcades siguen siendo solo monedas de 100 yenes.</p></div></li>
+          <li class="day"><p class="day-when">vie<b>18 dic</b></p><div class="day-body"><h4>Excursión: Kamakura</h4><p>El Gran Buda, templos y mar. La alternativa es Nikko, más espectacular pero más lejos y más frío en diciembre.</p></div></li>
+          <li class="day"><p class="day-when">sáb<b>19 dic</b></p><div class="day-body"><h4>Harajuku e Ikebukuro</h4><p>Meiji Jingū por la mañana — el mismo santuario al que volveremos en Año Nuevo, y merece verlo vacío antes. Luego Takeshita-dōri y, por la tarde, Nakano Broadway o Sunshine City.</p></div></li>
+          <li class="day"><p class="day-when">dom<b>20 dic</b></p><div class="day-body"><h4>Odaiba o Ueno</h4><p>teamLab y el Gundam de DiverCity<span class="tag t-book">reservar</span>, o museos y el mercado de Ameyoko. Los domingos Akihabara corta su avenida al tráfico: si quedaron ganas, es el día.</p></div></li>
+        </ul>
+      </article>
+
+      <article class="leg" style="--accent:var(--torii)">
+        <div class="leg-head">
+          <h3>Kioto <span>Templos · Osaka · Nara</span></h3>
+          <span class="leg-num">BLOQUE II</span>
+          <p class="leg-meta"><span>21 → 27 dic</span> <span><b>6</b> noches</span> <span><b>4</b> personas</span></p>
+        </div>
+        <p class="leg-note">Aquí se une <b>nuestro amigo japonés</b> y ya somos cuatro: hay que resolver el formato de habitación.</p>
+        <ul class="days">
+          <li class="day"><p class="day-when">lun<b>21 dic</b></p><div class="day-body"><h4>Shinkansen a Kioto</h4><p>2h15 por la mañana<span class="tag t-move">traslado</span>. Tarde suave e instalarse. Primer día los cuatro juntos.</p></div></li>
+          <li class="day"><p class="day-when">mar<b>22 dic</b></p><div class="day-body"><h4>Fushimi Inari y Gion</h4><p><b>Antes de las 8 de la mañana</b>, sin excepciones: es gratis, abre 24 horas, y a las 10 la subida entre torii es una cola india<span class="tag t-early">madrugar</span>. Tarde: Kiyomizu-dera, Sannenzaka y Gion.</p></div></li>
+          <li class="day"><p class="day-when">mié<b>23 dic</b></p><div class="day-body"><h4>Arashiyama</h4><p>Bosque de bambú temprano, Tenryū-ji, y el parque de monos de Iwatayama — sí, otros monos, estos sin nieve y con vistas a la ciudad.</p></div></li>
+          <li class="day"><p class="day-when">jue<b>24 dic</b></p><div class="day-body"><h4>Osaka: Den Den Town y Dōtonbori</h4><p>El Akihabara de Osaka, más pequeño y menos turístico. En Japón la Nochebuena <b>no es fiesta</b>: es día laborable y noche de parejas, y se cena pollo frito del KFC. Literalmente. Cuatro solteros en Osaka rodeados de parejas con un cubo de KFC: la anécdota se cuenta sola.</p></div></li>
+          <li class="day"><p class="day-when">vie<b>25 dic</b></p><div class="day-body"><h4>Nara</h4><p>Ciervos, Tōdai-ji y el Gran Buda. Media jornada, vuelta a Kioto y tarde de chill.</p></div></li>
+          <li class="day"><p class="day-when">sáb<b>26 dic</b></p><div class="day-body"><h4>Kioto a nuestro ritmo</h4><p>Kinkaku-ji, Nijō-jō, el mercado de Nishiki, y las galerías de Teramachi y Shinkyōgoku con sus tiendas y arcades en pleno centro.</p></div></li>
+        </ul>
+      </article>
+
+      <article class="leg" style="--accent:var(--snow)">
+        <div class="leg-head">
+          <h3>Hakuba <span>Esquí · onsen · monos de la nieve</span></h3>
+          <span class="leg-num">BLOQUE III</span>
+          <p class="leg-meta"><span>27 → 30 dic</span> <span><b>3</b> noches</span> <span><b>4</b> personas</span></p>
+        </div>
+        <p class="leg-note">La nieve va aquí y no en la primera semana: la temporada de Hakuba <b>arranca de verdad la tercera semana de diciembre</b>. Es la diferencia entre nieve artificial y nieve.</p>
+        <ul class="days">
+          <li class="day"><p class="day-when">dom<b>27 dic</b></p><div class="day-body"><h4>Kioto → Hakuba</h4><p>El traslado duro: unas 5 horas cruzando el país<span class="tag t-move">traslado</span>. Llegada por la tarde, onsen y cena. No planificar nada más — es el peaje de esta ruta.</p></div></li>
+          <li class="day"><p class="day-when">lun<b>28 dic</b></p><div class="day-body"><h4>Esquí, día 1</h4><p>Happō-One, la estación grande del valle y sede olímpica del 98.</p></div></li>
+          <li class="day"><p class="day-when">mar<b>29 dic</b></p><div class="day-body"><h4>Esquí, día 2</h4><p>Hakuba Goryū y Hakuba 47, conectadas entre sí. <b>Hoy mandamos las maletas a Tokio por takkyubin</b>, unos ¥2.000 por bulto: sin eso, el día de mañana no funciona.</p></div></li>
+          <li class="day"><p class="day-when">mié<b>30 dic</b></p><div class="day-body"><h4>Monos de la nieve y vuelta a Tokio</h4><p>Jigokudani está a 90 minutos por carretera, más una caminata de 25-40 minutos por el bosque — la carretera corta cierra en invierno, así que hace falta <b>calzado decente, no zapatillas de lona</b>. Va en dirección a Tokio: no es un desvío, es el camino<span class="tag t-move">traslado</span>.</p></div></li>
+        </ul>
+      </article>
+
+      <article class="leg" style="--accent:var(--gold)">
+        <div class="leg-head">
+          <h3>Tokio <span>Nochevieja · hatsumōde · fukubukuro</span></h3>
+          <span class="leg-num">BLOQUE IV</span>
+          <p class="leg-meta"><span>30 dic → 4 ene</span> <span><b>5</b> noches</span> <span><b>3</b> personas</span></p>
+        </div>
+        <p class="leg-note">Medio país está cerrado, así que la regla cambia: <b>menos museo, más calle, templo y comida</b>. Es la reserva más difícil del viaje.</p>
+        <ul class="days">
+          <li class="day"><p class="day-when">jue<b>31 dic</b></p><div class="day-body"><h4>Nochevieja <span class="jp">大晦日</span></h4><p>De día, Ameyoko en pleno mercado de fin de año. De noche, <em>toshikoshi soba</em> y las <b>108 campanadas</b> del <em>joya no kane</em>. Nada que ver con nuestra Nochevieja: es una noche solemne y silenciosa. Id con esa expectativa y os encantará.</p></div></li>
+          <li class="day"><p class="day-when">vie<b>1 ene</b></p><div class="day-body"><h4>Hatsumōde <span class="jp">初詣</span></h4><p>La primera visita del año al santuario. Meiji Jingū recibe millones de personas estos días: está masificado y merece la pena igual. Es la tradición viva más importante del país. Tarde de descanso.</p></div></li>
+          <li class="day"><p class="day-when">sáb<b>2 ene</b></p><div class="day-body"><h4>Fukubukuro <span class="jp">福袋</span></h4><p>Reabre el comercio y lo hace con las <b>bolsas de la suerte</b>: lotes sorpresa a precio cerrado, muy por debajo de su valor. Las de anime, videojuegos y figuras son legendarias y hay cola desde antes del amanecer. Este día es nuestro.</p></div></li>
+          <li class="day"><p class="day-when">dom<b>3 ene</b></p><div class="day-body"><h4>Último día completo</h4><p>Lo que quedó pendiente y las compras finales.</p></div></li>
+          <li class="day"><p class="day-when">lun<b>4 ene</b></p><div class="day-body"><h4>Vuelta</h4><p>Día libre hasta media tarde. <b>Salir hacia Narita a las 17:30</b> para estar allí a las 19:15; el vuelo sale a las 22:10. Es el pico de retorno a Tokio de todo el año: este traslado no se improvisa.</p></div></li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Lo del viernes</p>
+      <h2>Alojamiento</h2>
+      <p>Por orden de urgencia: el inventario más escaso primero. Y una regla que vale más que cualquier chollo — <b>cancelación gratuita siempre que exista</b>, aunque cueste algo más. Bloquea el precio de hoy y deja margen para ajustar durante los tres meses que quedan.</p>
+    </div>
+    <div class="beds">
+      <article class="bed">
+        <p class="bed-rank">1.º · lo más escaso</p>
+        <h3>Hakuba <span>27–30 dic · 3 noches · 4 pax</span></h3>
+        <p class="where">Zona <b>Happō</b>, el centro del valle</p>
+        <p>Fin de año en una estación de esquí japonesa es la demanda máxima del año. Con onsen privado, como queríamos: <b>Shiroumaso</b> (a 2 minutos de la terminal de autobuses, agua alcalina de pH 11) o <b>Hakuba Hifumi</b> (habitaciones con baño termal propio).</p>
+        <ul>
+          <li>Media pensión merece mucho la pena: se cena dentro y no hay que salir al frío</li>
+          <li>Preguntar la <b>política de tatuajes</b> — muchos onsen públicos los rechazan</li>
+          <li>Avisar de la alergia al pollo <b>al reservar</b>, no al llegar</li>
+        </ul>
+      </article>
+      <article class="bed">
+        <p class="bed-rank">2.º · Año Nuevo</p>
+        <h3>Tokio II <span>30 dic–4 ene · 5 noches · 3 pax</span></h3>
+        <p class="where"><b>Shinjuku</b>, o Ueno si aprieta el precio</p>
+        <p>Plena temporada altísima en la capital. Shinjuku tiene la mejor conexión de la ciudad y siempre hay algo abierto; Ueno sale más barato, está andando de Akihabara y tiene el Skyliner directo a Narita en 41 minutos.</p>
+        <ul>
+          <li>Habitación <b>triple</b>, o twin con supletoria</li>
+          <li>Confirmar que la habitación admite legalmente a 3: el aforo en Japón es estricto</li>
+        </ul>
+      </article>
+      <article class="bed">
+        <p class="bed-rank">3.º · cuatro personas</p>
+        <h3>Kioto <span>21–27 dic · 6 noches · 4 pax</span></h3>
+        <p class="where"><b>Kawaramachi / Shijō</b>, el centro</p>
+        <p>Andando a Gion, rodeados de restaurantes y con las galerías de Teramachi al lado. Para cuatro, lo mejor es un <b>apartamento entero</b>: espacio común, lavadora — a mitad de viaje se agradece — y suele salir más barato por cabeza que dos habitaciones.</p>
+        <ul>
+          <li>Alternativa con encanto: habitación de <b>tatami</b> para 4 con futones</li>
+          <li>Osaka y Nara salen bien desde el centro; no hace falta dormir junto a la estación</li>
+        </ul>
+      </article>
+      <article class="bed">
+        <p class="bed-rank">4.º · el fácil</p>
+        <h3>Tokio I <span>14–21 dic · 7 noches · 3 pax</span></h3>
+        <p class="where">El <b>mismo hotel</b> que el bloque IV</p>
+        <p>La jugada: reservar los dos bloques de Tokio en el mismo sitio y preguntar si guardan una maleta durante los 9 días fuera. Muchos hoteles japoneses lo hacen sin problema.</p>
+        <ul>
+          <li>Viajamos ligeros a Kioto y Hakuba</li>
+          <li>Dejamos allí las compras de la primera semana</li>
+          <li>Ya conocemos el barrio cuando volvamos reventados el día 30</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Sobre el terreno</p>
+      <h2>Práctico</h2>
+      <p>Lo que hay que resolver antes de salir de casa, y lo que hay que tener en la cabeza estando allí.</p>
+    </div>
+    <div class="facts">
+
+      <div class="fact">
+        <h3>Trenes · sin JR Pass</h3>
+        <p>Los números no dan: nuestros tres trayectos suman unos <b>¥38.000</b> en billetes sueltos frente a los <b>¥50.000</b> del pase — que además sube a ¥53.000 en octubre. Y aunque compensara, el pase dura <b>7 días</b> y nuestros trayectos están repartidos en 21.</p>
+        <p>Las reservas de shinkansen abren <b>un mes antes</b>, y en Año Nuevo se agotan el mismo día. Fechas para el calendario: <b>21, 27 y 30 de noviembre</b>.</p>
+      </div>
+
+      <div class="fact">
+        <h3>Dinero</h3>
+        <ul>
+          <li><b>Los bancos cierran del 29 de diciembre al 3 de enero.</b> Llegar al día 28 con un colchón de efectivo para los seis días siguientes es la única fecha dura de esta lista.</li>
+          <li>Cajeros de <b>7-Eleven</b> y Correos: los más fiables para tarjetas extranjeras, sin recargo de fin de semana, abiertos 24 h.</li>
+          <li>Con Revolut, <b>cambiar entre semana</b>: el fin de semana hay recargo. Y pocas retiradas grandes, no muchas pequeñas — el cajero japonés cobra lo suyo aparte.</li>
+          <li><b>Dos tarjetas de bancos distintos.</b> Es el consejo más importante de todos: si una falla con los bancos cerrados, la segunda deja de ser precaución y pasa a ser rescate.</li>
+          <li><span class="no">No</span> cambiar euros en España ni en el aeropuerto. Mal tipo en los dos sitios.</li>
+        </ul>
+      </div>
+
+      <div class="fact">
+        <h3>Internet</h3>
+        <p>La eSIM que trae el billete es <b>1 GB durante 24 horas</b>: sirve para aterrizar y poco más.</p>
+        <p>Lo que importa en nuestro caso es la cobertura en <b>Hakuba</b>, en pleno Alpes japoneses. <b>Ubigi</b> y <b>Sakura Mobile</b> van sobre la red de Docomo, que es la que mejor cubre esa zona — eso pesa más que diez euros de diferencia.</p>
+        <p><b>eSIM individual, cada uno la suya.</b> El pocket wifi sale algo más barato pero obliga a ir siempre juntos, y en tres semanas de tiendas y arcades nos vamos a separar.</p>
+      </div>
+
+      <div class="fact">
+        <h3>Equipaje</h3>
+        <p>Llevamos <b>2 maletas de 23 kg por persona</b> en bodega. Es muchísimo margen — y precisamente por eso: <b>no las llevéis todas solo porque podéis</b>. Escaleras de metro, habitaciones pequeñas y trenes con sitio justo.</p>
+        <p>La jugada buena: ir con menos a la ida y comprar una maleta barata allí para la vuelta. Con nuestro plan de compras, va a hacer falta igual.</p>
+      </div>
+
+      <div class="fact">
+        <h3>Frío</h3>
+        <p>Tokio y Kioto son llevaderos con abrigo normal. <b>Hakuba es otra cosa</b>: Alpes japoneses en plena temporada, bajo cero.</p>
+        <p>Lo fácil de olvidar: calzado impermeable con suela para la caminata de los monos, y ropa térmica para esquiar — el material se alquila allí, la ropa interior no. Y los <b>kairo</b>, esas bolsitas de calor que se venden en cualquier konbini por céntimos y que usa todo el mundo.</p>
+      </div>
+
+      <div class="fact">
+        <h3>Antes de volar</h3>
+        <ul>
+          <li>Rellenar <b>Visit Japan Web</b>: llegamos a las 18:30 y cada minuto de cola es un minuto de sueño</li>
+          <li>Comprobar vigencia de los pasaportes</li>
+          <li>Seguro de viaje que <b>cubra deportes de invierno</b> — muchos los excluyen por defecto</li>
+          <li>Mapas de Tokio, Kioto y Nagano descargados sin conexión</li>
+          <li>Comprar la eSIM antes de volar; se activa al aterrizar</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="cut-mark">✂ Imprimir, recortar y llevar en la cartera</p>
+    <div class="cut">
+      <div class="cut-in">
+        <div class="cut-card">
+          <p class="eyebrow">Alergia al pollo</p>
+          <p class="cut-jp">私は鶏肉アレルギーです。<br>鶏肉、鶏がらスープ、チキンエキスが入っていない料理をお願いします。</p>
+          <p class="cut-es">«Soy alérgico al pollo. Por favor, un plato que no lleve carne de pollo, caldo de pollo ni extracto de pollo.»</p>
+        </div>
+        <div class="cut-card pref">
+          <p class="eyebrow">No como pescado</p>
+          <p class="cut-jp">魚が苦手です。<br>魚が入っていない料理はありますか？</p>
+          <p class="cut-es">«No llevo bien el pescado. ¿Hay algún plato que no lleve pescado?»</p>
+        </div>
+        <p class="cut-tip"><b>Por qué esto importa más de lo que parece:</b> el problema no es el pollo evidente, sino el invisible — el caldo de pollo está en muchísimos ramen, incluso en platos que no llevan un solo trozo de pollo. Hay que preguntar por el caldo, no solo por los ingredientes. En Japón se toman las alergias muy en serio y nadie lo vive como una molestia.<br><br>Con el pescado, en cambio, no luchéis contra el <em>dashi</em>: el caldo de bonito está en media cocina japonesa y <b>no sabe a pescado</b>. Guardad el esfuerzo para el pescado reconocible, que sí se esquiva sin problema.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Calendario</p>
+      <h2>Qué se reserva y cuándo</h2>
+      <p>Lo que más viajes arruina no es equivocarse de hotel, sino llegar tarde a una reserva que solo se podía hacer antes.</p>
+    </div>
+    <div class="scroll">
+      <table class="todo">
+        <thead><tr><th>Qué</th><th>Cuándo</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr><td>Alojamiento en Hakuba</td><td class="now">ya</td><td>El inventario más escaso del viaje</td></tr>
+          <tr><td>Tokio, 30 dic → 4 ene</td><td class="now">ya</td><td>Año Nuevo en la capital</td></tr>
+          <tr><td>Kioto, 6 noches</td><td class="now">ya</td><td>Cuatro personas en temporada alta</td></tr>
+          <tr><td>Tokio, 14 → 21 dic</td><td class="now">ya</td><td>El más fácil de los cuatro</td></tr>
+          <tr><td>eSIM</td><td>oct–nov</td><td>Sobre red Docomo por Hakuba</td></tr>
+          <tr><td>teamLab · Shibuya Sky</td><td>oct–nov</td><td>Entradas con fecha y hora</td></tr>
+          <tr><td>Shinkansen Tokio → Kioto</td><td>21 nov</td><td>Abre justo un mes antes</td></tr>
+          <tr><td>Traslado Kioto → Hakuba</td><td>27 nov</td><td>Comparar ruta por Nagoya o por Tokio</td></tr>
+          <tr><td>Shinkansen Nagano → Tokio</td><td>30 nov</td><td>En Año Nuevo se agota el mismo día</td></tr>
+          <tr><td>Forfait y alquiler de esquí</td><td>nov–dic</td><td>Dos días, 28 y 29 de diciembre</td></tr>
+          <tr><td>Visit Japan Web</td><td>días previos</td><td>Inmigración y aduanas</td></tr>
+          <tr><td>Takkyubin Hakuba → Tokio</td><td>29 dic</td><td>Allí mismo, en el alojamiento</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Plan de viaje · actualizado el 10 de septiembre de 2026</p>
+    <p class="key"><span><b>reservar</b> entrada con fecha</span> <span><b>madrugar</b> antes de las 8</span> <span><b>traslado</b> día de tren</span></p>
+  </footer>
+
+</div>
