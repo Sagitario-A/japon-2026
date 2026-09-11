@@ -1,0 +1,263 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Fukubukuro y la Pika Pika Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:60rem;margin-inline:auto;padding-inline:1rem;max-width:min(60rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:60ch}
+.hero .sub b{color:var(--ink)}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.7rem}
+
+.fixbox{background:var(--torii-soft);border:1px solid var(--torii);border-left-width:4px;border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.2rem}
+.fixbox .tag{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--torii)}
+.fixbox h3{font-size:1.2rem;font-weight:800;margin:.3rem 0 .6rem;color:var(--torii)}
+.fixbox p{font-size:.92rem;color:var(--slate)}
+.fixbox p+p{margin-top:.5rem}
+.fixbox b{color:var(--ink)}
+
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--mist);border-radius:6px;background:var(--paper);margin:1rem 0}
+table{border-collapse:collapse;width:100%;min-width:32rem;font-size:.86rem}
+th,td{padding:.6rem .7rem;text-align:left;border-bottom:1px solid var(--hair);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunken)}
+td b{color:var(--ink)}
+td.win{color:var(--moss);font-weight:700}
+td.bad{color:var(--torii)}
+
+.q{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.8rem}
+.q h3{font-size:1.04rem;font-weight:700;margin-bottom:.5rem}
+.q p{font-size:.9rem;color:var(--slate)}
+.q p+p{margin-top:.5rem}
+.q b{color:var(--ink)}
+
+.cols{display:grid;gap:.7rem;grid-template-columns:1fr;margin-top:.5rem}
+.col h4{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;margin:0 0 .3rem}
+.col.pro h4{color:var(--moss)} .col.con h4{color:var(--torii)}
+.col ul{margin:0;padding-left:1.05rem;font-size:.89rem;color:var(--slate);display:flex;flex-direction:column;gap:.3rem}
+.col ul b{color:var(--ink)}
+
+.trash{background:var(--sunken);border-radius:6px;padding:1rem 1.1rem}
+.trash h3{font-size:1.05rem;font-weight:800;margin-bottom:.5rem}
+.trash ul{margin:0;padding-left:1.1rem;font-size:.88rem;color:var(--slate);display:flex;flex-direction:column;gap:.4rem}
+.trash ul b{color:var(--ink)}
+
+.checklist{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.checklist li{font-size:.9rem;color:var(--slate);padding-left:1.5rem;position:relative}
+.checklist li:before{content:"☐";position:absolute;left:0;color:var(--faint)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .cols{grid-template-columns:1fr 1fr}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .fixbox,.q,.trash{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="ver.html">Qué ver</a>
+        <a href="calles.html">Calles y edificios</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="logistica.html">Logística</a>
+        <a href="fukubukuro.html" class="now">Fukubukuro</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Fukubukuro y la Pika Pika Box</h1>
+    <p class="sub">Las bolsas de la suerte de Año Nuevo caen justo en <b>Tokio II (1-3 de enero)</b>. Y hay un caso concreto que afecta directamente al grupo: Pokémon Center ya no las vende en tienda.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">Lo de siempre</p>
+  <h2 class="big">Qué es un fukubukuro</h2>
+  <p style="font-size:.92rem;color:var(--slate)"><b>Fukubukuro (福袋, "bolsa de la suerte")</b> es una bolsa cerrada que las tiendas venden a precio fijo con contenido sorpresa que vale más de lo pagado. La costumbre comercial más grande del Año Nuevo japonés — ropa, cosmética, café, electrónica, jugueterías, tiendas de personajes.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Categoría</th><th>Ejemplos</th><th>Precio orientativo</th></tr></thead>
+      <tbody>
+        <tr><td>Ropa (gama media)</td><td>United Arrows, Beams, Snidel</td><td>¥8.000–15.000</td></tr>
+        <tr><td>Cosmética</td><td>FANCL, Shu Uemura</td><td>¥5.000–20.000+</td></tr>
+        <tr><td>Café / té</td><td>Starbucks, Tully's, Lupicia</td><td>¥3.000–6.000</td></tr>
+        <tr><td>Electrónica</td><td>Yodobashi, Bic Camera</td><td>Variable — suele incluir un producto de gama alta con descuento fuerte</td></tr>
+        <tr><td>Grandes almacenes</td><td>Loft, Tokyu Hands, Muji</td><td>Variable</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="q">
+    <p>✅ <b>Venta el 1, 2 y 3 de enero de 2027.</b> Muchas tiendas —sobre todo grandes almacenes— no abren hasta el <b>2 de enero</b>, así que el día 1 no es universal.</p>
+    <p><b>Cómo se compran:</b> cola física el mismo día (los más codiciados se agotan en minutos, colas desde antes del amanecer), o reserva/pre-pedido online cada vez más común en cadenas grandes — el método varía tienda a tienda.</p>
+    <p>⚠️ Ninguna fuente da todavía el catálogo concreto de la edición 2026-27. Se suele publicar entre <b>finales de noviembre y mediados de diciembre</b>.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Por qué existe esta página</p>
+  <h2 class="big">El caso Pokémon Center: ya no hay fukubukuro en tienda</h2>
+
+  <div class="fixbox">
+    <span class="tag">🚨 Dato clave</span>
+    <h3>Se sustituyó por la Pika Pika Box, 100% online y por sorteo</h3>
+    <p>Pokémon Center <b>ya no vende su fukubukuro en el mostrador</b>. Lo sustituyó por
+    <b>ピカピカボックス (Pika Pika Box, "caja reluciente")</b>, que se reparte por <b>sorteo</b> —
+    no hay cola física posible.</p>
+  </div>
+
+  <div class="q">
+    <h3>Cómo funcionó la última edición (Pika Pika Box 2026 — sirve de plantilla)</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Fase</th><th>Fecha</th></tr></thead>
+        <tbody>
+          <tr><td>Solicitud al sorteo</td><td>21 nov 2025, 14:00 → 27 nov 2025, 16:59 JST</td></tr>
+          <tr><td>Anuncio de resultado</td><td>3 dic 2025, desde las 15:00 JST</td></tr>
+          <tr><td>Pago (solo si toca)</td><td>3 → 9 dic 2025, 16:59 JST</td></tr>
+          <tr><td>Envío</td><td>Finales de diciembre de 2025</td></tr>
+          <tr><td>Precio</td><td>¥4.400 con impuestos</td></tr>
+          <tr><td>Contenido</td><td>Bolsa bandolera de Magikarp/Koiking (al azar) + varios productos Pokémon</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Hubo además una <b>ronda adicional de sorteo</b> después de la primera, con plazo hasta el 16 de enero.</p>
+  </div>
+
+  <div class="fixbox" style="background:var(--gold-soft);border-color:var(--gold)">
+    <span class="tag" style="color:var(--gold)">⚠️ Sin anunciar</span>
+    <h3 style="color:var(--gold)">La edición que toca al viaje: Pika Pika Box 2027</h3>
+    <p><b>A día de hoy no está anunciada.</b> Ni fecha de solicitud, ni precio, ni contenido. 💭 Previsión por patrón —no tratar como hecho—: solicitud hacia el <b>20-27 de noviembre de 2026</b>, resultado a primeros de diciembre, envío a finales de diciembre.</p>
+  </div>
+
+  <h3 style="font-size:1.1rem;font-weight:700;margin:1.4rem 0 .8rem">Por qué no es tan simple: los dos obstáculos reales</h3>
+  <div class="q">
+    <p>🚨 <b>Obstáculo 1 — verificación por teléfono japonés.</b> La cuenta de Pokémon Center Online exige verificación por SMS de un <b>número de móvil japonés real</b> — los números extranjeros ni el VoIP pasan la verificación. La eSIM de datos que van a usar los tres desde Madrid <b>no da un número con capacidad de recibir SMS</b> de este tipo.</p>
+    <p>🚨 <b>Obstáculo 2 — solo envía dentro de Japón.</b> Pokémon Center Japan no hace envío internacional desde su propia web. Contratar un servicio de reenvío de cero no es realista para una ventana de compra de días.</p>
+    <p>✅ <b>La solución obvia: el amigo japonés.</b> Número de móvil real, dirección japonesa, cuenta que puede llevar meses activa. 💭 Recomiendo pedirle que <b>se registre y verifique su cuenta ya</b>, sin esperar al anuncio — la verificación de teléfono a veces tarda, y así no compite con el plazo corto del sorteo.</p>
+    <p>⚠️ El amigo no está en los bloques de Tokio (solo Kioto y nieve). Si el envío llega a su casa mientras el grupo está en Tokio II, hay que resolver la entrega — pieza de logística menor, pendiente de cuando se cierre el itinerario.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Para decidir</p>
+  <h2 class="big">Ventajas y desventajas de perseguirla</h2>
+  <div class="q">
+    <div class="cols">
+      <div class="col pro"><h4>Intentarlo</h4><ul>
+        <li>Encaja perfecto con <b>el alma friki</b> del viaje</li>
+        <li>El amigo japonés ya resuelve los dos obstáculos técnicos</li>
+        <li>Precio bajo: ~¥4.400 en la edición anterior</li>
+      </ul></div>
+      <div class="col con"><h4>Intentarlo</h4><ul>
+        <li>Depende de que se anuncie a tiempo</li>
+        <li>Depende de la logística de entrega con el amigo</li>
+        <li>Contenido fijo (el año pasado, bolsas de Magikarp) que puede no gustarle a nadie</li>
+      </ul></div>
+      <div class="col pro"><h4>No intentarlo, fukubukuro genéricos en tienda</h4><ul>
+        <li>No depende de nadie ni de ningún sorteo</li>
+        <li>Se puede hacer los tres solos, con cola física, cualquier cadena</li>
+      </ul></div>
+      <div class="col con"><h4>No intentarlo, fukubukuro genéricos en tienda</h4><ul>
+        <li>Los más codiciados exigen colas desde antes del amanecer</li>
+        <li>Hay que decidir qué tienda sobre la marcha</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="q">
+    <p>💭 <b>Recomendación: no son excluyentes.</b> Vigilar el anuncio de la Pika Pika Box 2027 desde mediados de noviembre a través del amigo japonés —coste bajo, cero esfuerzo si él ya tiene cuenta verificada— y aparte dejar una mañana libre del 1-3 de enero por si el grupo quiere cazar fukubukuro de otras tiendas sobre el terreno.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Para no repetir el error</p>
+  <h2 class="big">Descartado</h2>
+  <div class="trash">
+    <ul>
+      <li><b>Comprar la Pika Pika Box desde España sin el amigo japonés</b> — la verificación por SMS japonés y el envío solo-Japón lo hacen inviable sin una identidad japonesa detrás</li>
+      <li><b>Esperar a comprarla en tienda el día de Año Nuevo</b> — Pokémon Center ya no la vende en mostrador; no hay plan B presencial para este producto concreto</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Antes de que se anuncie</p>
+  <h2 class="big">Lo que queda por hacer</h2>
+  <ul class="checklist">
+    <li>Vigilar el anuncio oficial de la Pika Pika Box 2027, esperado hacia mediados/finales de noviembre de 2026</li>
+    <li>Confirmar si el amigo japonés puede/quiere registrarse y verificar su cuenta con antelación</li>
+    <li>Cuando se cierre el orden final de bloques, decidir cómo y cuándo se entrega el paquete si toca en el sorteo</li>
+    <li>Cuando se acerque diciembre, mirar el catálogo concreto de fukubukuro genéricos en las tiendas de las zonas donde esté el grupo el 1-3 de enero</li>
+  </ul>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · fuente completa en la investigación del repositorio de trabajo</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>
