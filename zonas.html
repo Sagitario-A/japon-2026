@@ -1,0 +1,300 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Las tres zonas de nieve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin-inline:auto;padding-inline:1rem;max-width:min(62rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+img,svg{max-width:100%;display:block}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.top a{text-decoration:none;color:var(--torii);border-bottom:2px solid currentColor;padding-bottom:1px}
+.top button{font:inherit;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:50ch}
+.hero .sub b{color:var(--ink)}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.7rem}
+
+/* Mapa */
+.mapbox{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem .8rem}
+.mapbox figcaption{font-size:.82rem;color:var(--slate);margin-top:.6rem;text-align:center}
+
+/* Tabla comparativa */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--mist);border-radius:6px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.88rem}
+th,td{padding:.6rem .7rem;text-align:left;border-bottom:1px solid var(--hair);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunken);position:sticky;top:0}
+tbody th{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);font-weight:600;white-space:nowrap}
+td b{color:var(--ink)}
+td.win{color:var(--moss);font-weight:700}
+td.bad{color:var(--torii)}
+
+/* Fichas de zona */
+.zcard{background:var(--paper);border:1px solid var(--mist);border-left:5px solid var(--zc);border-radius:6px;margin-bottom:1.1rem;overflow:hidden}
+.zhead{padding:1rem 1.1rem .8rem;display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:baseline}
+.zhead h3{font-size:1.4rem;font-weight:800;color:var(--zc);margin-right:auto}
+.zhead .num{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.zbody{padding:0 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.85rem}
+.zpitch{font-size:.97rem;color:var(--slate)}
+.zpitch b{color:var(--ink)}
+.cols{display:grid;gap:.7rem}
+.col h4{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;margin:0 0 .3rem}
+.col.pro h4{color:var(--moss)} .col.con h4{color:var(--torii)}
+.col ul{margin:0;padding-left:1.05rem;font-size:.89rem;color:var(--slate);display:flex;flex-direction:column;gap:.25rem}
+.col ul b{color:var(--ink)}
+.who{background:var(--zcs);border-radius:4px;padding:.65rem .8rem;font-size:.9rem}
+.who b{color:var(--ink)}
+.zgo{display:flex;flex-wrap:wrap;gap:.7rem;padding-top:.6rem;border-top:1px solid var(--hair);font-family:var(--f-mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.zgo a{text-decoration:none}
+.zgo a.cta{background:var(--zc);color:#fff;padding:.45rem .8rem;border-radius:3px}
+.zgo a.m{color:var(--moss)}
+
+.q{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.8rem}
+.q h3{font-size:1.06rem;font-weight:700;margin-bottom:.5rem}
+.q p{font-size:.9rem;color:var(--slate)}
+.q p+p{margin-top:.4rem}
+.q b{color:var(--ink)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  .cols{grid-template-columns:1fr 1fr;gap:1.4rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .zcard,.q,.mapbox{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="top">
+      <a href="index.html">← Plan del viaje</a>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </div>
+    <h1>¿A qué nieve vamos?</h1>
+    <p class="sub">Tres días entre el 27 y el 30 de diciembre. Hay que elegir <b>una</b> de estas tres zonas, y de esa elección depende todo lo demás: qué esquiamos, si vemos los monos y qué clase de pueblo tenemos alrededor.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">Dónde está cada una</p>
+  <h2 class="big">Las tres están en Nagano, pero no juntas</h2>
+  <figure class="mapbox">
+    <svg viewBox="0 0 620 400" role="img" aria-label="Mapa esquemático de las tres zonas en Nagano con tiempos de transporte">
+      <defs>
+        <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="none" stroke="var(--faint)" stroke-width="1.3"/></marker>
+      </defs>
+      <!-- lineas -->
+      <g stroke="var(--mist)" stroke-width="2" fill="none" marker-end="url(#ar)">
+        <path d="M300,300 L150,210"/>
+        <path d="M300,300 L300,150"/>
+        <path d="M300,300 L455,205"/>
+      </g>
+      <path d="M300,300 L520,352" stroke="var(--faint)" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+      <path d="M300,300 L95,352" stroke="var(--faint)" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+
+      <!-- Hakuba -->
+      <circle cx="150" cy="200" r="31" fill="var(--snow-soft)" stroke="var(--snow)" stroke-width="2.5"/>
+      <text x="150" y="196" text-anchor="middle" font-size="19">🎿</text>
+      <text x="150" y="213" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--snow)" font-family="sans-serif">HAKUBA</text>
+      <text x="150" y="252" text-anchor="middle" font-size="11" fill="var(--slate)" font-family="monospace">70 min · bus</text>
+
+      <!-- Nozawa -->
+      <circle cx="300" cy="140" r="31" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="2.5"/>
+      <text x="300" y="136" text-anchor="middle" font-size="19">🏘️</text>
+      <text x="300" y="153" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--moss)" font-family="sans-serif">NOZAWA</text>
+      <text x="300" y="97" text-anchor="middle" font-size="11" fill="var(--slate)" font-family="monospace">75 min · bus</text>
+
+      <!-- Shibu -->
+      <circle cx="460" cy="195" r="31" fill="var(--torii-soft)" stroke="var(--torii)" stroke-width="2.5"/>
+      <text x="460" y="191" text-anchor="middle" font-size="19">♨️</text>
+      <text x="460" y="208" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--torii)" font-family="sans-serif">SHIBU</text>
+      <text x="460" y="248" text-anchor="middle" font-size="11" fill="var(--slate)" font-family="monospace">45 min · tren</text>
+
+      <!-- Monos -->
+      <circle cx="545" cy="140" r="23" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="2"/>
+      <text x="545" y="146" text-anchor="middle" font-size="17">🐒</text>
+      <text x="545" y="178" text-anchor="middle" font-size="10" fill="var(--gold)" font-weight="700" font-family="sans-serif">MONOS</text>
+      <path d="M488,182 L523,155" stroke="var(--gold)" stroke-width="2.5" fill="none"/>
+      <text x="524" y="203" text-anchor="middle" font-size="10" fill="var(--slate)" font-family="monospace">4 km</text>
+
+      <!-- Nagano -->
+      <circle cx="300" cy="300" r="27" fill="var(--ink)"/>
+      <text x="300" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="var(--paper)" font-family="sans-serif">NAGANO</text>
+      <text x="300" y="343" text-anchor="middle" font-size="10.5" fill="var(--faint)" font-family="monospace">nudo de conexión</text>
+
+      <!-- Tokio / Kioto -->
+      <text x="547" y="357" text-anchor="middle" font-size="12" font-weight="700" fill="var(--slate)" font-family="sans-serif">TOKIO</text>
+      <text x="547" y="374" text-anchor="middle" font-size="10" fill="var(--faint)" font-family="monospace">1 h 20</text>
+      <text x="62" y="357" text-anchor="middle" font-size="12" font-weight="700" fill="var(--slate)" font-family="sans-serif">KIOTO</text>
+      <text x="62" y="374" text-anchor="middle" font-size="10" fill="var(--faint)" font-family="monospace">~3 h</text>
+    </svg>
+    <figcaption>Esquema, no está a escala. <b>Casi todo pasa por Nagano</b>: se llega en shinkansen y de ahí sale el último tramo a cada zona.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <p class="lead">Lo que las diferencia</p>
+  <h2 class="big">Comparación directa</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th></th><th>♨️ Shibu Onsen</th><th>🏘️ Nozawa Onsen</th><th>🎿 Hakuba</th></tr></thead>
+      <tbody>
+        <tr><th>Qué es</th><td>Pueblo termal de 1.300 años</td><td>Pueblo termal con estación propia</td><td>Valle de esquí, 10 estaciones</td></tr>
+        <tr><th>Desde Tokio</th><td>3 h</td><td class="win">2 h 15 — el más rápido</td><td>3 h <b>(o Azusa directo 3 h 40)</b></td></tr>
+        <tr><th>Desde Kioto</th><td>~4 h</td><td class="win">~3 h 30</td><td class="bad">~5 h</td></tr>
+        <tr><th>Esquí</th><td><b>Shiga Kogen</b> a un bus: 600 ha, la más grande y alta de Japón</td><td>Propia, <b>a pie desde el pueblo</b>. 297 ha, 40% pistas fáciles</td><td class="win"><b>10 estaciones</b> bajo un pase. Tsugaike tiene la mejor zona de principiantes del país</td></tr>
+        <tr><th>Los monos</th><td class="win"><b>4 km · 10 min</b></td><td class="bad">~4 h en transporte público, o tour de 5 h</td><td>90 min por carretera</td></tr>
+        <tr><th>Baños del pueblo</th><td><b>9 baños</b>, solo para quien duerme allí</td><td class="win"><b>13 baños gratis</b>, abiertos a todos</td><td>2 públicos en Happō</td></tr>
+        <tr><th>Tatuajes</th><td class="bad">Información contradictoria</td><td class="win"><b>Aceptados sin discusión</b></td><td>Sin baños públicos: depende del hotel</td></tr>
+        <tr><th>De noche</th><td>Silencio. Paseo en yukata entre baños</td><td class="win">Izakayas, 2 destilerías de sake, microcervecería</td><td>Bares, ambiente internacional</td></tr>
+        <tr><th>Precio 3 noches</th><td class="win">~¥59.000 <b>con cena y desayuno</b></td><td>~¥62.000–68.000 sin comidas</td><td class="bad">~¥85.000 sin comidas</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Por qué elegir cada una</p>
+  <h2 class="big">Tres viajes distintos</h2>
+
+  <article class="zcard" style="--zc:var(--torii);--zcs:var(--torii-soft)">
+    <div class="zhead"><h3>♨️ Shibu Onsen</h3><span class="num">Opción 1</span></div>
+    <div class="zbody">
+      <p class="zpitch">Un pueblo de <b>1.300 años</b> con calles empedradas y casas de madera de época Edo. Dormir en cualquiera de sus ryokanes te da <b>una llave maestra que abre los nueve baños públicos del pueblo</b>, cerrados a todos los demás: la tradición se llama <em>Kyū-tō Meguri</em> y se recorre en yukata y sandalias de madera, sellando una toalla en cada baño.</p>
+      <div class="cols">
+        <div class="col pro"><h4>A favor</h4><ul>
+          <li><b>Los monos a 10 minutos.</b> Un mismo autobús une ryokan, monos y pistas</li>
+          <li>Esquí en <b>Shiga Kogen</b>: la estación más grande y más alta de Japón</li>
+          <li>La <b>mejor relación calidad-precio</b>: los ryokanes incluyen cena y desayuno</li>
+          <li>El <b>Kanaguya</b>, el edificio que todos comparan con <em>El viaje de Chihiro</em></li>
+        </ul></div>
+        <div class="col con"><h4>En contra</h4><ul>
+          <li><b>De noche no hay nada.</b> Es un pueblo silencioso</li>
+          <li><b>Tatuajes: dudoso.</b> Hay fuentes que dicen que sí y otras que no</li>
+          <li>Hay que coger bus a diario para esquiar</li>
+        </ul></div>
+      </div>
+      <p class="who">👤 <b>Elegidla si</b> lo que queréis es la experiencia japonesa de verdad —ryokan, baños, yukata— y los monos os importan.</p>
+      <p class="zgo"><a class="cta" href="alojamientos.html#shibu">Ver los 12 alojamientos →</a><a class="m" href="https://www.google.com/maps/search/?api=1&query=Shibu+Onsen+Yamanouchi+Nagano" target="_blank" rel="noopener">📍 En el mapa</a></p>
+    </div>
+  </article>
+
+  <article class="zcard" style="--zc:var(--moss);--zcs:var(--moss-soft)">
+    <div class="zhead"><h3>🏘️ Nozawa Onsen</h3><span class="num">Opción 2</span></div>
+    <div class="zbody">
+      <p class="zpitch">Un pueblo documentado desde <b>1272</b> con estación de esquí propia: se sale del alojamiento y se está en las pistas. <b>Trece baños públicos gratuitos</b> mantenidos por los vecinos y abiertos a cualquiera, dos destilerías de sake y una microcervecería. Es el que más vida tiene de los tres.</p>
+      <div class="cols">
+        <div class="col pro"><h4>A favor</h4><ul>
+          <li><b>El más fácil de alcanzar</b>: 2 h 15 desde Tokio, 3 h 30 desde Kioto</li>
+          <li><b>Acepta tatuajes sin discusión</b> — el único de los tres</li>
+          <li>13 baños <b>gratis</b> y el forfait más barato (¥7.000)</li>
+          <li>El <b>mejor ambiente nocturno</b>, y se esquía andando</li>
+        </ul></div>
+        <div class="col con"><h4>En contra</h4><ul>
+          <li>🚨 <b>Los monos quedan a casi 4 horas</b> en transporte público. O tour de 5 h</li>
+          <li>Estación más pequeña (297 ha) y de cota más baja</li>
+          <li>Se llena en temporada alta</li>
+        </ul></div>
+      </div>
+      <p class="who">👤 <b>Elegidla si</b> queréis salir de noche, esquiar sin coger transporte y que lo del tatuaje deje de ser un tema — y podéis vivir sin los monos.</p>
+      <p class="zgo"><a class="cta" href="alojamientos.html#nozawa">Ver los 8 alojamientos →</a><a class="m" href="https://www.google.com/maps/search/?api=1&query=Nozawa+Onsen+Village+Nagano" target="_blank" rel="noopener">📍 En el mapa</a></p>
+    </div>
+  </article>
+
+  <article class="zcard" style="--zc:var(--snow);--zcs:var(--snow-soft)">
+    <div class="zhead"><h3>🎿 Hakuba</h3><span class="num">Opción 3</span></div>
+    <div class="zbody">
+      <p class="zpitch">No es un pueblo sino un <b>valle de varios kilómetros</b> con núcleos separados y <b>diez estaciones bajo un mismo pase</b>. Fue sede olímpica en 1998. Aquí la decisión real es en qué núcleo dormir: <b>Wadano</b> es el premium y el que más onsen concentra, <b>Happō</b> el centro con restaurantes, <b>Cortina</b> tiene los mejores baños del valle y <b>Tsugaike</b> las pistas más fáciles de Japón.</p>
+      <div class="cols">
+        <div class="col pro"><h4>A favor</h4><ul>
+          <li><b>Diez estaciones</b>: se puede cambiar de montaña cada día</li>
+          <li><b>Tsugaike Kogen</b> tiene el terreno de principiantes más extenso del país</li>
+          <li>El <b>Green Plaza de Cortina</b>: once tipos de baño distintos</li>
+          <li>Ambiente internacional, menos barrera de idioma</li>
+        </ul></div>
+        <div class="col con"><h4>En contra</h4><ul>
+          <li>🚨 <b>El más caro</b>: recargo de temporada del 27 dic al 25 ene, y sin comidas</li>
+          <li><b>No es pueblo termal</b>: sin ronda de baños ni paseo en yukata</li>
+          <li><b>Peor acceso desde Kioto</b> (~5 h) y monos a 90 min</li>
+          <li>Alojamiento disperso: hay que elegir bien el núcleo</li>
+        </ul></div>
+      </div>
+      <p class="who">👤 <b>Elegidla si</b> lo que manda es esquiar: variedad de montaña, ambiente internacional y vida nocturna occidental.</p>
+      <p class="zgo"><a class="cta" href="alojamientos.html#hakuba">Ver los 13 alojamientos →</a><a class="m" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Village+Nagano" target="_blank" rel="noopener">📍 En el mapa</a></p>
+    </div>
+  </article>
+</section>
+
+<section>
+  <p class="lead">Para decidir</p>
+  <h2 class="big">Cuatro preguntas y ya está</h2>
+  <div class="q"><h3>1 · ¿Los monos son innegociables?</h3>
+    <p><b>Sí</b> → Shibu (10 min) o Hakuba (90 min).<br><b>No</b> → las tres siguen en juego.</p>
+    <p>Con Nozawa los monos no son imposibles, pero se comen un día entero atado a un tour.</p></div>
+  <div class="q"><h3>2 · ¿Noche o calma?</h3>
+    <p><b>Salir</b> → Nozawa (japonesa) o Hakuba (internacional).<br><b>Desconectar</b> → Shibu.</p></div>
+  <div class="q"><h3>3 · ¿Qué hacemos con el tatuaje?</h3>
+    <p><b>Nozawa</b> lo acepta sin más. En <b>Shibu</b> es dudoso y se resuelve reservando habitación con baño privado. En <b>Hakuba</b> no hay baños públicos, así que depende solo del hotel.</p>
+    <p>💡 Y la pregunta previa: <b>¿de qué tamaño es?</b> Si es pequeño, taparlo con un parche es práctica aceptada en Japón y el asunto desaparece.</p></div>
+  <div class="q"><h3>4 · ¿Cuánto pesa el dinero?</h3>
+    <p>Shibu sale por <b>~¥59.000</b> los tres días <b>con cena y desayuno incluidos</b>. Nozawa, <b>~¥62.000–68.000</b> sin comidas. Hakuba, <b>~¥85.000</b> sin comidas.</p>
+    <p>Contando que una cena kaiseki en ryokan vale fácil ¥5.000–8.000, la diferencia real es mayor de lo que parece.</p></div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · <b>nada reservado</b> · precios de referencia, sin comprobar para nuestras fechas</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>
