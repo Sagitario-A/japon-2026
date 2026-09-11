@@ -1,0 +1,375 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Qué reservar y cuándo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:56rem;margin-inline:auto;padding-inline:1rem;max-width:min(56rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:52ch}
+.hero .sub b{color:var(--ink)}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.7rem}
+
+/* Alarma */
+.alarm{background:var(--torii-soft);border:1px solid var(--torii);border-left-width:4px;border-radius:6px;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.alarm h3{font-size:1.15rem;font-weight:800;color:var(--torii)}
+.alarm p{font-size:.92rem;color:var(--slate)}
+.alarm p b{color:var(--ink)}
+.alarm .when{font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--torii)}
+
+/* Timeline */
+.tl{display:flex;flex-direction:column;gap:.8rem}
+.item{background:var(--paper);border:1px solid var(--mist);border-radius:6px;display:flex;gap:0;overflow:hidden}
+.item.urgent{border-color:var(--torii);border-width:2px}
+.datebox{flex:0 0 5.2rem;background:var(--sunken);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.6rem .3rem;text-align:center;border-right:1px solid var(--mist)}
+.item.urgent .datebox{background:var(--torii-soft)}
+.datebox .d{font-family:var(--f-mono);font-size:1.15rem;font-weight:800;color:var(--ink);line-height:1}
+.item.urgent .datebox .d{color:var(--torii)}
+.datebox .m{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-top:.15rem}
+.datebox .h{font-family:var(--f-mono);font-size:.6rem;color:var(--slate);margin-top:.3rem}
+.ibody{padding:.8rem 1rem;display:flex;flex-direction:column;gap:.35rem;flex:1;min-width:0}
+.ibody h4{font-size:1.02rem;font-weight:700}
+.ibody p{font-size:.87rem;color:var(--slate)}
+.ibody p b{color:var(--ink)}
+.badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.15rem}
+.bdg{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;font-weight:700;padding:.2rem .45rem;border-radius:3px}
+.bdg.free{background:var(--moss-soft);color:var(--moss)}
+.bdg.pay{background:var(--gold-soft);color:var(--gold)}
+.bdg.lottery{background:var(--torii-soft);color:var(--torii)}
+.bdg.done{background:var(--sunken);color:var(--faint)}
+
+.monthlab{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;margin:1.2rem 0 .5rem;padding-top:.4rem}
+.monthlab:first-child{margin-top:0}
+
+.note{background:var(--snow-soft);border-radius:6px;padding:.9rem 1.05rem;font-size:.9rem;color:var(--slate);margin-top:1rem}
+.note b{color:var(--ink)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .datebox{flex:0 0 6rem}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .item{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html" class="now">Reservas</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Qué reservar y cuándo</h1>
+    <p class="sub">Todo lo que hay que comprar con antelación, en orden cronológico. <b>Lo que más viajes arruina no es equivocarse de hotel, sino llegar tarde a una reserva que solo se podía hacer antes.</b> Japón va 8 horas por delante de España en invierno: las horas japonesas llevan su equivalente peninsular al lado.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">Lo más urgente de todas</p>
+  <div class="alarm">
+    <span class="when">1 → 30 de septiembre de 2026 · estamos dentro de esta ventana ahora mismo</span>
+    <h3>🎮 Sorteo del Museo Nintendo (diciembre)</h3>
+    <p>No se vende entrada en taquilla: solo por <b>sorteo</b>, solicitado <b>tres meses antes</b> del mes de visita. Para diciembre, la ventana se cierra <b>el 30 de septiembre</b>. Resultado el 1 de octubre; si toca, hay que pagar antes del 7.</p>
+    <p>✅ El sorteo es <b>completamente aleatorio</b>, no por orden de llegada: da igual el día de septiembre en que se solicite. Y entrar no compromete a nada — solo se paga si sale premiado.</p>
+    <p>💭 Días propuestos: <b>24, 25 y 26 de diciembre</b> — los tres caen en el bloque de Kioto con cualquier reparto posible. Más detalle en <a href="festividades.html#nintendo">Festividades →</a></p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">El calendario completo</p>
+  <h2 class="big">De ahora a la salida</h2>
+
+  <p class="monthlab">Ya — cuanto antes</p>
+  <div class="tl">
+    <div class="item urgent">
+      <div class="datebox"><span class="d">Ya</span><span class="m">urgente</span></div>
+      <div class="ibody">
+        <h4>🏨 Alojamiento de los 4 bloques</h4>
+        <p>Año Nuevo es, con la Golden Week, la temporada de máxima demanda del país. <b>Regla de oro: cancelación gratuita siempre que exista</b>, aunque cueste algo más.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Ya</span><span class="m">si toca</span></div>
+      <div class="ibody">
+        <h4>🎿 Alquiler de material de esquí</h4>
+        <p>Conviene reservarlo por adelantado en temporada alta: asegura disponibilidad y acelera el trámite en tienda el primer día.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Ya</span><span class="m">si interesa</span></div>
+      <div class="ibody">
+        <h4>🧙 Studio Tour Tokyo — Harry Potter</h4>
+        <p>Venta abierta ahora mismo, para fechas hasta el 31 de diciembre de 2026. Se agota en temporada alta.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Ya</span><span class="m">semanas antes</span></div>
+      <div class="ibody">
+        <h4>🥋 Entrenamiento de sumo (asageiko)</h4>
+        <p>Grupos de 10-20 personas en Ryōgoku, se llenan con semanas de antelación. Diciembre es de los mejores meses del año para verlo. Confirmar hasta qué día de diciembre entrenan antes del parón de fin de año.</p>
+        <div class="badges"><span class="bdg pay">¥5.000–15.000</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="monthlab">Octubre</p>
+  <div class="tl">
+    <div class="item">
+      <div class="datebox"><span class="d">1</span><span class="m">oct · 5:00 JST</span></div>
+      <div class="ibody">
+        <h4>🏯 Villas imperiales de Kioto (Katsura y Shugakuin)</h4>
+        <p>Solicitud online desde las 5:00 del día 1 del mes, tres meses antes de la visita. Para diciembre, hoy mismo.</p>
+        <div class="badges"><span class="bdg free">Gratis</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">~9</span><span class="m">oct · 10:00 JST</span></div>
+      <div class="ibody">
+        <h4>🎭 Kaomise del Minamiza — entradas</h4>
+        <p>El gran kabuki de diciembre en Kioto. Venta telefónica y web; fecha orientativa según la edición anterior.</p>
+        <div class="badges"><span class="bdg pay">¥6.000–28.000</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Oct</span><span class="m">cuando publiquen</span></div>
+      <div class="ibody">
+        <h4>🎿 Forfait, temporada 26-27</h4>
+        <p>Los precios se publican hacia octubre. Comprobar si hay tarifa de venta anticipada más barata que la de taquilla.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Oct</span><span class="m">antes de volar</span></div>
+      <div class="ibody">
+        <h4>📱 eSIM</h4>
+        <p>Comprar e instalar antes de volar; se activa al aterrizar. Sobre red Docomo por la cobertura en la montaña.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="monthlab">Noviembre — el mes clave</p>
+  <div class="tl">
+    <div class="item">
+      <div class="datebox"><span class="d">1-30</span><span class="m">noviembre</span></div>
+      <div class="ibody">
+        <h4>🎮 Jump Festa 2027 — registro previo</h4>
+        <p>19 y 20 de diciembre en Makuhari. Entrada gratis, pero con sorteo previo — en la edición anterior el plazo se abrió a mediados de noviembre. Vigilar la web oficial.</p>
+        <div class="badges"><span class="bdg free">Gratis</span><span class="bdg lottery">Sorteo</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">1</span><span class="m">de cada mes</span></div>
+      <div class="ibody">
+        <h4>🐟 Subasta de atún de Toyosu</h4>
+        <p>Sorteo gratuito convocado a primeros de cada mes para el mes siguiente. Visita de 5:45 a 6:25. Si no toca, el pasillo del 2.º piso no necesita solicitud.</p>
+        <div class="badges"><span class="bdg free">Gratis</span><span class="bdg lottery">Sorteo</span></div>
+      </div>
+    </div>
+    <div class="item urgent">
+      <div class="datebox"><span class="d">10</span><span class="m">nov · 02:00 ES</span></div>
+      <div class="ibody">
+        <h4>🎬 Museo Ghibli — entradas de diciembre</h4>
+        <p>Salen a las 10:00 JST del día 10, para todo diciembre. <b>Es el tiro bueno</b>: en enero el museo está cerrado casi todo el bloque. Días posibles: 16 al 20 de diciembre. Los huecos de fin de semana se agotan en menos de 15 minutos.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Nov</span><span class="m">3-4 sem antes</span></div>
+      <div class="ibody">
+        <h4>🎨 teamLab (Borderless / Planets)</h4>
+        <p>Franjas horarias cerradas; los fines de semana se agotan con 3 semanas de antelación. Comprar a mediados de noviembre.</p>
+        <div class="badges"><span class="bdg pay">¥3.600–5.600</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Nov</span><span class="m">sistema nuevo</span></div>
+      <div class="ibody">
+        <h4>🐒 Entradas de los monos de la nieve</h4>
+        <p>Desde agosto de 2026 el parque vende entrada online y el aforo diario puede llenarse en temporada alta. Falta confirmar la antelación exacta para fechas de diciembre.</p>
+        <div class="badges"><span class="bdg pay">¥800</span></div>
+      </div>
+    </div>
+    <div class="item urgent">
+      <div class="datebox"><span class="d">21</span><span class="m">nov</span></div>
+      <div class="ibody">
+        <h4>🚅 Shinkansen del 21 de diciembre (Tokio → Kioto)</h4>
+        <p>Las reservas abren exactamente un mes antes. En Año Nuevo los asientos se agotan el mismo día que salen a la venta.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item urgent">
+      <div class="datebox"><span class="d">27</span><span class="m">nov</span></div>
+      <div class="ibody">
+        <h4>🚅 Traslado del 27 de diciembre (Kioto → nieve)</h4>
+        <p>Mismo sistema: un mes exacto antes de la fecha de viaje.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Fin</span><span class="m">nov</span></div>
+      <div class="ibody">
+        <h4>🌅 Shibuya Sky — amanecer del 1 de enero</h4>
+        <p>Apertura especial de madrugada con aforo muy limitado — 330 entradas en la edición anterior, agotadas rápido.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item urgent">
+      <div class="datebox"><span class="d">30</span><span class="m">nov</span></div>
+      <div class="ibody">
+        <h4>🚅 Shinkansen del 30 de diciembre (Nagano → Tokio)</h4>
+        <p>El tercer y último traslado largo con reserva exacta a un mes.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="monthlab">Diciembre — antes de volar</p>
+  <div class="tl">
+    <div class="item">
+      <div class="datebox"><span class="d">10</span><span class="m">dic · 02:00 ES</span></div>
+      <div class="ibody">
+        <h4>🎬 Museo Ghibli — entradas de enero</h4>
+        <p>Segundo intento, solo sirve para <b>el 3 de enero</b>: el 1 y el 2 el museo está cerrado por vacaciones de invierno.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">~15</span><span class="m">dic</span></div>
+      <div class="ibody">
+        <h4>🎮 Comiket 109 — pulseras de participación</h4>
+        <p>29-31 de diciembre, tres días. Pulseras en Animate, Toranoana y Melonbooks, online y en tienda — difícil desde España. Aquí es donde el amigo japonés vale oro.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Dic</span><span class="m">mediados</span></div>
+      <div class="ibody">
+        <h4>🎭 Kabuki de Año Nuevo, Kabuki-za</h4>
+        <p>Los asientos de un solo acto (makumi-seki) se compran online el mismo día — la forma sensata de probar el kabuki.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">14</span><span class="m">días antes · 16:00 ES</span></div>
+      <div class="ibody">
+        <h4>🌆 Shibuya Sky, entrada normal</h4>
+        <p>Ventana rodante: salen a medianoche JST del día exactamente 14 días antes. La franja de atardecer se agota en unos 60 segundos.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">2 sem</span><span class="m">– 1 día antes</span></div>
+      <div class="ibody">
+        <h4>🍵 Saihō-ji, el templo de musgo (si interesa)</h4>
+        <p>Solicitud online entre 2 semanas y 1 día antes de la visita — o por postal desde 2 meses antes. Incluye copiar sutras antes de entrar al jardín.</p>
+        <div class="badges"><span class="bdg pay">De pago</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">Dic</span><span class="m">días previos</span></div>
+      <div class="ibody">
+        <h4>📋 Visit Japan Web</h4>
+        <p>Registro previo de inmigración y aduanas. Llegamos a las 18:30 — cada minuto de cola es un minuto de sueño.</p>
+        <div class="badges"><span class="bdg free">Gratis</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="monthlab">Ya en Japón</p>
+  <div class="tl">
+    <div class="item">
+      <div class="datebox"><span class="d">29</span><span class="m">dic · en Hakuba</span></div>
+      <div class="ibody">
+        <h4>📦 Takkyubin, Hakuba → Tokio</h4>
+        <p>Se contrata en el propio alojamiento el día antes del traslado. Unos ¥2.000 por bulto, normalmente en 24 h.</p>
+        <div class="badges"><span class="bdg pay">¥2.000/bulto</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="datebox"><span class="d">🍄</span><span class="m">cada mañana</span></div>
+      <div class="ibody">
+        <h4>Super Nintendo World, USJ Osaka</h4>
+        <p>Ticket de acceso por horas, gratuito y por orden de llegada — se agota una hora después de abrir el parque en días de mucha gente. Alternativa: Express Pass de pago.</p>
+        <div class="badges"><span class="bdg free">Gratis · por orden de llegada</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">💭 <b>Esta lista cubre lo que ya sabemos que hace falta.</b> Puede que aparezcan más restaurantes o actividades concretas que también pidan reserva — se van añadiendo aquí en cuanto se detectan, según la regla del repositorio: se avisa en el momento en que aparece, no al final.</div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · fechas y fuentes contrastadas en la investigación completa del repositorio de trabajo</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>

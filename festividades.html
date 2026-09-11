@@ -1,0 +1,331 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Festividades y eventos especiales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:64rem;margin-inline:auto;padding-inline:1rem;max-width:min(64rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:60ch}
+.hero .sub b{color:var(--ink)}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.35rem}
+.sec-sub{color:var(--slate);font-size:.92rem;max-width:60ch;margin-bottom:1.1rem}
+
+/* Fichas de evento */
+.ev{background:var(--paper);border:1px solid var(--mist);border-left:5px solid var(--ec,var(--ai));border-radius:6px;margin-bottom:1rem;overflow:hidden}
+.ev-head{padding:.9rem 1.1rem .55rem;display:flex;flex-wrap:wrap;gap:.35rem .9rem;align-items:baseline}
+.ev-head h3{font-size:1.22rem;font-weight:800;color:var(--ec,var(--ink));margin-right:auto}
+.ev-head .when{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.05em;color:var(--faint);font-weight:600;white-space:nowrap}
+.ev-body{padding:0 1.1rem 1.05rem;display:flex;flex-direction:column;gap:.6rem}
+.ev-body p{font-size:.92rem;color:var(--slate)}
+.ev-body p b{color:var(--ink)}
+.ev-meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-family:var(--f-mono);font-size:.72rem;color:var(--slate)}
+.ev-meta span b{color:var(--ink)}
+.badges{display:flex;flex-wrap:wrap;gap:.3rem}
+.bdg{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;font-weight:700;padding:.2rem .45rem;border-radius:3px}
+.bdg.free{background:var(--moss-soft);color:var(--moss)}
+.bdg.pay{background:var(--gold-soft);color:var(--gold)}
+.bdg.lottery{background:var(--torii-soft);color:var(--torii)}
+.cols{display:grid;gap:.6rem;margin-top:.1rem}
+.col h4{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin:0 0 .25rem}
+.col.pro h4{color:var(--moss)} .col.con h4{color:var(--torii)}
+.col ul{margin:0;padding-left:1.05rem;font-size:.86rem;color:var(--slate);display:flex;flex-direction:column;gap:.22rem}
+.col ul b{color:var(--ink)}
+
+/* Choque destacado */
+.clash{background:var(--torii-soft);border:1px solid var(--torii);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem}
+.clash h3{font-size:1.25rem;font-weight:800;color:var(--torii);margin-bottom:.5rem}
+.clash p{font-size:.92rem;color:var(--slate);margin-bottom:.5rem}
+.clash p b{color:var(--ink)}
+
+/* Fix del Ghibli */
+.fixbox{background:var(--snow-soft);border-radius:6px;padding:1rem 1.15rem;margin-bottom:1rem}
+.fixbox h3{font-size:1.05rem;font-weight:800;margin-bottom:.4rem}
+.fixbox p{font-size:.9rem;color:var(--slate)}
+.fixbox p b{color:var(--ink)}
+
+.q{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.8rem}
+.q h3{font-size:1.06rem;font-weight:700;margin-bottom:.5rem}
+.q p{font-size:.9rem;color:var(--slate)}
+.q p+p{margin-top:.4rem}
+.q b{color:var(--ink)}
+.verdict{display:inline-block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:.25rem .55rem;border-radius:3px;margin-bottom:.5rem}
+.verdict.no{background:var(--torii-soft);color:var(--torii)}
+.verdict.yes{background:var(--moss-soft);color:var(--moss)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .cols{grid-template-columns:1fr 1fr;gap:1.2rem}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .ev,.q,.clash,.fixbox{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html" class="now">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Qué pasa en Japón estas fechas</h1>
+    <p class="sub">Del <b>13 de diciembre al 4 de enero</b> caen encima del viaje, sin buscarlo, un mercado centenario, la mayor feria de manga gratuita del país, el gran kabuki de Kioto, un Comiket de tres días —el primero así desde 2019— y el Año Nuevo japonés entero. Esto es qué es cada cosa, por qué compensa ir, dónde está y cuánto cuesta. Fechas con entrada o reserva, en <a href="reservas.html">el calendario de reservas →</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">Solo se puede aquí</p>
+  <h2 class="big">Primer bloque de Tokio</h2>
+  <p class="sec-sub">Cuatro cosas que <b>solo existen en este tramo del viaje</b>. Si el primer bloque de Tokio se acorta, se pierden.</p>
+
+  <article class="ev" style="--ec:var(--ai)">
+    <div class="ev-head"><h3>🎍 Hagoita-ichi, el mercado de las palas</h3><span class="when">17–19 dic · 9:00–19:30</span></div>
+    <div class="ev-body">
+      <p>El <em>hagoita</em> es la pala del <em>hanetsuki</em>, un juego de volante de Año Nuevo. Hace siglos dejaron de usarse para jugar y se convirtieron en amuletos: palas decoradas con un rostro en relieve de seda, que se regalan para «devolver» la mala suerte del año. Los últimos artesanos del oficio montan sus puestos en el recinto de <b>Sensō-ji</b>, el templo más famoso de Tokio.</p>
+      <p><b>Por qué compensa:</b> convierte una visita turística en una escena. Vamos a ver Sensō-ji igual — la diferencia entre verlo un día cualquiera y verlo estos tres días, con el recinto lleno de puestos iluminados y gritos rituales, es enorme.</p>
+      <div class="ev-meta"><span>📍 <b>Sensō-ji, Asakusa</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--ai)">
+    <div class="ev-head"><h3>🎮 Jump Festa 2027</h3><span class="when">19–20 dic · 9:00–17:00</span></div>
+    <div class="ev-body">
+      <p>El acto anual de la editorial Shueisha: <b>One Piece, Dragon Ball, Jujutsu Kaisen, My Hero Academia, Kimetsu no Yaiba</b> y más, en once pabellones de Makuhari Messe. Estrenos mundiales de anime, escenarios con seiyū y autores, demos jugables y mercancía exclusiva.</p>
+      <p><b>Por qué compensa:</b> si el alma del viaje son el manga y los videojuegos, esto es el acto central del manga comercial japonés — y es <b>gratis</b>. Mucho más accesible que Comiket para quien no habla japonés.</p>
+      <div class="ev-meta"><span>📍 <b>Makuhari Messe, Chiba</b> · ~30 min desde Tokio</span><span class="badges"><span class="bdg free">Gratis</span><span class="bdg lottery">Registro previo</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--ai)">
+    <div class="ev-head"><h3>✨ Iluminaciones de invierno</h3><span class="when">hasta el 25 dic (Roppongi · Shibuya)</span></div>
+    <div class="ev-body">
+      <p><b>Roppongi Hills</b> y la <b>Cueva Azul de Shibuya</b> (Aoi Dōkutsu) se apagan el 25 de diciembre. Solo <b>Marunouchi</b> dura hasta el 4 de enero. Gratis, de paso, no merece un día — merece una hora al final de uno que ya estemos haciendo por ahí.</p>
+      <div class="ev-meta"><span>📍 <b>Roppongi · Shibuya · Marunouchi</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--ai)">
+    <div class="ev-head"><h3>🥋 Entrenamiento matinal de sumo (asageiko)</h3><span class="when">diciembre · 7:00–10:00</span></div>
+    <div class="ev-body">
+      <p>Diciembre es de los mejores meses del año para ver el entrenamiento en un establo real de <b>Ryōgoku</b>: los luchadores preparan el torneo de enero. Sin público, sin espectáculo — el trabajo de verdad, a un par de metros del <em>dohyō</em>.</p>
+      <p><b>Por qué compensa:</b> es la manera de ver sumo <b>sin mover los vuelos</b> — el torneo de Tokio empieza el 10 de enero, seis días después de volar. Y gratis al lado, el Museo del Sumo dentro del propio Kokugikan.</p>
+      <div class="ev-meta"><span>📍 <b>Ryōgoku, Tokio</b></span><span class="badges"><span class="bdg pay">¥5.000–15.000</span></span></div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <p class="lead">En Kioto y alrededores</p>
+  <h2 class="big">El diciembre de Kioto</h2>
+
+  <article class="ev" style="--ec:var(--torii)">
+    <div class="ev-head"><h3>🏮 Shimai-Kōbō, el mayor mercado del año</h3><span class="when">21 dic · mañana a tarde</span></div>
+    <div class="ev-body">
+      <p>Cada día 21 hay mercado en <b>Tō-ji</b>, y el del 21 de diciembre es el último y el más grande del año: <b>más de mil puestos</b> de antigüedades, kimonos usados, cerámica y todo lo necesario para el Año Nuevo. Tō-ji tiene además la pagoda de madera más alta de Japón.</p>
+      <p><b>Por qué compensa:</b> el mejor sitio para comprar souvenirs con carácter, y a <b>15 minutos andando</b> de la estación de Kioto — encaja en un día de llegada sin robar tiempo a nada.</p>
+      <div class="ev-meta"><span>📍 <b>Tō-ji, a 15 min de la estación de Kioto</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--torii)" id="nintendo">
+    <div class="ev-head"><h3>🎮 Museo Nintendo</h3><span class="when">días candidatos: 24, 25, 26 dic</span></div>
+    <div class="ev-body">
+      <p>La sede histórica de Nintendo en <b>Uji</b>, convertida en museo: todo lo fabricado desde 1889, cartas <em>hanafuda</em>, la Game &amp; Watch, la Famicom, la Game Boy, la N64 — y una planta de experiencias jugables con mandos gigantes.</p>
+      <p><b>Por qué compensa:</b> de todo lo que hay en esta página, es lo que mejor encaja con este grupo. 🚨 <b>Solo se entra por sorteo, y para diciembre la ventana se cierra el 30 de septiembre.</b> Detalle completo en <a href="reservas.html">Reservas →</a></p>
+      <div class="ev-meta"><span>📍 <b>Uji, ~20 min de la estación de Kioto</b></span><span class="badges"><span class="bdg pay">¥3.300</span><span class="bdg lottery">Sorteo</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--torii)">
+    <div class="ev-head"><h3>🎭 Kaomise, el gran kabuki de diciembre</h3><span class="when">1–25 dic · 10:30 y 16:30</span></div>
+    <div class="ev-body">
+      <p>El acontecimiento cultural del año en Kioto: los actores de kabuki de <b>Tokio y Osaka juntos</b> en el teatro <b>Minamiza</b>, en pie desde 1610. Una función entera son 4-5 horas en japonés arcaico.</p>
+      <p><b>La versión gratis:</b> los <em>maneki</em> (まねき), los tablones con los nombres de los actores caligrafiados en la fachada, están <b>al pie del puente de Gion</b> — de camino de todas formas. Verlos cuesta cinco minutos.</p>
+      <div class="cols">
+        <div class="col pro"><h4>Los maneki</h4><ul><li><b>Gratis</b> y de paso</li><li>5 minutos, sin compromiso</li></ul></div>
+        <div class="col con"><h4>Una función</h4><ul><li>4-5 horas en japonés antiguo</li><li>¥6.000–28.000</li></ul></div>
+      </div>
+      <div class="ev-meta"><span>📍 <b>Minamiza, Shijō — junto al puente de Gion</b></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--torii)">
+    <div class="ev-head"><h3>🏮 Shimai-Tenjin</h3><span class="when">25 dic · todo el día</span></div>
+    <div class="ev-body">
+      <p>El gemelo del mercado de Tō-ji, en <b>Kitano Tenmangū</b>. El último del año y el más animado: antigüedades, plantas, ropa usada y género de Año Nuevo.</p>
+      <p>💭 Y tiene morbo: el 25 de diciembre es día laborable en Japón — pasar la Navidad en un mercadillo de amuletos rodeados de abuelas regateando es difícil de olvidar.</p>
+      <div class="ev-meta"><span>📍 <b>Kitano Tenmangū, noroeste de Kioto</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <div class="clash">
+    <h3>🚨 El choque: Comiket 109 contra el bloque de nieve</h3>
+    <p><b>29, 30 y 31 de diciembre en Tokyo Big Sight</b> — y este año son <b>tres días</b>, el primer Comiket de invierno de tres días desde 2019. Medio millón de personas, decenas de miles de círculos vendiendo <em>dōjinshi</em>, cosplay masivo. Cae exactamente sobre el bloque de nieve, que aún no está decidido.</p>
+    <div class="cols">
+      <div class="col pro"><h4>A favor</h4><ul>
+        <li>Irrepetible: tres días, el primero desde 2019</li>
+        <li>El fandom japonés puro, sin escaparate para turistas</li>
+      </ul></div>
+      <div class="col con"><h4>En contra</h4><ul>
+        <li>Agotador y físicamente duro con frío</li>
+        <li>🚨 Las pulseras se venden en tiendas japonesas — difícil desde España sin el amigo</li>
+      </ul></div>
+    </div>
+    <p>💭 <b>La pulsera de tarde</b> es más barata y mucho más llevadera que la de mañana. Si solo se hace un día, el 31 es el que menos toca al resto del plan — pero también es Nochevieja japonesa, así que es un día doble.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">El bloque más cargado, no el más cerrado</p>
+  <h2 class="big">Año Nuevo en Tokio</h2>
+  <p class="sec-sub">Del 29 de diciembre al 3 de enero medio país cierra — pero Tokio, precisamente, es donde más pasa. Casi todo lo siguiente es gratis.</p>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>🛒 Ameyoko en fin de año</h3><span class="when">28–31 dic · pico el 30</span></div>
+    <div class="ev-body">
+      <p>La calle de mercado de Ueno se transforma en donde medio Tokio compra el género de Año Nuevo. El 30 de diciembre puede reunir <b>más de 500.000 personas en un solo día</b>.</p>
+      <div class="ev-meta"><span>📍 <b>Ameyoko, Ueno</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>🔔 Ōmisoka, la Nochevieja japonesa</h3><span class="when">31 dic · de noche</span></div>
+    <div class="ev-body">
+      <p><em>Toshikoshi soba</em> para «cruzar el año», y a medianoche las <b>108 campanadas</b> (<em>joya no kane</em>) en templos como Zōjō-ji o Sensō-ji — una por cada deseo mundano del budismo.</p>
+      <p><b>No se parece en nada a nuestra Nochevieja:</b> es solemne y silenciosa, no una fiesta. Con esa expectativa, es de lo más fuerte del viaje.</p>
+      <div class="ev-meta"><span>📍 <b>Zōjō-ji · Sensō-ji</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>⛩️ Hatsumōde, la primera visita del año</h3><span class="when">1–3 ene</span></div>
+    <div class="ev-body">
+      <p><b>Meiji Jingū</b> recibe entre 3,2 y 3,3 millones de personas en tres días. 💭 <b>Kanda Myōjin</b>, a 5 minutos de Akihabara, es la alternativa friki: vende amuletos de «protección informática» y es lugar de peregrinación de <em>Love Live!</em> y <em>Steins;Gate</em>.</p>
+      <p>💭 <b>El truco de las horas:</b> el día 1 entre las 10:00 y las 15:00 es lo peor. Mejor el 2 o el 3 muy temprano, o cualquier día a partir de las 16:00.</p>
+      <div class="ev-meta"><span>📍 <b>Meiji Jingū o Kanda Myōjin</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>🎁 Fukubukuro, las bolsas de la suerte</h3><span class="when">1–2 ene</span></div>
+    <div class="ev-body">
+      <p>El primer día de venta del año: bolsas opacas a precio cerrado con género por bastante más de lo que cuestan. Las de <b>Animate, Mandarake, Yodobashi</b> y los Pokémon Center son legendarias, con colas desde antes del amanecer.</p>
+      <div class="ev-meta"><span>📍 <b>Akihabara, Ikebukuro, Nakano</b></span><span class="badges"><span class="bdg pay">¥3.000–10.000</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>🏃 Hakone Ekiden + 👑 saludo del Emperador</h3><span class="when">2 ene, el mejor día del viaje</span></div>
+    <div class="ev-body">
+      <p>Salida de la carrera de relevos más seguida de Japón, en <b>Ōtemachi</b>, por la mañana. A <b>10 minutos andando</b>, el <b>Palacio Imperial</b> abre para el saludo del Emperador — uno de los dos únicos días del año. Cinco apariciones, entre las 9:30 y las 14:10.</p>
+      <p>Se encadena sin esfuerzo con el Ekiden y con los fukubukuro por la tarde: los tres gratis, los tres solo este día.</p>
+      <div class="ev-meta"><span>📍 <b>Ōtemachi · Palacio Imperial</b></span><span class="badges"><span class="bdg free">Gratis</span></span></div>
+    </div>
+  </article>
+
+  <article class="ev" style="--ec:var(--gold)">
+    <div class="ev-head"><h3>🎬 Reapertura del Ghibli + 🎭 kabuki de Año Nuevo</h3><span class="when">3 ene</span></div>
+    <div class="ev-body">
+      <p>Meta del Ekiden por la tarde, y el <b>único día de enero</b> en que el Museo Ghibli está abierto. En el Kabuki-za, los asientos de un solo acto (<em>makumi-seki</em>) son la forma sensata de probar el kabuki sin comerse cinco horas.</p>
+      <div class="ev-meta"><span>📍 <b>Mitaka · Kabuki-za, Ginza</b></span><span class="badges"><span class="bdg pay">De pago</span></span></div>
+    </div>
+  </article>
+
+  <div class="fixbox">
+    <h3>🚨 Corrección importante sobre el Museo Ghibli</h3>
+    <p>El museo hace cierre invernal largo — en la temporada anterior, <b>del 27 de diciembre al 2 de enero</b>. De enero solo queda el <b>día 3</b>, y además cierra los martes todo el año. <b>El tiro bueno es diciembre</b>, con la alarma del 10 de noviembre.</p>
+  </div>
+
+  <div class="q">
+    <h3>🎄 La Navidad japonesa — contexto, no plan</h3>
+    <p>El <b>25 de diciembre es laborable</b>, no cierra nada. La Nochebuena es <b>noche de parejas</b>, más parecida a un San Valentín: se cena pollo frito del KFC —literalmente, por una campaña de 1974— y tarta de nata y fresas.</p>
+    <p>🍗 Ojo con el alérgico al pollo: ese día está en todas partes. Y el <b>26 de diciembre el país cambia de decorado</b> de la noche a la mañana: fuera la Navidad, dentro el Año Nuevo.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">La pregunta grande</p>
+  <h2 class="big">¿Movemos los vuelos?</h2>
+  <div class="q">
+    <span class="verdict no">Recomendación: no</span>
+    <h3>La ventana actual ya es excepcional</h3>
+    <p>Sin buscarlo, han caído dentro: Hagoita-ichi, Jump Festa, los dos mercados de fin de año de Kioto, el Kaomise, un Comiket de tres días, el Ōmisoka, el hatsumōde, los fukubukuro, el Hakone Ekiden y el saludo del Emperador. Hay pocas ventanas de tres semanas en el calendario japonés tan cargadas como esta.</p>
+    <p>Adelantar el viaje por el <b>Chichibu Yomatsuri</b> (2-3 dic) exigiría once días más y se lleva por delante la nieve y el Año Nuevo. Retrasarlo por el <b>festival de fuego de Nozawa</b> (15 ene) tiene además un problema técnico: el acceso está limitado a quien duerma esa noche en el pueblo.</p>
+    <p>El único argumento serio es el <b>torneo de sumo</b>, que empieza el 10 de enero — seis días tarde. Pero cuesta 540 € de penalización de vuelo más tarifa, más seis noches y seis días de vacaciones. Y hay alternativa sin tocar nada: el <b>entrenamiento matinal en Ryōgoku</b>, arriba en esta misma página.</p>
+    <p>💭 Si al grupo le tira el torneo de verdad: primero se pregunta si hay seis días más de vacaciones, y solo entonces se pide el precio a Iberia.</p>
+  </div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · calendario de eventos investigado con fuentes primarias, algunas fechas de 2026-27 aún sin publicar oficialmente (marcadas ⚠️ en el repositorio de trabajo)</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>

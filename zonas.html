@@ -39,9 +39,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offs
 
 .hero{background:var(--paper);border-bottom:1px solid var(--mist)}
 .hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
-.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
-.top a{text-decoration:none;color:var(--torii);border-bottom:2px solid currentColor;padding-bottom:1px}
-.top button{font:inherit;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
 .hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
 .hero .sub{color:var(--slate);max-width:50ch}
 .hero .sub b{color:var(--ink)}
@@ -108,10 +111,17 @@ footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.7
 
 <header class="hero">
   <div class="wrap hero-in">
-    <div class="top">
-      <a href="index.html">← Plan del viaje</a>
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="zonas.html" class="now">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+      </div>
       <button id="theme" type="button">🌙 Oscuro</button>
-    </div>
+    </nav>
     <h1>¿A qué nieve vamos?</h1>
     <p class="sub">Tres días entre el 27 y el 30 de diciembre. Hay que elegir <b>una</b> de estas tres zonas, y de esa elección depende todo lo demás: qué esquiamos, si vemos los monos y qué clase de pueblo tenemos alrededor.</p>
   </div>
