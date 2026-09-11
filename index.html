@@ -393,6 +393,7 @@ footer b{color:var(--slate);font-weight:600}
     <div class="hero-l">
       <p class="eyebrow">14 dic 2026 — 4 ene 2027</p>
       <h1>21 Noches en Japón<em>Invierno, nieve y Año Nuevo</em></h1>
+      <p style="font-family:var(--f-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase"><button id="theme" type="button" style="font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding:.4rem .75rem;border:1px solid var(--mist);color:var(--slate);background:var(--paper);cursor:pointer;margin-bottom:.6rem">🌙 Oscuro</button>
       <p style="font-family:var(--f-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase"><a href="alojamientos.html" style="font-weight:600;text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:2px">Ver catálogo de alojamiento →</a></p>
       <p class="route">
         <b>Tokio</b> <i>7</i> <i>→</i> <b>Kioto</b> <i>6</i> <i>→</i> <b>Hakuba</b> <i>3</i> <i>→</i> <b>Tokio</b> <i>5</i>
@@ -667,3 +668,14 @@ footer b{color:var(--slate);font-weight:600}
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var b=document.getElementById('theme'),r=document.documentElement;
+  if(!b)return;
+  function set(t){r.setAttribute('data-theme',t);b.textContent=t==='dark'?'☀️ Claro':'🌙 Oscuro';try{localStorage.setItem('tema',t)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('tema')}catch(e){}
+  set(saved==='dark'?'dark':'light');
+  b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='dark'?'light':'dark')});
+})();
+</script>
