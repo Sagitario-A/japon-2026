@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
 <title>Dónde dormimos en la nieve</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5,7 +7,7 @@
 
 <style>
 :root{
-  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F5F8FC;
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
   --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
   --mist:#D4DEEA; --hair:#E7EDF4;
   --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
@@ -15,7 +17,6 @@
   --f-disp:"Shippori Mincho",Georgia,serif;
   --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-  --wrap:84rem;
 }
 :root[data-theme="dark"]{
   --ground:#101725; --paper:#18212F; --sunken:#1E2938;
@@ -26,969 +27,340 @@
   --snow:#7FC2E4; --snow-soft:#152834;
   --moss:#8CBE97; --moss-soft:#1A2B1E;
 }
-
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(1rem,4vw,3rem)}
-h1,h2,h3,h4{font-family:var(--f-disp);margin:0;line-height:1.2;text-wrap:balance}
+html{overflow-x:hidden}
+body,.wrap,.card,.info,.hero-in,.bar-in{max-width:100%;min-width:0}
+.why,.zone-d,.sub,.name h3{overflow-wrap:anywhere}
+.info,.name,.specs,.go{min-width:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+.wrap{max-width:68rem;margin-inline:auto;padding-inline:1rem}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
 p{margin:0}
-a{color:var(--ai);text-underline-offset:2px}
-a:focus-visible{outline:2px solid var(--torii);outline-offset:3px}
 img{max-width:100%;display:block}
-.eyebrow{font-family:var(--f-mono);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
 
 .hero{background:var(--paper);border-bottom:1px solid var(--mist)}
-.hero-in{padding-block:clamp(2rem,4vw,3rem) clamp(1.5rem,3vw,2rem);display:flex;flex-direction:column;gap:.9rem}
-.backlink{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
-.backlink a{text-decoration:none;color:var(--torii);border-bottom:2px solid currentColor;padding-bottom:2px}
-.hero h1{font-size:clamp(2.1rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-.02em}
-.hero h1 em{font-style:normal;display:block;font-size:.34em;font-weight:600;color:var(--slate);margin-top:.5rem}
-.hero p.lead{max-width:64ch;color:var(--slate);font-size:1.0625rem}
-.counts{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;font-family:var(--f-mono);font-size:.8125rem;color:var(--slate)}
-.counts b{color:var(--ink);font-weight:600}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.top a{text-decoration:none;color:var(--torii);border-bottom:2px solid currentColor;padding-bottom:1px}
+.top button{font:inherit;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px}
+.hero h1{font-size:clamp(1.9rem,7vw,3rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);font-size:1rem;max-width:48ch}
+.hero .sub b{color:var(--ink)}
 
-.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--mist);box-shadow:0 1px 4px rgba(20,32,47,.06)}
-.nav-in{display:flex;gap:.35rem;overflow-x:auto;padding-block:.65rem}
-.nav a{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding:.45rem .8rem;border:1px solid var(--mist);white-space:nowrap;text-decoration:none;color:var(--slate);background:var(--paper);border-radius:2px}
-.nav a:hover{border-color:var(--ai);color:var(--ai)}
-.nav a.main{color:var(--ink);border-color:var(--ink)}
-.nav button{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding:.45rem .8rem;border:1px solid var(--mist);white-space:nowrap;color:var(--slate);background:var(--paper);border-radius:2px;cursor:pointer;margin-left:auto}
-.nav button:hover{border-color:var(--ai);color:var(--ai)}
+.bar{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--mist);box-shadow:0 2px 6px rgba(20,32,47,.06)}
+.bar-in{display:flex;flex-direction:column;gap:.45rem;padding-block:.6rem}
+.row{display:flex;gap:.3rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.row::-webkit-scrollbar{display:none}
+.chip{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:.42rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);white-space:nowrap;cursor:pointer;border-radius:3px;flex-shrink:0}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.row-lab{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600;align-self:center;flex-shrink:0;padding-right:.3rem}
 
-.opt{padding-block:clamp(2rem,4vw,3rem);scroll-margin-top:3.5rem}
-.opt + .opt{border-top:2px solid var(--mist)}
-.opt-head{margin-bottom:1.5rem;max-width:74ch;display:flex;flex-direction:column;gap:.65rem}
-.opt-num{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--oc,var(--ai))}
-.opt-head h2{font-size:clamp(1.9rem,5vw,2.8rem);font-weight:800;color:var(--oc,var(--ai))}
-.opt-head h2 small{display:block;font-family:var(--f-body);font-size:.33em;font-weight:500;color:var(--slate);margin-top:.4rem;letter-spacing:0;line-height:1.4}
-.opt-head p{color:var(--slate)}
-.opt-head .note{background:var(--ocs,var(--snow-soft));border-left:3px solid var(--oc,var(--ai));padding:.75rem 1rem;font-size:.9375rem;color:var(--ink);border-radius:0 2px 2px 0}
+.zone{padding-block:1.6rem .5rem;scroll-margin-top:5.5rem}
+.zone-t{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.3rem}
+.zone-t h2{font-size:1.6rem;font-weight:800;color:var(--zc)}
+.zone-t span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.zone-d{color:var(--slate);font-size:.92rem;margin-bottom:1rem;max-width:60ch}
+.zone-d b{color:var(--ink)}
 
-.sub{margin-top:2rem;scroll-margin-top:3.5rem}
-.sub-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem .9rem;padding-bottom:.55rem;margin-bottom:1rem;border-bottom:2px solid var(--sc,var(--mist))}
-.sub-head h3{font-size:1.45rem;font-weight:700}
-.sub-head h3 .dot{color:var(--sc,var(--ai))}
-.sub-head .tagline{font-size:.875rem;color:var(--slate);margin-left:auto}
-.sub-note{background:var(--sunken);border-left:3px solid var(--sc,var(--mist));padding:.6rem .9rem;font-size:.875rem;color:var(--slate);margin-bottom:1rem;border-radius:0 2px 2px 0}
-.sub-note b{color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--mist);border-radius:6px;overflow:hidden;margin-bottom:.9rem;display:flex;flex-direction:column}
+.card.top3{border-color:var(--zc);border-width:2px}
+.shot{position:relative;aspect-ratio:16/10;background:var(--sunken)}
+.shot img{width:100%;height:100%;object-fit:cover}
+.rank{position:absolute;top:.6rem;left:.6rem;background:rgba(20,32,47,.88);color:#fff;font-family:var(--f-mono);font-size:.85rem;font-weight:600;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.card.top3 .rank{background:var(--zc)}
+.flag{position:absolute;top:.6rem;right:.6rem;background:var(--zc);color:#fff;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;font-weight:600;padding:.32rem .55rem;border-radius:3px;max-width:60%;text-align:right}
+.info{padding:.85rem .95rem 1rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.name{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+.name h3{font-size:1.18rem;font-weight:700}
+.name .jp{display:block;font-family:var(--f-disp);font-size:.68rem;color:var(--faint);font-weight:600;margin-top:.12rem}
+.eur{font-family:var(--f-mono);font-size:.84rem;font-weight:600;white-space:nowrap;color:var(--ink)}
+.eur.na{color:var(--faint);font-weight:400;font-size:.74rem}
+.why{font-size:.92rem;color:var(--slate)}
+.why b{color:var(--ink);font-weight:700}
+.specs{display:flex;flex-wrap:wrap;gap:.35rem}
+.s{font-family:var(--f-mono);font-size:.63rem;letter-spacing:.03em;text-transform:uppercase;font-weight:600;padding:.25rem .5rem;border-radius:3px;border:1px solid currentColor}
+.s-priv{color:var(--torii)}
+.s-four{color:var(--ai)}
+.s-meal{color:var(--moss)}
+.s-loc{color:var(--snow)}
+.s-star{color:var(--gold)}
+.go{display:flex;gap:.9rem;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding-top:.55rem;border-top:1px solid var(--hair);margin-top:auto}
+.go a{text-decoration:none}
+.go a:hover{text-decoration:underline}
+.go .m{color:var(--moss)}
 
-.lodge{background:var(--paper);border:1px solid var(--mist);margin-bottom:1.1rem;overflow:hidden;border-radius:3px}
-.lodge.star{box-shadow:0 0 0 2px var(--oc,var(--ai)) inset;border-color:transparent}
-.lodge-head{padding:1rem clamp(1rem,2vw,1.4rem) .8rem;display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;align-items:baseline}
-.lodge-head h4{font-family:var(--f-disp);font-size:1.3rem;font-weight:700;margin-right:auto}
-.lodge-head h4 .jp{font-family:var(--f-disp);font-size:.72rem;font-weight:600;color:var(--faint);display:block;margin-top:.18rem}
-.price{font-family:var(--f-mono);font-size:.9375rem;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
-.price small{font-weight:400;color:var(--faint);font-size:.72rem}
-.price.unknown{color:var(--faint);font-weight:400;font-size:.8125rem}
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint);display:flex;flex-direction:column;gap:.4rem;margin-top:1.5rem}
 
-.gal{display:flex;gap:.5rem;overflow-x:auto;padding:0 clamp(1rem,2vw,1.4rem) .9rem;scroll-snap-type:x proximity}
-.gal figure{margin:0;flex:0 0 20rem;scroll-snap-align:start;display:flex;flex-direction:column;gap:.35rem}
-.gal figure:first-child{flex:0 0 27rem}
-.gal figure:first-child .ph{height:14rem}
-.gal .ph{overflow:hidden;height:14rem;background:var(--sunken);border:1px solid var(--hair);border-radius:2px}
-.gal .ph img{width:100%;height:100%;object-fit:cover}
-.gal .ph.crop img{transform:scale(1.16);transform-origin:22% 28%}
-.gal figcaption{font-size:.75rem;color:var(--slate);line-height:1.35;padding-right:.3rem}
-.gal figcaption b{color:var(--ink)}
-.nopic{margin:0 clamp(1rem,2vw,1.4rem) .9rem;background:var(--sunken);border:1px dashed var(--mist);padding:.7rem .9rem;display:flex;align-items:center;gap:.7rem;font-size:.8125rem;color:var(--faint);border-radius:2px}
-.nopic .mark{font-family:var(--f-disp);font-size:1.4rem;opacity:.55}
-
-.lodge-body{padding:0 clamp(1rem,2vw,1.4rem) 1.1rem;display:flex;flex-direction:column;gap:.65rem}
-.desc{font-size:.9375rem;color:var(--slate);max-width:82ch}
-.desc b{color:var(--ink);font-weight:700}
-.badges{display:flex;flex-wrap:wrap;gap:.3rem}
-.b{font-family:var(--f-mono);font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.2rem .45rem;border:1px solid currentColor;border-radius:2px}
-.b-priv{color:var(--torii)} .b-meal{color:var(--moss)} .b-hist{color:var(--gold)}
-.b-loc{color:var(--snow)} .b-four{color:var(--ai)}
-.links{display:flex;flex-wrap:wrap;gap:.85rem;font-family:var(--f-mono);font-size:.6875rem;letter-spacing:.04em;text-transform:uppercase;padding-top:.5rem;border-top:1px solid var(--hair);align-items:center}
-.links a{text-decoration:none;font-weight:600}
-.links a:hover{text-decoration:underline}
-.links .map{color:var(--moss)}
-
-.compact{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.5rem 1.2rem;background:var(--sunken);padding:1rem 1.2rem;border:1px solid var(--hair);border-radius:3px}
-.compact-title{grid-column:1/-1;font-family:var(--f-mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
-.compact div{font-size:.875rem;color:var(--slate)}
-.compact div b{color:var(--ink);font-weight:600}
-.compact .note2{grid-column:1/-1;font-size:.8125rem;color:var(--slate);margin-top:.35rem;padding-top:.65rem;border-top:1px solid var(--mist)}
-
-footer{border-top:1px solid var(--mist);padding-block:1.75rem 3rem;font-size:.8125rem;color:var(--faint);display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between}
-footer b{color:var(--slate)}
-
-@media (max-width:44rem){
-  .gal figure,.gal figure:first-child{flex:0 0 15rem};
-  .gal .ph{height:10rem}
-  .sub-head .tagline{margin-left:0;width:100%}
+@media (min-width:52rem){
+  .wrap{padding-inline:2rem}
+  .card{flex-direction:row;margin-bottom:1rem}
+  .shot{flex:0 0 21rem;aspect-ratio:auto}
+  .info{padding:1.1rem 1.3rem}
+  .hero-in{padding-block:2.4rem 1.7rem}
+  .zone{padding-block:2.2rem .5rem}
+  .bar-in{flex-direction:row;align-items:center;gap:1.4rem}
 }
 @media print{
   :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
-  body{font-size:9.5pt}
-  .nav{display:none}
-  .lodge,.compact{break-inside:avoid;box-shadow:none!important;border:1px solid #bbb!important}
-  .gal{overflow:visible;flex-wrap:wrap}
-  .gal figure,.gal figure:first-child{flex:0 0 31%}
-  a{color:#111;text-decoration:none}
-  @page{margin:11mm}
+  .bar{display:none}.card{break-inside:avoid;border:1px solid #bbb!important}
+  body{font-size:9.5pt}@page{margin:12mm}
 }
 </style>
 
 <header class="hero">
   <div class="wrap hero-in">
-    <p class="backlink"><a href="index.html">← Plan del viaje</a></p>
-    <p class="eyebrow">Bloque de nieve · 27 → 30 diciembre · 4 personas</p>
-    <h1>Dónde dormimos en la nieve<em>Tres opciones, con fotos de cada alojamiento</em></h1>
-    <p class="lead">Hay que elegir <b>una de las tres zonas</b>, y dentro de ella el alojamiento. Aquí está todo lo que hemos encontrado, con lo que cuesta, lo que tiene y dónde está. <b>Nada reservado, nada decidido.</b></p>
-    <p class="counts"><span><b>3</b> opciones</span> <span><b>75</b> alojamientos con ficha</span> <span><b>273</b> fotos revisadas una a una</span> <span><b>20</b> ryokanes de Shibu, lista oficial completa</span></p>
+    <div class="top">
+      <a href="index.html">← Plan del viaje</a>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </div>
+    <h1>Dónde dormimos en la nieve</h1>
+    <p class="sub">Tres zonas, y dentro el alojamiento. Ordenados <b>de más a menos espectacular</b>, con lo que tiene cada uno de un vistazo. <b>Nada reservado todavía.</b></p>
   </div>
 </header>
 
-<nav class="nav">
-  <div class="wrap nav-in">
-    <a href="#shibu" class="main">① ♨️ Shibu Onsen</a>
-    <a href="#nozawa" class="main">② 🏘️ Nozawa Onsen</a>
-    <a href="#hakuba" class="main">③ 🎿 Hakuba</a>
-    <a href="#wadano">· Wadano</a>
-    <a href="#happo">· Happō</a>
-    <a href="#echoland">· Echoland</a>
-    <a href="#cortina">· Cortina</a>
-    <a href="#tsugaike">· Tsugaike</a>
-    <a href="#otros-hakuba">· Otros</a>
-    <button id="theme" type="button" title="Cambiar claro/oscuro">🌙 Oscuro</button>
+<nav class="bar">
+  <div class="wrap bar-in">
+    <div class="row">
+      <span class="row-lab">Orden</span>
+      <button class="chip" id="o-rec" aria-pressed="true">✨ Recomendado</button>
+      <button class="chip" id="o-pre" aria-pressed="false">💴 Más barato</button>
+    </div>
+    <div class="row">
+      <span class="row-lab">Filtro</span>
+      <button class="chip f" data-f="all" aria-pressed="true">Todos</button>
+      <button class="chip f" data-f="priv" aria-pressed="false">♨️ Onsen privado</button>
+      <button class="chip f" data-f="four" aria-pressed="false">👥 Caben 4</button>
+      <button class="chip f" data-f="meal" aria-pressed="false">🍽️ Media pensión</button>
+    </div>
   </div>
 </nav>
 
-<div class="wrap">
+<div class="wrap" id="app"></div>
 
-<!-- ═══════ OPCIÓN 1 · SHIBU ═══════ -->
-<section class="opt" id="shibu" style="--oc:var(--torii);--ocs:var(--torii-soft)">
-  <div class="opt-head">
-    <p class="opt-num">Opción 1 de 3</p>
-    <h2>♨️ Shibu Onsen<small>Pueblo termal de 1.300 años · los monos a 4 km · esquí en Shiga Kogen, la estación más grande y alta de Japón</small></h2>
-    <p>Calles empedradas y casas de madera de época Edo. Un mismo autobús une el ryokan, el parque de los monos y las pistas.</p>
-    <p class="note">🔑 <b>Dormir en cualquier ryokan del pueblo da la llave maestra de los nueve baños públicos</b>, cerrados a quien no se aloja allí. Eso no se puede comprar de paso.</p>
-  </div>
-
-  <article class="lodge star">
-    <div class="lodge-head">
-      <h4>Kanaguya<span class="jp">歴史の宿 金具屋 · fundado en 1758</span></h4>
-      <p class="price">¥12.150 – 24.880 <small>/ persona</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/kanaguya-pasillo-saigetsuro.jpg" alt="Pasillo de madera con farolillos encendidos"></div><figcaption><b>El pasillo del Saigetsurō</b>, con la hilera de farolillos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kanaguya-bano-vidrieras.jpg" alt="Baño termal con altas vidrieras de colores"></div><figcaption><b>El baño de las vidrieras de colores.</b> No hay nada igual en el catálogo.</figcaption></figure>
-      <figure><div class="ph crop"><img src="fotos/kanaguya-fachada-calle.jpg" alt="Fachada de madera de cuatro plantas"></div><figcaption>La fachada desde la callejuela.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kanaguya-rotenburo-exterior.jpg" alt="Baño exterior de piedra junto a muro blanco"></div><figcaption>Rotenburo exterior de piedra.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kanaguya-bano-roca.jpg" alt="Bañera excavada en roca"></div><figcaption>Otro de los nueve: bañera excavada en roca.</figcaption></figure>
-      <figure><div class="ph crop"><img src="fotos/kanaguya-bano-piedra.jpg" alt="Pila termal redonda de piedra"></div><figcaption>Pila redonda de piedra.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kanaguya-habitacion-tatami.jpg" alt="Habitación de tatami con puertas de papel"></div><figcaption>Habitación de tatami con shōji.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kanaguya-kaiseki.jpg" alt="Bandeja de cena kaiseki"></div><figcaption>La cena kaiseki.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shibuhotel-callejuela-noche.jpg" alt="La callejuela del pueblo de noche, con los farolillos de los baños enc"></div><figcaption><b>La callejuela del pueblo de noche</b>, con los farolillos de los baños encendidos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shibuhotel-toalla-sellos.jpg" alt="La toalla de sellos del Kyū-tō Meguri: se estampa uno en cada uno de l"></div><figcaption><b>La toalla de sellos del <em>Kyū-tō Meguri</em></b>: se estampa uno en cada uno de los nueve baños.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc"><b>Patrimonio Cultural Nacional desde 2003.</b> El Saigetsurō es una torre de madera de cuatro plantas de 1936 levantada <b>sin una sola pieza de acero</b>. Nueve baños propios de cuatro manantiales, cinco privados, más otros cinco de alquiler. Es el edificio que todo el mundo compara con la casa de baños de <em>El viaje de Chihiro</em> — Ghibli nunca lo ha confirmado.</p>
-      <div class="badges"><span class="b b-priv">5 baños privados</span><span class="b b-hist">1758 · Patrimonio</span></div>
-      <p class="links"><a href="https://kanaguya.com/">Web oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kanaguya+Shibu+Onsen+Yamanouchi">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge star">
-    <div class="lodge-head">
-      <h4>Shibu Onsen Kokuya<span class="jp">渋温泉 古久屋 · fundado en 1625</span></h4>
-      <p class="price unknown">Desayuno ¥2.200 · tasa ¥150/persona</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/kokuya-rotenburo-piedra-jardin.jpg" alt="Baño exterior de piedra con jardín"></div><figcaption><b>Rotenburo exterior de piedra</b> rodeado de jardín.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-rotenburo-privado-cedro.jpg" alt="Bañera redonda de cedro con caño de bambú"></div><figcaption><b>El privado:</b> bañera de cedro con caño de bambú.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-rotenburo-piedra-2.jpg" alt="Baño exterior con borde de roca natural"></div><figcaption>Otro de los nueve, con borde de roca.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-rotenburo-madera-vapor.jpg" alt="Baño de madera humeando"></div><figcaption>Baño de madera humeando al aire libre.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-banos-madera-individuales.jpg" alt="Bañeras de madera individuales"></div><figcaption>Bañeras individuales, para bañarse solo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-cascada-roca.jpg" alt="Cascada sobre roca musgosa"></div><figcaption>La cascada del recinto.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kokuya-habitacion-tatami.jpg" alt="Habitación de tatami con mesa baja"></div><figcaption>Habitación de tatami.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaeya-bano-privado-madera.jpg" alt="Sakaeya: baño privado de madera iluminado. Otro ryokan del pueblo."></div><figcaption><b>Sakaeya: baño privado de madera iluminado.</b> Otro ryokan del pueblo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/chinbaya-pasillo.jpg" alt="Chinbaya: pasillo interior de madera."></div><figcaption>Chinbaya: pasillo interior de madera.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Fundado en 1625 y llevado por la <b>decimosexta generación</b>: de los hoteles más antiguos de Japón. <b>Diez habitaciones con rotenburo propio</b>, seis manantiales y nueve baños. Los privados son gratuitos, y además hay rotenburo privado de pago a ¥1.000/hora. Kaiseki que cambia cada mes. <b>Hay reseñas que lo consideran caro de más.</b></p>
-      <div class="badges"><span class="b b-priv">10 hab. con rotenburo</span><span class="b b-meal">Kaiseki</span><span class="b b-hist">1625 · 16 generaciones</span></div>
-      <p class="links"><a href="https://www.ichizaemon.com/lang_en/">Web oficial</a> <a href="https://www.oyster.com/chubu/hotels/shibu-onsen-kokuya/">Fotos sin retocar</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kokuya+Shibu+Onsen+Yamanouchi">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge star">
-    <div class="lodge-head">
-      <h4>Onyado Hishiya Torazo<span class="jp">御宿 ひしや寅蔵 · desde 1840</span></h4>
-      <p class="price">$615 <small>/ noche los 4, con cena y desayuno</small></p>
-    </div>
-    \<div\ class\=\"gal\"\>\
-\ \ \ \ \ \ \<figure\>\<div\ class\=\"ph\"\>\<img\ src\=\"fotos\/hishiya\-mono\-jardin\.jpg\"\ alt\=\"Macaco\ sentado\ en\ el\ jardin\ del\ ryokan\"\>\<\/div\>\<figcaption\>\<b\>Un\ macaco\ en\ el\ jard\�\�n\ del\ propio\ ryokan\.\<\/b\>\ Los\ monos\ bajan\ al\ pueblo\.\<\/figcaption\>\<\/figure\>\
-\ \ \ \ \ \ \<figure\>\<div\ class\=\"ph\"\>\<img\ src\=\"fotos\/hishiya\-callejuela\.jpg\"\ alt\=\"Callejuela\ de\ Shibu\ Onsen\ con\ casas\ de\ madera\"\>\<\/div\>\<figcaption\>La\ callejuela\ de\ Shibu\ a\ la\ que\ da\ la\ entrada\.\<\/figcaption\>\<\/figure\>\
-\ \ \ \ \ \ \<figure\>\<div\ class\=\"ph\"\>\<img\ src\=\"fotos\/hishiya\-entrada\.jpg\"\ alt\=\"Entrada\ del\ ryokan\ con\ jardin\ de\ piedra\"\>\<\/div\>\<figcaption\>La\ entrada\,\ con\ su\ jard\�\�n\ de\ piedra\.\<\/figcaption\>\<\/figure\>\
-\ \ \ \ \ \ \<figure\>\<div\ class\=\"ph\"\>\<img\ src\=\"fotos\/hishiya\-jardin\-nieve\.jpg\"\ alt\=\"Jardin\ del\ ryokan\ con\ nieve\"\>\<\/div\>\<figcaption\>El\ jard\�\�n\ con\ nieve\.\<\/figcaption\>\<\/figure\>\
-\ \ \ \ \<\/div\>
-    <div class="lodge-body">
-      <p class="desc">Trece generaciones de la misma familia. Tres plantas de madera con ambiente de época Edo. Dos onsen interiores y <b>uno exterior de piedra que se reserva para uso privado</b>. <b>Es el único del catálogo con precio publicado para cuatro personas</b>: unos ¥23.000 por cabeza con todo incluido.</p>
-      <div class="badges"><span class="b b-priv">Onsen privado</span><span class="b b-meal">Media pensión</span><span class="b b-four">Precio para 4</span><span class="b b-hist">1840</span></div>
-      <p class="links"><a href="https://www.tripadvisor.com/Hotel_Feature-g1117904-d1880937-zft1-Onyado_Hishiya_Torazo.html">Galería completa</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hishiya+Torazo+Shibu+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Yoroduya<span class="jp">よろづや · más de 200 años</span></h4>
-      <p class="price">~£300 <small>/ noche doble con comidas</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/yoroduya-bano-momoyama.jpg" alt="Gran baño termal con columnas y bóveda de madera"></div><figcaption><b>El baño Momoyama</b>, el famoso de la casa: una sala entera con columnas.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/yoroduya-habitacion-cama.jpg" alt="Habitación con dos camas occidentales"></div><figcaption><b>Habitación con cama occidental</b>, la única del pueblo que las tiene.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/yoroduya-habitacion-tatami.jpg" alt="Habitación de tatami con mesa baja"></div><figcaption>Habitación de tatami tradicional.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/yoroduya-entrada.jpg" alt="Entrada de madera con estanterías"></div><figcaption>La entrada, en madera.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Seis baños, interiores y en jardín. Y el único del pueblo con <b>habitaciones japonesas-occidentales con cama</b>, por si a alguien no le convence dormir en futón. El más caro de los de ficha completa.</p>
-      <div class="badges"><span class="b b-priv">Baño privado</span><span class="b b-meal">Media pensión</span><span class="b b-loc">Camas occidentales</span></div>
-      <p class="links"><a href="https://yudanaka-yoroduya.com/eng/">Web oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Yoroduya+Yudanaka+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Masuya<span class="jp">ますや · 140 años</span></h4>
-      <p class="price">¥16.500 – 44.000 <small>/ persona con comidas</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/masuya-banera-madera-ventanal.jpg" alt="Bañera redonda de madera junto a ventanal"></div><figcaption><b>Bañera redonda de madera</b> junto al ventanal.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/masuya-rotenburo-piedra.jpg" alt="Baño exterior de piedra entre rocas"></div><figcaption>El rotenburo exterior, entre rocas.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/masuya-habitacion.jpg" alt="Habitación con camas bajas"></div><figcaption>Habitación con camas bajas.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/masuya-kaiseki.jpg" alt="Cena kaiseki con varios platos"></div><figcaption>La cena kaiseki.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Siglo y medio de historia. <b>Cuatro habitaciones con baño exterior propio</b> y baños privados de alquiler.</p>
-      <div class="badges"><span class="b b-priv">4 hab. con rotenburo</span><span class="b b-meal">Media pensión</span><span class="b b-hist">140 años</span></div>
-      <p class="links"><a href="https://selected-ryokan.com/ryokan/masuya_snow-monkey_yudanaka-shibu_nagano.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Masuya+Ryokan+Shibu+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Shibu Hotel · Suminoyu<span class="jp">渋ホテル</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/shibuhotel-bano-madera.jpg" alt="Baño de madera con cerramiento de cañizo"></div><figcaption><b>Shibu Hotel:</b> baño de madera con cañizo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shibuhotel-bano-grande.jpg" alt="Gran baño de madera clara"></div><figcaption>Shibu Hotel: el baño grande, todo en madera clara.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shibuhotel-habitacion.jpg" alt="Habitación de tatami con ventanal"></div><figcaption>Shibu Hotel: habitación de tatami.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc"><b>Shibu Hotel:</b> baños termales de alquiler privado, junto al parque de los monos. <b>Suminoyu:</b> arquitectura histórica de madera y <b>rotenburo en la sexta planta</b> — sin fotos propias todavía.</p>
-      <div class="badges"><span class="b b-priv">Baño de alquiler privado</span></div>
-      <p class="links"><a href="https://selected-ryokan.com/ryokan/shibu-hotel_snow-monkey_yudanaka-shibu_nagano.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Shibu+Hotel+Shibu+Onsen+Yamanouchi">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Suminoyu<span class="jp">角の湯 · el que mejor enseña el pueblo</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/suminoyu-calle-reflejo.jpg" alt="La calle del pueblo de noche, reflejada en el agua."></div><figcaption><b>La calle del pueblo de noche</b>, reflejada en el agua.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-yukata-callejuela.jpg" alt="Huéspedes en yukata por la callejuela empedrada."></div><figcaption>Huéspedes en yukata por la callejuela empedrada.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-farolillos.jpg" alt="Los farolillos de los baños públicos encendidos."></div><figcaption>Los farolillos de los baños públicos encendidos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-sellando-toalla.jpg" alt="Sellando la toalla del Kyū-tō Meguri en uno de los nueve baños."></div><figcaption><b>Sellando la toalla del <em>Kyū-tō Meguri</em></b> en uno de los nueve baños.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-geta.jpg" alt="Las geta del ryokan, con su nombre grabado."></div><figcaption>Las <em>geta</em> del ryokan, con su nombre grabado.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-pueblo-noche.jpg" alt="El pueblo entero iluminado, de noche."></div><figcaption>El pueblo entero iluminado, de noche.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-habitacion.jpg" alt="Habitación de tatami con luz cálida."></div><figcaption>Habitación de tatami con luz cálida.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-habitacion-moderna.jpg" alt="Otra habitación, más moderna."></div><figcaption>Otra habitación, más moderna.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/suminoyu-paseo-yukata.jpg" alt="El paseo en yukata por la calle empedrada."></div><figcaption>El paseo en yukata por la calle empedrada.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Rotenburo en la sexta planta y arquitectura histórica de madera. 💭 <b>Sus fotos son las que mejor enseñan cómo es Shibu de noche</b>: el paseo en yukata y geta entre los nueve baños, que es la razón de dormir aquí.</p>
-      <div class="badges"><span class="b b-priv">Rotenburo 6.ª planta</span><span class="b b-priv">Llave de los 9 baños</span></div>
-      <p class="links"><a href="https://www.suminoyu.com/">Web oficial</a> <a href="https://www.booking.com/hotel/jp/suminoyu.html">Booking</a> <a href="https://shibuonsen.net/stay/suminoyu/">Ficha del pueblo</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=角の湯+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Koishiya Ryokan<span class="jp">小石屋旅館 · 8,8 sobre 1.035 comentarios</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/koishiya-recepcion.jpg" alt="La recepción, con el pilar rojo."></div><figcaption>La recepción, con el pilar rojo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/koishiya-habitacion.jpg" alt="Habitación de tatami."></div><figcaption>Habitación de tatami.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/koishiya-futones.jpg" alt="Habitación con los futones preparados."></div><figcaption>Habitación con los futones preparados.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/koishiya-lavabo-madera.jpg" alt="El lavabo, en madera."></div><figcaption>El lavabo, en madera.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/koishiya-bano.jpg" alt="El baño de la habitación."></div><figcaption>El baño de la habitación.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/koishiya-habitacion2.jpg" alt="Otra habitación del ryokan."></div><figcaption>Otra habitación del ryokan.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc"><b>El mejor valorado de los que faltaban: 8,8 sobre 1.035 comentarios</b> — es el que más reseñas tiene de todo el pueblo.</p>
-      <div class="badges"><span class="b b-priv">Llave de los 9 baños</span></div>
-      <p class="links"><a href="https://koishiya.com/">Web oficial</a> <a href="https://www.booking.com/hotel/jp/koishiya.html">Booking</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=小石屋旅館+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Kaneki Hotel<span class="jp">金喜ホテル</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/kaneki-bano-rocas.jpg" alt="El baño interior, con muro de roca natural."></div><figcaption><b>El baño interior, con muro de roca natural.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kaneki-bano-rocas2.jpg" alt="El mismo baño desde el otro lado."></div><figcaption>El mismo baño desde el otro lado.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kaneki-bano-madera.jpg" alt="El otro baño, en madera."></div><figcaption>El otro baño, en madera.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kaneki-fachada-calle.jpg" alt="La fachada, en plena calle del pueblo."></div><figcaption>La fachada, en plena calle del pueblo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kaneki-habitacion.jpg" alt="Habitación de tatami."></div><figcaption>Habitación de tatami.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kaneki-letrero.jpg" alt="El letrero de madera con el nombre, 金喜."></div><figcaption>El letrero de madera con el nombre, 金喜.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Baños con muro de roca natural dentro del propio edificio, y fachada de madera en la calle principal.</p>
-      <div class="badges"><span class="b b-priv">Baños de roca</span><span class="b b-priv">Llave de los 9 baños</span></div>
-      <p class="links"><a href="https://www.booking.com/hotel/jp/kaneki.html">Booking</a> <a href="https://shibuonsen.net/stay/kaneki/">Ficha del pueblo</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=金喜ホテル+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Hatsunoyu<span class="jp">旅の宿 初の湯</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/hatsunoyu-bano-madera.jpg" alt="El baño, todo en madera oscura."></div><figcaption><b>El baño, todo en madera oscura.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hatsunoyu-entrada.jpg" alt="La entrada de madera iluminada."></div><figcaption>La entrada de madera iluminada.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hatsunoyu-noren.jpg" alt="La fachada, con el noren azul."></div><figcaption>La fachada, con el noren azul.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hatsunoyu-habitacion.jpg" alt="Habitación de tatami."></div><figcaption>Habitación de tatami.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hatsunoyu-sala-tatami.jpg" alt="Sala grande de tatami, que puede servir para los cuatro juntos."></div><figcaption><b>Sala grande de tatami</b>, que puede servir para los cuatro juntos.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Ryokan pequeño con baño de madera y una <b>sala grande de tatami</b> que puede dar cabida al grupo entero.</p>
-      <div class="badges"><span class="b b-priv">Baño de madera</span><span class="b b-priv">Sala para grupo</span></div>
-      <p class="links"><a href="https://hatunoyu.jp/">Web oficial</a> <a href="https://www.booking.com/hotel/jp/hatsunoyu.html">Booking</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=初の湯+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Shirokaneya<span class="jp">白金屋</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/shirokaneya-bano-verde.jpg" alt="El baño, de agua verde turquesa."></div><figcaption><b>El baño, de agua verde turquesa.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shirokaneya-fachada.jpg" alt="La fachada de madera del ryokan."></div><figcaption>La fachada de madera del ryokan.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shirokaneya-callejuela.jpg" alt="La callejuela del pueblo a la que da."></div><figcaption>La callejuela del pueblo a la que da.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shirokaneya-okami.jpg" alt="La okami sirviendo la cena en persona."></div><figcaption>La <em>okami</em> sirviendo la cena en persona.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/shirokaneya-kaiseki.jpg" alt="La cena kaiseki."></div><figcaption>La cena kaiseki.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Ryokan familiar con baño de agua verde y trato muy cercano: la <em>okami</em> sirve la cena ella misma.</p>
-      <div class="badges"><span class="b b-priv">Baño propio</span><span class="b b-priv">Llave de los 9 baños</span></div>
-      <p class="links"><a href="https://shirokaneya.com/">Web oficial</a> <a href="https://shibuonsen.net/stay/shirokaneya/">Ficha del pueblo</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=白金屋+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Maruzen Ryokan · Yumoto<span class="jp">丸善旅館 · 湯本</span></h4>
-      <p class="price unknown">Precio por confirmar</p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/maruzen-bano-madera.jpg" alt="Maruzen: el baño de madera con luz natural."></div><figcaption><b>Maruzen:</b> el baño de madera con luz natural.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/yumoto-edificio-noche.jpg" alt="Yumoto: el edificio de madera iluminado de noche."></div><figcaption><b>Yumoto: el edificio de madera iluminado de noche.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/maruzen-salon.jpg" alt="Maruzen: el salón con ventanal."></div><figcaption>Maruzen: el salón con ventanal.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/maruzen-kaiseki.jpg" alt="Maruzen: la cena kaiseki."></div><figcaption>Maruzen: la cena kaiseki.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc"><b>Maruzen</b> es un ryokan familiar con baño de madera. <b>Yumoto</b> tiene uno de los edificios de madera más bonitos del pueblo visto de noche.</p>
-      <div class="badges"><span class="b b-priv">Baño propio</span><span class="b b-priv">Llave de los 9 baños</span></div>
-      <p class="links"><a href="https://maruzen.moo.jp/">Maruzen</a> <a href="http://www.sibu-yumoto.jp/">Yumoto</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=丸善旅館+渋温泉">📍 Maps</a></p>
-    </div>
-  </article>
-
-  <div class="compact">
-    <p class="compact-title">Los seis sin fotos · lista oficial de la asociación</p>
-    <div><b>Amagawasou</b> — plan sin comidas con baño privado incluido</div>
-    <div><b>Yamaichiya</b> — <b>baño exterior privado con vistas al pueblo</b></div>
-    <div><b>Kadoya</b></div>
-    <div><b>Kameya</b> — web caída</div>
-    <div><b>Wakakiya</b> — sin web ni ficha</div>
-    <div><b>Shinei</b></div>
-    <p class="note2">De los <b>20 ryokanes oficiales</b> del pueblo ya tenemos fotos de 14. Estos seis no tienen web operativa ni ficha internacional. Todos aparecen con foto y datos de contacto en el <a href="https://shibuonsen.net/stay/">índice oficial del pueblo</a> — y nuestro amigo japonés puede llamarlos directamente.</p>
-  </div>
-
-  <div class="sub" style="--sc:var(--gold)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Yudanaka y Kanbayashi</h3>
-      <p class="tagline">El pueblo de al lado — y la entrada a los monos</p>
-    </div>
-
-    <article class="lodge star" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Aburaya Tōsen<span class="jp">油屋灯泉 · Yudanaka</span></h4>
-        <p class="price">¥24.200 – 56.100 <small>/ persona con comidas</small></p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/aburaya-bano-terraza-nieve.jpg" alt="Baño de madera en terraza frente a montañas nevadas"></div><figcaption><b>Baño privado en la terraza, frente a las montañas nevadas.</b> Exactamente lo que buscábamos.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-bano-noche-luna.jpg" alt="Baño exterior de noche con la luna sobre el valle"></div><figcaption>El mismo, de noche, con la luna sobre el valle.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-bano-piedra-habitacion.jpg" alt="Baño de piedra dentro de la habitación"></div><figcaption>Otra habitación, con el baño de piedra dentro.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-bano-privado-madera.jpg" alt="Bañera de madera iluminada"></div><figcaption>Bañera de madera con luz bajo el agua.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-tosen-habitacion-tipo-a.jpg" alt="Habitación de tatami con camas bajas"></div><figcaption>Habitación tipo A: tatami y camas bajas.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-habitacion-cama-tatami.jpg" alt="Habitación mixta con cama y tatami"></div><figcaption>Habitación mixta, con cama y zona de tatami.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/aburaya-salon-chimenea.jpg" alt="Salón común con chimenea"></div><figcaption>El salón común, con chimenea.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/aburaya-monos.jpg" alt="Los macacos del parque, a cuatro kilómetros del ryokan."></div><figcaption><b>Los macacos del parque</b>, a cuatro kilómetros del ryokan.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/aburaya-domos-nieve.jpg" alt="Los domos de la terraza bajo la nieve."></div><figcaption>Los domos de la terraza bajo la nieve.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/aburaya-vista-nocturna.jpg" alt="Vista nocturna del valle desde el baño."></div><figcaption>Vista nocturna del valle desde el baño.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Nueve habitaciones con baño exterior propio</b>, con terraza y vistas al valle. Reseñas excepcionales: «el mejor ryokan en el que me he alojado».</p>
-        <div class="badges"><span class="b b-priv">9 hab. con rotenburo</span><span class="b b-meal">Media pensión</span></div>
-        <p class="links"><a href="https://www.aburaya-tousen.co.jp/en/room/newroom/">Habitaciones</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Aburaya+Tosen+Yudanaka+Onsen">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge star" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Kanbayashi Hotel Senjukaku<span class="jp">かんばやし 千寿閣 · Kanbayashi</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/senjukaku-rotenburo-atardecer.jpg" alt="Baño exterior de madera al atardecer con barandilla"></div><figcaption><b>El rotenburo al atardecer</b>, con la barandilla de madera sobre el valle.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/senjukaku-rotenburo-madera.jpg" alt="Baño de madera al aire libre con cielo azul"></div><figcaption>El mismo baño con el cielo aún azul.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/senjukaku-habitacion-tatami.jpg" alt="Habitación de tatami amplia con lámparas de papel"></div><figcaption>Habitación de tatami amplia.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/senjukaku-habitacion-camas.jpg" alt="Habitación con camas y zona de tatami"></div><figcaption>Habitación con camas y zona de tatami.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/senjukaku-salon-tatami.jpg" alt="Salón de tatami con mesas bajas"></div><figcaption>Salón de tatami con mesas bajas.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/senjukaku-mono-agua.jpg" alt="Un macaco en el agua termal. El parque está a 5-10 minutos andando."></div><figcaption><b>Un macaco en el agua termal.</b> El parque está a 5-10 minutos andando.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/senjukaku-balcon.jpg" alt="El balcón de una de las habitaciones."></div><figcaption>El balcón de una de las habitaciones.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>El alojamiento más cercano a los monos de todo el catálogo:</b> a 5-10 minutos andando del inicio del sendero. Onsen interior, exterior y privado. Kaiseki de temporada.</p>
-        <div class="badges"><span class="b b-priv">Onsen privado</span><span class="b b-loc">5 min de los monos</span><span class="b b-meal">Kaiseki</span></div>
-        <p class="links"><a href="https://www.snowmonkeyresorts.com/hotels/hotel-senjukaku/">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kanbayashi+Hotel+Senjukaku+Yamanouchi">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Shoraiso<span class="jp">松籟荘 · Yudanaka</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/shoraiso-edificio-noche.jpg" alt="Edificio de madera iluminado de noche reflejado en el agua"></div><figcaption><b>El edificio de noche, reflejado en el agua.</b> De las imágenes más bonitas del catálogo.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/shoraiso-bano-ventanales.jpg" alt="Gran baño termal con ventanales al jardín"></div><figcaption>El baño grande, con ventanales al jardín.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/shoraiso-entrada.jpg" alt="Entrada de madera con estanterías"></div><figcaption>La entrada.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">Apareció al buscar fotos y merece estar en la lista solo por cómo se ve de noche. ⚠️ Sus datos —precio, habitaciones, baño privado— están <b>sin verificar todavía</b>.</p>
-        <div class="badges"><span class="b b-hist">Por investigar</span></div>
-        <p class="links"><a href="https://selected-ryokan.com/ryokan/shoraiso_snow-monkey_yudanaka_nagano.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Shoraiso+Yudanaka+Onsen">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Jinpyokaku Honten<span class="jp">Kanbayashi</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/jinpyokaku-rotenburo-jardin.jpg" alt="Baño exterior de piedra en jardín"></div><figcaption><b>Rotenburo de piedra</b> en el jardín.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/jinpyokaku-rotenburo-rocas.jpg" alt="Baño exterior entre rocas y vegetación"></div><figcaption>Otro baño, entre rocas y vegetación.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/jinpyokaku-entrada.jpg" alt="Entrada de madera con jardín"></div><figcaption>La entrada, con su jardín.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/jinpyokaku-habitacion.jpg" alt="Habitación de tatami amplia"></div><figcaption>Habitación de tatami amplia.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/jinpyokaku-kaiseki.jpg" alt="Kaiseki con wagyu y sashimi"></div><figcaption>El kaiseki, con wagyu.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">También en Kanbayashi, la zona de la entrada al parque de los monos. ⚠️ Lo encontré al buscar fotos, así que sus datos están <b>sin verificar</b>.</p>
-        <div class="badges"><span class="b b-priv">Rotenburo</span><span class="b b-loc">Cerca de los monos</span></div>
-        <p class="links"><a href="https://selected-ryokan.com/ryokan/jinpyokaku-honten_snow-monkey_kanbayshi_yudanaka-shibu_nagano.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jinpyokaku+Kanbayashi+Onsen+Yamanouchi">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Biyunoyado · Ichinoyu Katei · Taiyokan Yamatoya</h4>
-        <p class="price">Biyunoyado ¥14.300 – 40.700 <small>/ persona con comidas</small></p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/biyunoyado-bano-campo.jpg" alt="Baño exterior con vistas al campo"></div><figcaption><b>Biyunoyado:</b> baño exterior con vistas abiertas.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/biyunoyado-bano-ventanal.jpg" alt="Baño interior con ventanal panorámico"></div><figcaption>Biyunoyado: baño con ventanal panorámico.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/biyunoyado-habitacion.jpg" alt="Habitación con camas y ventanal"></div><figcaption>Biyunoyado: habitación con camas y vistas.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/katei-rotenburo-noche.jpg" alt="Baño exterior de noche"></div><figcaption><b>Katei:</b> el rotenburo de noche.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/katei-bano-azulejos.jpg" alt="Baño de azulejos con luz natural"></div><figcaption>Katei: baño interior de azulejos.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/taiyokan-bano.jpg" alt="Baño termal con ventanales"></div><figcaption><b>Taiyokan Yamatoya:</b> el baño con ventanales.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/taiyokan-habitacion.jpg" alt="Habitación de tatami"></div><figcaption>Taiyokan: habitación de tatami.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Biyunoyado</b> es la entrada de gama de la zona, con cena y desayuno desde ¥14.300 por cabeza. <b>Ichinoyu Katei</b> y <b>Taiyokan Yamatoya</b> aparecieron al buscar fotos; ⚠️ sus datos están <b>sin verificar</b>.</p>
-        <div class="badges"><span class="b b-priv">Rotenburo</span><span class="b b-meal">Media pensión</span></div>
-        <p class="links"><a href="https://selected-ryokan.com/ryokan/issanokomichi-biyunoyado_snow-monkey_yudanaka-shibu_nagano.html">Biyunoyado</a> <a href="https://selected-ryokan.com/ryokan/ichinoyu-katei_snow-monkey_yudanaka-shibu_nagano.html">Katei</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Yudanaka+Onsen+Yamanouchi+Nagano">📍 Yudanaka en Maps</a></p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ═══════ OPCIÓN 2 · NOZAWA ═══════ -->
-<section class="opt" id="nozawa" style="--oc:var(--moss);--ocs:var(--moss-soft)">
-  <div class="opt-head">
-    <p class="opt-num">Opción 2 de 3</p>
-    <h2>🏘️ Nozawa Onsen<small>Pueblo termal desde 1272 · estación propia con el 40% de pistas fáciles · el mejor ambiente de noche</small></h2>
-    <p>Trece baños públicos gratis, dos destilerías de sake, una microcervecería e izakayas con farolillos. Y el acceso más rápido desde Tokio y desde Kioto.</p>
-    <p class="note">🎨 <b>Es el único de los tres que acepta tatuajes sin discusión.</b> 🚨 Su punto flojo: <b>los monos quedan a casi 4 horas</b> en transporte público, o un tour de 5 horas.</p>
-  </div>
-
-  <article class="lodge star">
-    <div class="lodge-head">
-      <h4>Ryokan Sakaya<span class="jp">旅館さかや · 18 generaciones</span></h4>
-      <p class="price">desde $467 <small>/ noche</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/sakaya-exterior-noche.jpg" alt="Fachada del ryokan iluminada de noche"></div><figcaption>La fachada iluminada al anochecer.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-fachada-iluminada.jpg" alt="Entrada del ryokan con farolillos"></div><figcaption>La entrada, con los farolillos encendidos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-edificio-anochecer.jpg" alt="El edificio al anochecer"></div><figcaption>El edificio contra el cielo del atardecer.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-interior-madera.jpg" alt="Interior de madera"></div><figcaption>El interior de madera.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-tejados-nieve.jpg" alt="Los tejados del pueblo nevados, desde el ryokan."></div><figcaption>Los tejados del pueblo nevados, desde el ryokan.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-habitacion-tatami.jpg" alt="Habitación de tatami."></div><figcaption>Habitación de tatami.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sakaya-rio-nevado.jpg" alt="El río del pueblo, helado."></div><figcaption>El río del pueblo, helado.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Baños en piedra natural y madera. Y el dato que lo cambia todo: <b>el onsen familiar privado cabe cuatro personas y se reserva sin coste adicional</b> hasta una hora. <b>Es el único del catálogo con baño privado dimensionado para el grupo entero</b> — y además Nozawa acepta tatuajes, así que resuelve las dos cosas de golpe.</p>
-      <div class="badges"><span class="b b-priv">Privado para 4, gratis</span><span class="b b-four">Cabe el grupo</span><span class="b b-hist">18 generaciones</span></div>
-      <p class="links"><a href="https://www.ryokan-sakaya.co.jp/en.html">Web oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ryokan+Sakaya+Nozawa+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge star">
-    <div class="lodge-head">
-      <h4>Tokiwaya Ryokan<span class="jp">常盤屋旅館 · más de 360 años</span></h4>
-      <p class="price">$129 – 204 <small>/ noche</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/tokiwaya-bano-dorado.jpg" alt="El baño principal: bóveda dorada y ventanales en arco. De lo más espec"></div><figcaption><b>El baño principal: bóveda dorada y ventanales en arco.</b> De lo más espectacular del catálogo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/tokiwaya-yukata-edificio.jpg" alt="Huéspedes en yukata ante la fachada."></div><figcaption>Huéspedes en yukata ante la fachada.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/tokiwaya-entrada-noren.jpg" alt="La entrada, con el noren rojo."></div><figcaption>La entrada, con el noren rojo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/tokiwaya-techo.jpg" alt="El techo artesonado de la sala común."></div><figcaption>El techo artesonado de la sala común.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc">Más de <b>360 años</b> en pie, y una de las <b>100 posadas termales famosas de Japón</b>. <b>La mejor relación historia-precio de todo el catálogo</b>: distinción nacional por menos de la mitad que Sakaya.</p>
-      <div class="badges"><span class="b b-hist">360 años</span><span class="b b-loc">100 posadas famosas</span></div>
-      <p class="links"><a href="https://us.trip.com/hotels/nozawaonsen-hotel-detail-3053093/nozawa-onsen-tokiwaya-ryokan/">Ficha y fotos</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tokiwaya+Ryokan+Nozawa+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Kawaichiya Ryokan<span class="jp">河一屋旅館</span></h4>
-      <p class="price">~$455 <small>/ noche</small></p>
-    </div>
-    <div class="gal">
-      <figure><div class="ph"><img src="fotos/kawaichiya-wagyu.jpg" alt="Carne wagyu sobre hoja de bambú"></div><figcaption>La cena: wagyu sobre hoja de bambú.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kawaichiya-ikebana.jpg" alt="Arreglo floral ikebana"></div><figcaption>Ikebana en las zonas comunes.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kawaichiya-amenities.jpg" alt="Amenities y toalla"></div><figcaption>Los amenities de la habitación.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kawaichiya-bano-cortinas.jpg" alt="El baño principal, con cortinas doradas."></div><figcaption><b>El baño principal</b>, con cortinas doradas.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kawaichiya-bano-grande.jpg" alt="El otro baño, con ventanal."></div><figcaption>El otro baño, con ventanal.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/kawaichiya-festival-fuego.jpg" alt="El Dōsojin Matsuri, el festival del fuego de Nozawa."></div><figcaption><b>El Dōsojin Matsuri</b>, el festival del fuego de Nozawa.</figcaption></figure>
-    </div>
-    <div class="lodge-body">
-      <p class="desc"><b>Doce tipos de habitación distintos</b>, algunos con baño exterior privado, camas bajas y tatami. Baño termal, rotenburo, masajes, salón compartido y restaurante. Tiene habitaciones familiares.</p>
-      <div class="badges"><span class="b b-priv">Rotenburo privado</span><span class="b b-four">Hab. familiares</span></div>
-      <p class="links"><a href="https://kawaichiya.jp/en/">Web oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kawaichiya+Ryokan+Nozawa+Onsen">📍 Ver en Maps</a></p>
-    </div>
-  </article>
-
-  <article class="lodge">
-    <div class="lodge-head">
-      <h4>Shirakaba · Sumiyoshiya · Kawahiro · Residence Yasushi · Akari House</h4>
-      <p class="price">Akari House ¥80.000 <small>/ noche, apartamento entero</small></p>
-    </div>
-    <p class="nopic"><span class="mark">白</span> Sin fotos propias — sus webs no permiten extraerlas.</p>
-    <div class="lodge-body">
-      <p class="desc"><b>Shirakaba:</b> tatami y futón con <b>baño privado en todas las habitaciones</b>. <b>Sumiyoshiya:</b> 15 habitaciones japonesas enfrente del géiser Ōgama. <b>Kawahiro:</b> casa japonesa antigua <em>con hogar de fuego en el centro de la sala</em>. <b>Residence Yasushi:</b> hospedería de lujo con onsen de uso exclusivamente privado. <b>Akari House:</b> apartamento de <b>cuatro dormitorios con cocina</b> para 4-10 personas — útil durante el cierre de Año Nuevo.</p>
-      <div class="badges"><span class="b b-priv">Onsen privado</span><span class="b b-four">Akari: 4 dormitorios</span><span class="b b-hist">Minka con irori</span></div>
-      <p class="links"><a href="https://nozawa-onsen.com/nozawa-accommodation/nozawa-onsen-ryokan-accommodation/">Todos con foto</a> <a href="https://www.nozawaholidays.com/properties/akari-4bedroom-apartment/">Akari House</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Nozawa+Onsen+Village+Nagano">📍 El pueblo en Maps</a></p>
-    </div>
-  </article>
-
-  <div class="compact">
-    <p class="compact-title">Lodges, hoteles y opciones económicas del pueblo</p>
-    <div><b>Nozawa Grand Hotel</b></div><div><b>Hotel Haus St. Anton</b></div><div><b>Nozawa View Shimataya</b></div>
-    <div><b>Villa Nozawa</b></div><div><b>Hatoguruma Kawabata</b></div><div><b>Lodge Matsuya</b></div>
-    <div><b>Tamayura</b></div><div><b>Utopia</b></div><div><b>Asahiya Ryokan</b></div>
-    <div><b>Lodge Nagano</b></div><div><b>Kiyotake Lodge</b></div><div><b>Aitoku Lodge</b></div>
-    <div><b>Blick Uchida</b></div><div><b>Nozawa House</b></div>
-    <p class="note2">Precio medio del pueblo <b>$138/noche</b>; en temporada alta ~$258. En diciembre, ~$212 entre semana y ~$238 en fin de semana. Reservar con <b>3 a 6 meses</b> de antelación.</p>
-  </div>
-</section>
-
-<!-- ═══════ OPCIÓN 3 · HAKUBA ═══════ -->
-<section class="opt" id="hakuba" style="--oc:var(--snow);--ocs:var(--snow-soft)">
-  <div class="opt-head">
-    <p class="opt-num">Opción 3 de 3</p>
-    <h2>🎿 Hakuba<small>Valle de esquí con diez estaciones · sede olímpica del 98 · seis subzonas con ambiente muy distinto</small></h2>
-    <p>No es un pueblo, es un <b>valle de varios kilómetros</b> con núcleos separados. Aquí la decisión de verdad es <b>en qué subzona dormir</b>; el alojamiento viene después.</p>
-    <p class="note">🗺️ <b>Las seis subzonas, en una frase:</b> <b>Wadano</b> es el premium y el que más onsen tiene · <b>Happō</b> es el centro con restaurantes y transporte · <b>Echoland</b> es el de salir de noche pero casi sin baños · <b>Cortina</b> tiene los mejores baños del valle · <b>Tsugaike</b> las pistas más fáciles · <b>Goryū</b> los precios más bajos.</p>
-  </div>
-
-  <div class="sub" id="wadano" style="--sc:var(--snow)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Wadano</h3>
-      <p class="tagline">El premium · 230+ alojamientos · la mayor concentración de onsen del valle</p>
-    </div>
-    <p class="sub-note">Bosque al norte de Happo Village, entre los remontes Kokusai y Sakka. Tranquilo y recogido. <b>Si el criterio es onsen y calma, esta es la subzona.</b></p>
-
-    <article class="lodge star" style="--oc:var(--snow)">
-      <div class="lodge-head">
-        <h4>The Wadano<span class="jp">reformado por completo en 2026</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/wadano-terraza-vistas.jpg" alt="Terraza de madera con sillones y montañas nevadas"></div><figcaption><b>La terraza</b>, con la cordillera nevada enfrente.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/wadano-recepcion-mural.jpg" alt="Recepción con mural japonés de olas"></div><figcaption>La recepción, con el mural de olas.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/the-wadano-bano-habitacion.jpg" alt="Baño de habitación con doble lavabo"></div><figcaption>Baño de habitación: doble lavabo y espejos retroiluminados.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/wadano-bano-habitacion2.jpg" alt="Otro baño de habitación"></div><figcaption>Otro de los baños de habitación.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/rosenheim-bano-exterior-nieve.jpg" alt="Rosenheim: baño exterior con muro de piedra y la nieve detrás."></div><figcaption><b>Rosenheim: baño exterior con muro de piedra y la nieve detrás.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/rosenheim-chimenea.jpg" alt="Rosenheim: la chimenea del salón."></div><figcaption>Rosenheim: la chimenea del salón.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Reformado por completo en 2026.</b> Hotel de montaña contemporáneo con <b>onsen exterior</b>, izakaya japonesa y bar. Y <b>acceso ski-in directo desde las pistas de Sakka</b>.</p>
-        <div class="badges"><span class="b b-priv">Onsen exterior</span><span class="b b-loc">Ski-in</span><span class="b b-hist">Nuevo 2026</span></div>
-        <p class="links"><a href="https://www.hakuba.com/accommodation/hotels/the-wadano/">Ficha oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=The+Wadano+Hakuba">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--snow)">
-      <div class="lodge-head">
-        <h4>Wadano Forest Hotel &amp; Apartments</h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/wforest-exterior.jpg" alt="Edificio del hotel entre árboles"></div><figcaption>El edificio, en el bosque de Wadano.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/wforest-habitacion.jpg" alt="Habitación con dos camas"></div><figcaption>Habitación doble con ventana al bosque.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/wforest-habitacion2.jpg" alt="Habitación con zona de estar"></div><figcaption>Otra habitación, con zona de estar.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>24 habitaciones occidentales con baño propio</b>, onsen, bar, restaurante, sala de juegos y wifi. A 500 metros de los remontes de Happō-One.</p>
-        <div class="badges"><span class="b b-priv">Onsen</span><span class="b b-loc">500 m de pistas</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/wadano-forest-hotel/">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Wadano+Forest+Hotel+Hakuba">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--snow)">
-      <div class="lodge-head">
-        <h4>Wadano Onsen Hotel · The Phoenix Hotel</h4>
-        <p class="price">Wadano Onsen desde ~$418 <small>/ temporada</small></p>
-      </div>
-      <div class="gal">
-      <figure><div class="ph"><img src="fotos/phoenix-onsen-piedra.jpg" alt="Phoenix: el onsen interior, en piedra."></div><figcaption><b>Phoenix:</b> el onsen interior, en piedra.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/phoenix-mist-room.jpg" alt="La mist room, que no tiene ningún otro del catálogo."></div><figcaption><b>La <em>mist room</em></b>, que no tiene ningún otro del catálogo.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/phoenix-vestuario-esqui.jpg" alt="El vestuario de esquí con secado."></div><figcaption>El vestuario de esquí con secado.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/phoenix-vinos.jpg" alt="La bodega del hotel."></div><figcaption>La bodega del hotel.</figcaption></figure>
-    </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Wadano Onsen Hotel:</b> a solo <b>200 metros de las pistas</b>, con onsen compartido interior y exterior. Es la opción económica del núcleo. <b>The Phoenix:</b> a 500 m de los remontes, con onsen <b>y una <em>mist room</em></b> para relajarse en privado o en grupos pequeños.</p>
-        <div class="badges"><span class="b b-priv">Onsen int. y ext.</span><span class="b b-priv">Mist room</span><span class="b b-loc">200 m de pistas</span></div>
-        <p class="links"><a href="https://www.booking.com/hotel/jp/wadano-onsen.html">Wadano Onsen</a> <a href="https://hakuba.com/accommodation/hotels/phoenix-hotel/">Phoenix</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Wadano+Hakuba+Nagano">📍 Wadano en Maps</a></p>
-      </div>
-    </article>
-  </div>
-
-  <div class="sub" id="happo" style="--sc:var(--ai)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Happō Village</h3>
-      <p class="tagline">El centro · restaurantes, tiendas y terminal de autobuses</p>
-    </div>
-    <p class="sub-note">♨️ <b>En pleno Happō hay dos onsen públicos abiertos a cualquiera: el Happō no Yu y el Sato no Yu.</b> Aunque el alojamiento no tenga baño, el onsen no se pierde.</p>
-
-    <article class="lodge star" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>The Happo</h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/the-happo-onsen.jpg" alt="Onsen interior con dos piscinas y mural del Fuji"></div><figcaption>El onsen, con el mural del Fuji. <b>Es interior y compartido</b>, no rotenburo.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/happo-habitacion.jpg" alt="Cama con cabecero de madera tallada"></div><figcaption>Habitación con cabecero de madera tallada.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/happo-sushi.jpg" alt="Chef preparando sushi"></div><figcaption>La barra de sushi premium.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/happo-desayuno.jpg" alt="Platos de desayuno"></div><figcaption>El desayuno.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/happo-habitacion-mural.jpg" alt="Habitación con mural de dragón pintado."></div><figcaption>Habitación con mural de dragón pintado.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/happo-habitacion-morada.jpg" alt="Otra habitación, en morado."></div><figcaption>Otra habitación, en morado.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>De los mejores hoteles del valle</b>, en el corazón del pueblo. 30-32 habitaciones con suites en la cuarta planta. Onsen y sauna, restaurante italiano, <b>sushi premium</b>, cafetería artesanal y taquillas de esquí de última generación.</p>
-        <div class="badges"><span class="b b-priv">Onsen y sauna</span><span class="b b-loc">Centro de Happō</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/the-happo/">Ficha oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=The+Happo+Hotel+Hakuba">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge star" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>evo Hotel Hakuba</h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/evo-exterior-nieve.jpg" alt="Hotel iluminado bajo la nieve"></div><figcaption><b>El hotel bajo la nieve</b>, con las ventanas encendidas.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/evo-onsen-ventanales.jpg" alt="Onsen con grandes ventanales a la montaña"></div><figcaption>El onsen, con ventanales a Happō-One e Iwatake.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/evo-terraza-montanas.jpg" alt="Terraza frente a montañas nevadas"></div><figcaption>La terraza, frente a la cordillera.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">27 habitaciones <b>justo al lado de la terminal de autobuses de Happō</b>, que moviéndonos en transporte público no es poca cosa. Su onsen tiene <b>vistas a Happō-One e Iwatake</b> y acceso exclusivo para huéspedes.</p>
-        <div class="badges"><span class="b b-priv">Onsen exclusivo</span><span class="b b-loc">Junto a la terminal</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/evo-hotel-hakuba/">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=evo+Hotel+Hakuba">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>Hakuba Hifumi<span class="jp">白馬ひふみ</span></h4>
-        <p class="price unknown">desde ~$256 <small>/ noche (tarifa de marzo)</small></p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/hifumi-banera-madera.jpg" alt="Bañera rectangular de madera con macetas"></div><figcaption><b>Bañera de madera</b> de una de las habitaciones.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/hifumi-salon.jpg" alt="Salón con butacas y ventanal al jardín"></div><figcaption>El salón, con ventanal al jardín.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Seis habitaciones con baño termal exterior propio</b>, más baños privados de alquiler fuera de las habitaciones.</p>
-        <div class="badges"><span class="b b-priv">6 hab. con rotenburo</span></div>
-        <p class="links"><a href="https://selected-ryokan.com/ryokan/hakuba-hifumi_nagano_tokyo-suburbs.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Hifumi">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>Shiroumaso · Sierra Resort · Ougiya · Miyuki</h4>
-        <p class="price">Shiroumaso desde ~¥19.048 <small>/ persona con desayuno</small></p>
-      </div>
-      <p class="nopic"><span class="mark">白</span> Sin fotos propias — sus webs no permiten extraerlas.</p>
-      <div class="lodge-body">
-        <p class="desc"><b>Shiroumaso:</b> ryokan a 2 minutos de la terminal, con baño privado de <b>agua alcalina de pH 11</b>. <b>Hotel Sierra Resort:</b> <b>número 1 de 58 hoteles de Hakuba en Tripadvisor</b>, con baño termal privado, ~$200/noche. <b>Ougiya:</b> tatami, futón y yukata, a 5 minutos en shuttle gratuito. <b>Miyuki:</b> baño termal, a 8 minutos andando.</p>
-        <div class="badges"><span class="b b-priv">Baño privado pH 11</span><span class="b b-loc">Sierra: #1 de 58</span></div>
-        <p class="links"><a href="https://shiroumaso.com/english/price.php">Shiroumaso</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Happo+Village+Hakuba+Nagano">📍 Happō en Maps</a></p>
-      </div>
-    </article>
-  </div>
-
-  <div class="sub" id="echoland" style="--sc:var(--torii)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Echoland</h3>
-      <p class="tagline">El de salir de noche · 50+ propiedades · la mejor zona de restaurantes</p>
-    </div>
-    <p class="sub-note">🚨 <b>Su punto débil es justo el que nos importa: Echoland tiene pocas opciones de onsen.</b> A cambio, la mejor escena gastronómica del valle y shuttles a todas las estaciones.</p>
-
-    <article class="lodge star" style="--oc:var(--torii)">
-      <div class="lodge-head">
-        <h4>Hakuba Echoland Apartments — el ático</h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <p class="nopic"><span class="mark">🏔️</span> Sin fotos propias — la ficha de Japan Ski Experience tiene galería.</p>
-      <div class="lodge-body">
-        <p class="desc">El ático de <b>cuatro dormitorios tiene un onsen privado grande</b> y tres baños. <b>Es la opción del catálogo entero que mejor encaja con «cuatro personas más onsen privado»</b> sin repartirse en dos habitaciones.</p>
-        <div class="badges"><span class="b b-priv">Onsen privado grande</span><span class="b b-four">4 dormitorios</span></div>
-        <p class="links"><a href="https://japanskiexperience.com/stay/hakuba-accommodation/echoland-apartments/">Ficha con fotos</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Echoland+Hakuba+Nagano">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--torii)">
-      <div class="lodge-head">
-        <h4>Courtyard by Marriott · Oak Forest Hotel<span class="jp">West Misorano</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <p class="nopic"><span class="mark">M</span> Sin fotos propias todavía.</p>
-      <div class="lodge-body">
-        <p class="desc">Los dos están en West Misorano y tienen <b>baños interiores y exteriores grandes</b>. Son las dos opciones con onsen serio de la zona, donde escasean.</p>
-        <div class="badges"><span class="b b-priv">Baños int. y ext.</span></div>
-        <p class="links"><a href="https://japanskiexperience.com/hakuba/accommodation/echoland/">Las 50+ propiedades</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Misorano+Hakuba+Nagano">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-  </div>
-
-  <div class="sub" id="cortina" style="--sc:var(--gold)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Cortina y Norikura</h3>
-      <p class="tagline">Los mejores baños del valle · al norte, más aislado</p>
-    </div>
-
-    <article class="lodge star" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Hotel Green Plaza<span class="jp">Cortina · 美人の湯 Bijin no Yu</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/greenplaza-bano-ventanal.jpg" alt="Baño termal grande con muro de piedra y ventanal"></div><figcaption><b>Uno de los once baños:</b> muro de piedra y ventanal a la montaña.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/greenplaza-bano-montana.jpg" alt="Baño con ventanal panorámico"></div><figcaption>Otro, con ventanal panorámico al valle.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/greenplaza-bano-valle.jpg" alt="Baño con ventana corrida sobre el bosque"></div><figcaption>Baño con ventana corrida sobre el bosque.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/greenplaza-bano-hinoki.jpg" alt="Bañera cuadrada de madera clara"></div><figcaption>Bañera de madera de ciprés hinoki.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/greenplaza-edificio-tejados-rojos.jpg" alt="Hotel con grandes tejados rojos"></div><figcaption>El edificio, con sus tejados rojos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/greenplaza-hotel-nieve.jpg" alt="El hotel entero bajo la nieve, con sus tejados rojos."></div><figcaption><b>El hotel entero bajo la nieve</b>, con sus tejados rojos.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/greenplaza-sushi.jpg" alt="La barra de sushi del hotel."></div><figcaption>La barra de sushi del hotel.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">Su onsen, el <b>«Bijin no Yu», tiene ONCE tipos de baños distintos: las mejores instalaciones termales de todo el valle de Hakuba</b>, sin discusión. Incluye <b>baños exteriores con vistas a las pistas</b>.</p>
-        <div class="badges"><span class="b b-priv">11 tipos de baño</span><span class="b b-loc">Vistas a pistas</span></div>
-        <p class="links"><a href="https://www.samuraisnow.com/hakuba-cortina-norikura/onsen-hot-springs-public-baths">Onsen de Cortina</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hotel+Green+Plaza+Hakuba+Cortina">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--gold)">
-      <div class="lodge-head">
-        <h4>Hakuba Alps Hotel · Norikura So<span class="jp">Norikura</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-      <figure><div class="ph"><img src="fotos/panorama-bano-humeante.jpg" alt="Baño de piedra humeando al aire libre."></div><figcaption>Baño de piedra humeando al aire libre.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/panorama-edificio-nieve.jpg" alt="El edificio bajo la nieve."></div><figcaption>El edificio bajo la nieve.</figcaption></figure>
-    </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Hakuba Alps Hotel:</b> onsen con baños interior y exterior, más una instalación llamada <b>«Karhaus» con piscina infinita, jacuzzi, baño Hitase y sala de vapor</b>. <b>Norikura So:</b> onsen local abierto al público.</p>
-        <div class="badges"><span class="b b-priv">Onsen + spa</span><span class="b b-loc">Piscina infinita</span></div>
-        <p class="links"><a href="https://thealpshotelhakuba.com/en/experiences/">Web oficial</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Norikura+Onsen">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-  </div>
-
-  <div class="sub" id="tsugaike" style="--sc:var(--moss)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Tsugaike y Goryū</h3>
-      <p class="tagline">Las pistas más fáciles de Japón · y los precios más bajos del valle</p>
-    </div>
-    <p class="sub-note">⚠️ <b>Tsugaike está administrativamente en Otari-mura, no en Hakuba-mura.</b> Buscando «Hakuba» en los portales de reserva no aparece.</p>
-
-    <article class="lodge" style="--oc:var(--moss)">
-      <div class="lodge-head">
-        <h4>Hakuba Highland Hotel<span class="jp">baños de alquiler con vistas a los Alpes</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/highland-comedor-vistas.jpg" alt="Comedor con ventanales panorámicos a la montaña"></div><figcaption><b>El comedor</b>, con ventanales a la cordillera.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/highland-habitacion.jpg" alt="Habitación con cama y vistas"></div><figcaption>Habitación con vistas al valle.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/highland-panoramica-alpes.jpg" alt="La panorámica de los Alpes japoneses desde el hotel."></div><figcaption><b>La panorámica de los Alpes japoneses</b> desde el hotel.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/highland-bano-vistas.jpg" alt="El baño, con vistas a la nieve."></div><figcaption>El baño, con vistas a la nieve.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">Baños exteriores separados por sexo <b>más baños termales de alquiler para uso privado</b>, con vistas a los Alpes japoneses.</p>
-        <div class="badges"><span class="b b-priv">Baño de alquiler privado</span><span class="b b-loc">Vistas a los Alpes</span></div>
-        <p class="links"><a href="https://selected-ryokan.com/ryokan/hakuba-highland-hotel_nagano_tokyo-suburbs.html">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Highland+Hotel">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--moss)">
-      <div class="lodge-head">
-        <h4>Hotel Sunny Valley<span class="jp">Goryū</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-      <figure><div class="ph"><img src="fotos/sunnyvalley-bano-verde.jpg" alt="El onsen natural, con bañera de madera."></div><figcaption><b>El onsen natural</b>, con bañera de madera.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/sunnyvalley-salon.jpg" alt="El salón, muy de los ochenta."></div><figcaption>El salón, muy de los ochenta.</figcaption></figure>
-    </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Valoración de 9,6 sobre 10 — la más alta de todo el catálogo.</b> Onsen natural y ryokan onsen, a minutos de Goryū y Hakuba 47.</p>
-        <div class="badges"><span class="b b-priv">Onsen natural</span><span class="b b-loc">9,6/10</span></div>
-        <p class="links"><a href="https://www.hotels.com/de1640774/hotels-hakuba-japan/">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hotel+Sunny+Valley+Hakuba+Goryu">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--moss)">
-      <div class="lodge-head">
-        <h4>Matsunoki-tei · Ha-Mon · Lodge Shosen · Berghaus · Kin-Kon-Kan</h4>
-        <p class="price">Matsunoki-tei desde $84 <small>/ noche</small></p>
-      </div>
-      <div class="gal">
-      <figure><div class="ph"><img src="fotos/matsunoki-habitacion-3camas.jpg" alt="Matsunoki-tei: habitación de tres camas, por $84 la noche."></div><figcaption><b>Matsunoki-tei: habitación de tres camas</b>, por $84 la noche.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/matsunoki-edificio-noche.jpg" alt="El edificio de noche, bajo la nieve."></div><figcaption>El edificio de noche, bajo la nieve.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/matsunoki-chimenea.jpg" alt="La chimenea de ladrillo encendida."></div><figcaption>La chimenea de ladrillo encendida.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/matsunoki-calle-nevada.jpg" alt="La calle de Tsugaike nevada."></div><figcaption>La calle de Tsugaike nevada.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hamon-habitacion-tatami.jpg" alt="Ha-Mon: habitación de tatami con cama."></div><figcaption><b>Ha-Mon:</b> habitación de tatami con cama.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/hamon-lavabo-piedra.jpg" alt="Ha-Mon: lavabo tallado en piedra."></div><figcaption>Ha-Mon: lavabo tallado en piedra.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/berghaus-rotenburo-ventanal.jpg" alt="Berghaus: el rotenburo con ventanal a la montaña."></div><figcaption><b>Berghaus: el rotenburo con ventanal a la montaña.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/berghaus-bano-madera.jpg" alt="Berghaus: otro de sus baños, en madera."></div><figcaption>Berghaus: otro de sus baños, en madera.</figcaption></figure>
-    </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Matsunoki-tei</b> es el más barato del catálogo y está a 4 minutos andando de Tsugaike. <b>Ha-Mon</b> es ski-in/ski-out literal, a 160 metros. <b>Lodge Shosen</b>, a 5 minutos. <b>Berghaus</b>, con acceso ski-to-door. <b>Kin-Kon-Kan</b> tiene planes que <b>incluyen el forfait</b>.</p>
-        <div class="badges"><span class="b b-loc">Ski-in / ski-out</span><span class="b b-four">El más barato</span><span class="b b-loc">Forfait incluido</span></div>
-        <p class="links"><a href="https://www.booking.com/landmark/jp/tsugaike-kogen-ski-area.html">Todos los de Tsugaike</a> <a href="https://matcha-jp.com/en/17379">13 alojamientos</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tsugaike+Kogen+Otari+Nagano">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-  </div>
-
-  <div class="sub" id="otros-hakuba" style="--sc:var(--faint)">
-    <div class="sub-head">
-      <h3><span class="dot">▸</span> Otros del valle</h3>
-      <p class="tagline">Hoteles que no encajan en una subzona concreta pero merecen estar</p>
-    </div>
-
-    <article class="lodge star" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>Hakuba Yamano Hotel<span class="jp">habitaciones multi-cama</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/yamano-habitacion-multicama.jpg" alt="Habitación con tres camas y techo de madera"></div><figcaption><b>Habitación de tres camas</b> con techo de madera. Del tipo que nos hace falta.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/yamano-habitacion-multicama2.jpg" alt="Otra habitación multi-cama"></div><figcaption>Otra configuración multi-cama.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/yamano-habitacion-doble.jpg" alt="Habitación doble con butaca"></div><figcaption>Habitación doble con butaca.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/yamano-cena.jpg" alt="La cena del lodge."></div><figcaption>La cena del lodge.</figcaption></figure>
-      <figure><div class="ph"><img src="fotos/tokyu-bar-arcos.jpg" alt="Tokyu: el bar, con sus arcos iluminados."></div><figcaption><b>Tokyu: el bar, con sus arcos iluminados.</b></figcaption></figure>
-      <figure><div class="ph"><img src="fotos/tokyu-yukata-balcon.jpg" alt="Tokyu: balcón con vistas a la cordillera."></div><figcaption>Tokyu: balcón con vistas a la cordillera.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">Lodge familiar con <b>habitaciones multi-cama japonesas y occidentales</b>, comida abundante y trato cercano. 💡 <b>Resuelve el problema de meter a cuatro en una sola habitación</b>, que es lo que más cuesta encontrar en Japón.</p>
-        <div class="badges"><span class="b b-four">Habitaciones multi-cama</span><span class="b b-meal">Buena comida</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/yamano-hotel/">Ficha</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Yamano+Hotel">📍 Ver en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>Rosenheim Hotel · Hotel Goryūkan<span class="jp">barrio de Mizuho</span></h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/rosenheim-exterior-nieve.jpg" alt="Edificio alpino entre abetos nevados"></div><figcaption><b>Rosenheim:</b> estilo alpino entre abetos nevados.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/rosenheim-habitacion-triple.jpg" alt="Habitación con tres camas"></div><figcaption>Rosenheim: habitación triple.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/rosenheim-habitacion-tatami.jpg" alt="Habitación japonesa de tatami"></div><figcaption>Rosenheim: habitación de tatami.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/goryukan-habitacion.jpg" alt="Habitación doble"></div><figcaption><b>Goryūkan:</b> habitación doble.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/goryukan-sushi.jpg" alt="Chef preparando sushi"></div><figcaption>Goryūkan: tiene barra de sushi propia.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc">Los dos están en el barrio de Mizuho y tienen <b>onsen con baños interior y exterior más sauna</b>. Rosenheim tiene habitaciones occidentales y japonesas, incluidas triples.</p>
-        <div class="badges"><span class="b b-priv">Onsen y sauna</span><span class="b b-four">Habitaciones triples</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/rosenheim-hotel/">Rosenheim</a> <a href="https://hakuba.com/accommodation/hotels/hotel-goryukan/">Goryūkan</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mizuho+Hakuba+Nagano">📍 Mizuho en Maps</a></p>
-      </div>
-    </article>
-
-    <article class="lodge" style="--oc:var(--ai)">
-      <div class="lodge-head">
-        <h4>Hakuba Tokyu Hotel · Mominoki Hotel · Hotel La Neige</h4>
-        <p class="price unknown">Precio por confirmar</p>
-      </div>
-      <div class="gal">
-        <figure><div class="ph"><img src="fotos/mominoki-habitacion-cuadruple.jpg" alt="Habitación con cuatro camas alineadas"></div><figcaption><b>Mominoki: habitación de cuatro camas.</b></figcaption></figure>
-        <figure><div class="ph"><img src="fotos/tokyu-exterior.jpg" alt="Edificio alargado rodeado de césped"></div><figcaption>Tokyu: el edificio, rodeado de jardín.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/tokyu-lounge.jpg" alt="Bar con barra de madera"></div><figcaption>Tokyu: el bar.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/tokyu-restaurante.jpg" alt="Comedor con mesas vestidas"></div><figcaption>Tokyu: el comedor principal.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/laneige-exterior.jpg" alt="Edificio de piedra clara con arco"></div><figcaption>La Neige: la entrada con su arco de piedra.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/laneige-lobby.jpg" alt="Salón con butacas altas"></div><figcaption>La Neige: el salón.</figcaption></figure>
-        <figure><div class="ph"><img src="fotos/mominoki-habitacion-multicama.jpg" alt="Habitación con varias camas"></div><figcaption>Mominoki: otra multi-cama.</figcaption></figure>
-      </div>
-      <div class="lodge-body">
-        <p class="desc"><b>Tokyu:</b> hotel grande y clásico del valle, con restaurantes propios. <b>Mominoki:</b> con <b>habitaciones de hasta cuatro camas</b>. <b>La Neige:</b> de los más señoriales de Hakuba.</p>
-        <div class="badges"><span class="b b-four">Mominoki: hab. de 4</span><span class="b b-loc">Hoteles grandes</span></div>
-        <p class="links"><a href="https://hakuba.com/accommodation/hotels/">Todos en hakuba.com</a> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Village+Nagano">📍 El valle en Maps</a></p>
-      </div>
-    </article>
-
-    <div class="compact">
-      <p class="compact-title">Otros del valle listados en hakuba.com</p>
-      <div><b>Double Black Hotel</b></div><div><b>Hakuba Inn Bloom</b></div><div><b>Marillen Hotel</b></div>
-      <div><b>Hotel Nishikan</b></div><div><b>Petit Hotel Shitaka</b></div><div><b>Summit Views</b></div>
-      <div><b>Villa Hakuba</b></div>
-      <p class="note2">Ficha y fotos de todos en <a href="https://hakuba.com/accommodation/hotels/">el listado oficial de hakuba.com</a>.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>Catálogo de alojamiento · actualizado el 11 de septiembre de 2026 · <b>nada reservado</b></p>
-  <p>Los precios son de referencia y no están comprobados para 4 personas en las fechas concretas. Fin de año lleva recargo.</p>
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · <b>nada reservado</b></p>
+  <p>Precios de referencia, no comprobados para 4 personas en nuestras fechas. Fin de año lleva recargo.</p>
 </footer>
-</div>
 
 <script>
-(function(){
-  var b=document.getElementById('theme'),r=document.documentElement;
-  function set(t){r.setAttribute('data-theme',t);b.textContent=t==='dark'?'☀️ Claro':'🌙 Oscuro';try{localStorage.setItem('tema',t)}catch(e){}}
-  var saved=null;try{saved=localStorage.getItem('tema')}catch(e){}
-  set(saved==='dark'?'dark':'light');
-  b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='dark'?'light':'dark')});
-})();
+const D=[
+{z:"shibu",r:1,n:"Kanaguya",jp:"歴史の宿 金具屋 · 1758",f:"kanaguya-pasillo-saigetsuro",p:12150,pt:"¥12.150–24.880 /pers",
+ w:"<b>El más espectacular del catálogo, sin discusión.</b> Patrimonio Cultural Nacional: una torre de madera de cuatro plantas de 1936 levantada sin una sola pieza de acero. Es el edificio que todo el mundo compara con la casa de baños de <em>El viaje de Chihiro</em>.",
+ s:[["priv","♨️ 5 baños privados"],["star","🏛️ Patrimonio Nacional"],["meal","🍽️ Media pensión"]],
+ u:"https://kanaguya.com/",m:"Kanaguya+Shibu+Onsen",flag:"El más espectacular"},
+{z:"shibu",r:2,n:"Shibu Onsen Kokuya",jp:"渋温泉 古久屋 · 1625",f:"kokuya-rotenburo-piedra-jardin",p:null,pt:"Por confirmar",
+ w:"Dieciséis generaciones desde 1625, de los hoteles más antiguos de Japón. <b>Diez habitaciones con su propio baño exterior</b>, seis manantiales y nueve baños entre interiores y de jardín.",
+ s:[["priv","♨️ 10 hab. con rotenburo"],["meal","🍽️ Kaiseki"],["star","🏛️ Desde 1625"]],
+ u:"https://www.ichizaemon.com/lang_en/",m:"Kokuya+Shibu+Onsen"},
+{z:"shibu",r:3,n:"Onyado Hishiya Torazo",jp:"御宿 ひしや寅蔵 · 1840",f:"hishiya-mono-jardin",p:23000,pt:"$615 los 4, con comidas",
+ w:"Trece generaciones. <b>El único con precio publicado para los cuatro</b> y con todo incluido: unos ¥23.000 por cabeza. Onsen exterior de piedra reservable en privado. Y los macacos bajan a su jardín.",
+ s:[["priv","♨️ Onsen privado"],["four","👥 Precio para 4"],["meal","🍽️ Media pensión"]],
+ u:"https://www.booking.com/hotel/jp/oyado-hishiya-torazo.html",m:"Hishiya+Torazo+Shibu+Onsen",flag:"Mejor precio para 4"},
+{z:"shibu",r:4,n:"Suminoyu",jp:"角の湯",f:"suminoyu-farolillos",p:null,pt:"Por confirmar",
+ w:"Rotenburo en la sexta planta y arquitectura histórica de madera. <b>Es el que mejor transmite lo que es dormir en Shibu:</b> el paseo nocturno en yukata y geta entre los nueve baños del pueblo.",
+ s:[["priv","♨️ Rotenburo 6.ª planta"],["loc","🔑 Llave de los 9 baños"]],
+ u:"https://www.suminoyu.com/",m:"角の湯+渋温泉"},
+{z:"shibu",r:5,n:"Koishiya Ryokan",jp:"小石屋旅館",f:"koishiya-recepcion",p:null,pt:"Por confirmar",
+ w:"<b>8,8 sobre 1.035 comentarios</b> — el mejor valorado y el que más reseñas acumula de todo el pueblo.",
+ s:[["star","⭐ 8,8 · 1.035 opiniones"],["loc","🔑 Llave de los 9 baños"]],
+ u:"https://koishiya.com/",m:"小石屋旅館+渋温泉"},
+{z:"shibu",r:6,n:"Yoroduya",jp:"よろづや · 200+ años",f:"yoroduya-bano-momoyama",p:57000,pt:"~£300 doble con comidas",
+ w:"El <b>baño Momoyama</b> es una sala entera con columnas y bóveda de madera. Y es el único del pueblo con <b>habitaciones de cama occidental</b>, por si el futón no convence a alguien.",
+ s:[["priv","♨️ Baño privado"],["four","🛏️ Camas occidentales"],["meal","🍽️ Media pensión"]],
+ u:"https://yudanaka-yoroduya.com/eng/",m:"Yoroduya+Yudanaka+Onsen"},
+{z:"shibu",r:7,n:"Kaneki Hotel",jp:"金喜ホテル",f:"kaneki-bano-rocas",p:null,pt:"Por confirmar",
+ w:"Baños con <b>muro de roca natural</b> dentro del propio edificio, y fachada de madera en plena calle principal.",
+ s:[["priv","♨️ Baños de roca"],["loc","🔑 Llave de los 9 baños"]],
+ u:"https://www.booking.com/hotel/jp/kaneki.html",m:"金喜ホテル+渋温泉"},
+{z:"shibu",r:8,n:"Masuya",jp:"ますや · 140 años",f:"masuya-banera-madera-ventanal",p:16500,pt:"¥16.500–44.000 /pers",
+ w:"Siglo y medio de historia. <b>Cuatro habitaciones con baño exterior propio</b> más baños privados de alquiler.",
+ s:[["priv","♨️ 4 hab. con rotenburo"],["meal","🍽️ Media pensión"]],
+ u:"https://selected-ryokan.com/ryokan/masuya_snow-monkey_yudanaka-shibu_nagano.html",m:"Masuya+Ryokan+Shibu+Onsen"},
+{z:"shibu",r:9,n:"Hatsunoyu",jp:"旅の宿 初の湯",f:"hatsunoyu-bano-madera",p:null,pt:"Por confirmar",
+ w:"Baño de madera oscura y una <b>sala grande de tatami</b> que puede acoger al grupo entero.",
+ s:[["priv","♨️ Baño de madera"],["four","👥 Sala para el grupo"]],
+ u:"https://hatunoyu.jp/",m:"初の湯+渋温泉"},
+{z:"shibu",r:10,n:"Shirokaneya",jp:"白金屋",f:"shirokaneya-bano-verde",p:null,pt:"Por confirmar",
+ w:"Baño de agua verde turquesa y trato muy cercano: la <em>okami</em> sirve la cena ella misma.",
+ s:[["priv","♨️ Baño propio"],["meal","🍽️ Cena servida"]],
+ u:"https://shirokaneya.com/",m:"白金屋+渋温泉"},
+{z:"shibu",r:11,n:"Shibu Hotel",jp:"渋ホテル",f:"shibuhotel-bano-madera",p:null,pt:"Por confirmar",
+ w:"Baños termales de alquiler privado, y está junto al camino del parque de los monos.",
+ s:[["priv","♨️ Baño de alquiler"],["loc","🐒 Cerca de los monos"]],
+ u:"https://selected-ryokan.com/ryokan/shibu-hotel_snow-monkey_yudanaka-shibu_nagano.html",m:"渋ホテル+渋温泉"},
+{z:"shibu",r:12,n:"Maruzen · Yumoto",jp:"丸善旅館 · 湯本",f:"yumoto-edificio-noche",p:null,pt:"Por confirmar",
+ w:"Dos ryokanes familiares del pueblo. El edificio de <b>Yumoto</b> iluminado de noche es de los más bonitos de Shibu.",
+ s:[["priv","♨️ Baño propio"],["loc","🔑 Llave de los 9 baños"]],
+ u:"https://maruzen.moo.jp/",m:"丸善旅館+渋温泉"},
+
+{z:"yudanaka",r:1,n:"Aburaya Tōsen",jp:"油屋灯泉",f:"aburaya-bano-terraza-nieve",p:24200,pt:"¥24.200–56.100 /pers",
+ w:"<b>Nueve habitaciones con baño exterior propio</b> en terraza, mirando a las montañas nevadas. Once tipos de baño termal en total y 8,9 sobre 257 comentarios. Es el que mejor cumple justo lo que buscamos.",
+ s:[["priv","♨️ 9 hab. con rotenburo"],["star","⭐ 8,9 · 11 baños"],["meal","🍽️ Media pensión"]],
+ u:"https://www.aburaya-tousen.co.jp/en/room/newroom/",m:"Aburaya+Tosen+Yudanaka",flag:"El más recomendado"},
+{z:"yudanaka",r:2,n:"Kanbayashi Senjukaku",jp:"かんばやし 千寿閣",f:"senjukaku-rotenburo-atardecer",p:null,pt:"Por confirmar",
+ w:"<b>El alojamiento más cercano a los monos:</b> cinco o diez minutos andando del inicio del sendero. Rotenburo de madera sobre el valle, mejor al atardecer.",
+ s:[["priv","♨️ Onsen privado"],["loc","🐒 5 min de los monos"],["meal","🍽️ Kaiseki"]],
+ u:"https://www.snowmonkeyresorts.com/hotels/hotel-senjukaku/",m:"Kanbayashi+Senjukaku+Yamanouchi"},
+{z:"yudanaka",r:3,n:"Jinpyokaku Honten",jp:"Kanbayashi",f:"jinpyokaku-rotenburo-jardin",p:null,pt:"Por confirmar",
+ w:"Rotenburo de piedra en jardín, también en Kanbayashi, la zona de entrada al parque de los monos.",
+ s:[["priv","♨️ Rotenburo"],["loc","🐒 Cerca de los monos"]],
+ u:"https://selected-ryokan.com/ryokan/jinpyokaku-honten_snow-monkey_kanbayshi_yudanaka-shibu_nagano.html",m:"Jinpyokaku+Kanbayashi+Yamanouchi"},
+{z:"yudanaka",r:4,n:"Shoraiso",jp:"松籟荘",f:"shoraiso-edificio-noche",p:null,pt:"Por confirmar",
+ w:"Su edificio de madera reflejado en el agua de noche es de las imágenes más bonitas de toda la zona.",
+ s:[["loc","🌙 Edificio nocturno"]],
+ u:"https://selected-ryokan.com/ryokan/shoraiso_snow-monkey_yudanaka_nagano.html",m:"Shoraiso+Yudanaka+Onsen"},
+{z:"yudanaka",r:5,n:"Biyunoyado · Katei",jp:"Yudanaka",f:"biyunoyado-bano-campo",p:14300,pt:"Desde ¥14.300 /pers",
+ w:"<b>La entrada de gama de la zona</b>, con cena y desayuno desde ¥14.300 por cabeza. Baño exterior con vistas abiertas al campo.",
+ s:[["priv","♨️ Rotenburo"],["meal","🍽️ Media pensión"]],
+ u:"https://selected-ryokan.com/ryokan/issanokomichi-biyunoyado_snow-monkey_yudanaka-shibu_nagano.html",m:"Yudanaka+Onsen+Yamanouchi",flag:"El más barato"},
+
+{z:"nozawa",r:1,n:"Tokiwaya Ryokan",jp:"常盤屋旅館 · 360+ años",f:"tokiwaya-bano-dorado",p:129,pt:"$129–204 /noche",
+ w:"<b>Su baño es una bóveda dorada con ventanales en arco</b>, de lo más espectacular de todo el catálogo. Más de 360 años en pie y una de las 100 posadas termales famosas de Japón. Y cuesta la mitad que Sakaya.",
+ s:[["star","🏛️ 360 años · Top 100"],["loc","💴 Mejor relación"],["priv","♨️ Baños termales"]],
+ u:"https://us.trip.com/hotels/nozawaonsen-hotel-detail-3053093/nozawa-onsen-tokiwaya-ryokan/",m:"Tokiwaya+Ryokan+Nozawa+Onsen",flag:"El más espectacular"},
+{z:"nozawa",r:2,n:"Ryokan Sakaya",jp:"旅館さかや · 18 generaciones",f:"sakaya-exterior-noche",p:467,pt:"Desde $467 /noche",
+ w:"<b>Su onsen familiar privado cabe cuatro personas y se reserva gratis.</b> Es el único del catálogo con baño privado a la medida del grupo entero — y Nozawa además acepta tatuajes sin discusión.",
+ s:[["priv","♨️ Privado para 4, gratis"],["four","👥 Cabe el grupo"],["star","🎨 Tatuajes sin problema"]],
+ u:"https://www.ryokan-sakaya.co.jp/en.html",m:"Ryokan+Sakaya+Nozawa+Onsen",flag:"Resuelve lo del tatuaje"},
+{z:"nozawa",r:3,n:"Kawaichiya Ryokan",jp:"河一屋旅館",f:"kawaichiya-bano-cortinas",p:455,pt:"~$455 /noche",
+ w:"<b>Doce tipos de habitación distintos</b>, algunos con baño exterior privado. Rotenburo, masajes y habitaciones familiares.",
+ s:[["priv","♨️ Rotenburo privado"],["four","👥 Hab. familiares"]],
+ u:"https://kawaichiya.jp/en/",m:"Kawaichiya+Ryokan+Nozawa+Onsen"},
+{z:"nozawa",r:4,n:"Masuya Ryokan",jp:"ますや旅館",f:"masuyanoz-bano-termal",p:null,pt:"Por confirmar",
+ w:"Sus baños termales son de los más grandes del pueblo, con ventanales a toda la pared.",
+ s:[["priv","♨️ Baños grandes"],["meal","🍽️ Media pensión"]],
+ u:"https://www.booking.com/hotel/jp/masuya-ryokan.html",m:"ますや旅館+野沢温泉"},
+{z:"nozawa",r:5,n:"Nozawa Grand Hotel",jp:"野沢グランドホテル",f:"grandhotel-bano-estatua",p:null,pt:"Por confirmar",
+ w:"Baño termal grande con muro de piedra y estatua, comedor con vistas y lobby amplio. El hotel clásico del pueblo.",
+ s:[["priv","♨️ Baños termales"],["four","👥 Hotel grande"]],
+ u:"https://www.booking.com/hotel/jp/nozawa-grand-hotel.html",m:"Nozawa+Grand+Hotel"},
+{z:"nozawa",r:6,n:"Nakajimaya · Yamadaya",jp:"中島屋 · 山田屋",f:"nakajimaya-bano-verde",p:null,pt:"Por confirmar",
+ w:"Dos ryokanes tradicionales. <b>Nakajimaya</b> tiene baños de agua verde; <b>Yamadaya</b>, uno de los edificios de madera roja más bonitos de Nozawa.",
+ s:[["priv","♨️ Baños termales"],["star","🏛️ Tradicionales"]],
+ u:"https://www.booking.com/hotel/jp/nakajimaya-ryokan.html",m:"中島屋+野沢温泉"},
+{z:"nozawa",r:7,n:"Akari House · Villa Nozawa",jp:"apartamento entero",f:"akari-cocina",p:80000,pt:"¥80.000 /noche entero",
+ w:"<b>Apartamento de cuatro dormitorios con cocina.</b> La opción de tener casa propia, y de poder cocinar durante el cierre de Año Nuevo, cuando medio pueblo baja la persiana.",
+ s:[["four","👥 4 dormitorios"],["loc","🍳 Con cocina"]],
+ u:"https://www.nozawaholidays.com/properties/akari-4bedroom-apartment/",m:"Akari+House+Nozawa+Onsen"},
+{z:"nozawa",r:8,n:"Shirakaba",jp:"白樺",f:"shirakaba-habitacion",p:null,pt:"Por confirmar",
+ w:"Tatami y futón con <b>baño privado en todas las habitaciones</b>, media pensión y vistas a la montaña.",
+ s:[["priv","♨️ Baño en todas"],["meal","🍽️ Media pensión"]],
+ u:"https://www.booking.com/hotel/jp/shirakaba.html",m:"白樺+野沢温泉"},
+
+{z:"hakuba",r:1,n:"Hotel Green Plaza",jp:"Cortina · 美人の湯",f:"greenplaza-hotel-nieve",p:null,pt:"Por confirmar",
+ w:"<b>Once tipos de baño distintos: las mejores instalaciones termales de todo el valle</b>, con baños exteriores mirando a las pistas. Está al norte, más aislado que el resto.",
+ s:[["priv","♨️ 11 tipos de baño"],["loc","🎿 Vistas a pistas"],["star","🏆 Los mejores baños"]],
+ u:"https://www.samuraisnow.com/hakuba-cortina-norikura/onsen-hot-springs-public-baths",m:"Hotel+Green+Plaza+Hakuba+Cortina",flag:"Los mejores baños"},
+{z:"hakuba",r:2,n:"The Wadano",jp:"reformado en 2026",f:"wadano-terraza-vistas",p:null,pt:"Por confirmar",
+ w:"Reformado por completo en 2026. <b>Onsen exterior y acceso ski-in directo desde las pistas de Sakka</b>, en el bosque de Wadano. Izakaya y bar propios.",
+ s:[["priv","♨️ Onsen exterior"],["loc","🎿 Ski-in directo"],["star","✨ Nuevo 2026"]],
+ u:"https://www.hakuba.com/accommodation/hotels/the-wadano/",m:"The+Wadano+Hakuba",flag:"El más recomendado"},
+{z:"hakuba",r:3,n:"Rosenheim Hotel",jp:"barrio de Mizuho",f:"rosenheim-bano-exterior-nieve",p:null,pt:"Por confirmar",
+ w:"<b>Baño exterior con muro de piedra y la nieve justo detrás</b>, más sauna y chimenea en el salón. Tiene habitaciones triples, que no abundan.",
+ s:[["priv","♨️ Baño exterior + sauna"],["four","👥 Hab. triples"]],
+ u:"https://hakuba.com/accommodation/hotels/rosenheim-hotel/",m:"Rosenheim+Hotel+Hakuba"},
+{z:"hakuba",r:4,n:"The Happo",jp:"centro de Happō",f:"the-happo-onsen",p:null,pt:"Por confirmar",
+ w:"De los mejores del valle, en el corazón del pueblo. Onsen y sauna, <b>restaurante de sushi premium</b>, italiano y cafetería. Habitaciones con murales pintados.",
+ s:[["priv","♨️ Onsen y sauna"],["loc","📍 Centro de Happō"],["star","🍣 Sushi premium"]],
+ u:"https://hakuba.com/accommodation/hotels/the-happo/",m:"The+Happo+Hotel+Hakuba"},
+{z:"hakuba",r:5,n:"evo Hotel Hakuba",jp:"junto a la terminal",f:"evo-onsen-ventanales",p:null,pt:"Por confirmar",
+ w:"Onsen con <b>ventanales a Happō-One e Iwatake</b> y acceso exclusivo de huéspedes. Y está <b>pegado a la terminal de autobuses</b>, que moviéndonos en transporte público cuenta mucho.",
+ s:[["priv","♨️ Onsen exclusivo"],["loc","🚌 Junto a la terminal"]],
+ u:"https://hakuba.com/accommodation/hotels/evo-hotel-hakuba/",m:"evo+Hotel+Hakuba"},
+{z:"hakuba",r:6,n:"Hakuba Berghaus",jp:"Tsugaike",f:"berghaus-rotenburo-ventanal",p:null,pt:"Por confirmar",
+ w:"<b>Rotenburo con ventanal corrido a la montaña</b>, y varios baños más en madera. Con acceso ski-to-door.",
+ s:[["priv","♨️ Rotenburo con vistas"],["loc","🎿 Ski-to-door"]],
+ u:"https://www.booking.com/hotel/jp/hakuba-berghaus.html",m:"Hakuba+Berghaus"},
+{z:"hakuba",r:7,n:"The Phoenix Hotel",jp:"Wadano Woods",f:"phoenix-mist-room",p:null,pt:"Por confirmar",
+ w:"Onsen de piedra <b>y una <em>mist room</em></b> para relajarse en privado o en grupos pequeños — no la tiene ningún otro. A 500 m de los remontes.",
+ s:[["priv","♨️ Onsen + mist room"],["loc","🎿 500 m de pistas"]],
+ u:"https://hakuba.com/accommodation/hotels/phoenix-hotel/",m:"Phoenix+Hotel+Hakuba"},
+{z:"hakuba",r:8,n:"Hakuba Hifumi",jp:"白馬ひふみ",f:"hifumi-banera-madera",p:256,pt:"Desde ~$256 /noche",
+ w:"<b>Seis habitaciones con baño termal exterior propio</b>, más baños privados de alquiler fuera de las habitaciones.",
+ s:[["priv","♨️ 6 hab. con rotenburo"]],
+ u:"https://selected-ryokan.com/ryokan/hakuba-hifumi_nagano_tokyo-suburbs.html",m:"Hakuba+Hifumi"},
+{z:"hakuba",r:9,n:"Hakuba Highland Hotel",jp:"vistas a los Alpes",f:"highland-panoramica-alpes",p:null,pt:"Por confirmar",
+ w:"<b>Baños termales de alquiler para uso privado</b> con vistas a los Alpes japoneses, y comedor con ventanal panorámico a la cordillera.",
+ s:[["priv","♨️ Baño de alquiler"],["loc","🏔️ Panorámica de los Alpes"]],
+ u:"https://selected-ryokan.com/ryokan/hakuba-highland-hotel_nagano_tokyo-suburbs.html",m:"Hakuba+Highland+Hotel"},
+{z:"hakuba",r:10,n:"Hakuba Yamano Hotel",jp:"habitaciones multi-cama",f:"yamano-habitacion-multicama",p:null,pt:"Por confirmar",
+ w:"Lodge familiar con <b>habitaciones de tres y cuatro camas</b>: resuelve el problema de meter a cuatro en una sola habitación, que es lo que más cuesta encontrar en Japón. Buena comida y trato cercano.",
+ s:[["four","👥 Multi-cama"],["meal","🍽️ Buena comida"]],
+ u:"https://hakuba.com/accommodation/hotels/yamano-hotel/",m:"Hakuba+Yamano+Hotel",flag:"Mejor para los 4 juntos"},
+{z:"hakuba",r:11,n:"Hakuba Tokyu Hotel",jp:"el clásico del valle",f:"tokyu-bar-arcos",p:null,pt:"Por confirmar",
+ w:"Hotel grande y clásico, con bar de arcos iluminados, restaurantes propios y jardín.",
+ s:[["priv","♨️ Baños termales"],["four","👥 Hotel grande"]],
+ u:"https://hakuba.com/accommodation/hotels/hakuba-tokyu-hotel/",m:"Hakuba+Tokyu+Hotel"},
+{z:"hakuba",r:12,n:"Matsunoki-tei",jp:"松の木亭 · Tsugaike",f:"matsunoki-habitacion-3camas",p:84,pt:"Desde $84 /noche",
+ w:"<b>El más barato de todo el catálogo</b>, y a cuatro minutos andando de Tsugaike. Habitaciones de tres camas y chimenea de ladrillo en el salón.",
+ s:[["four","👥 Hab. de 3 camas"],["loc","🎿 4 min de pistas"]],
+ u:"https://www.booking.com/hotel/jp/matsunoki-tei.html",m:"Matsunoki-tei+Tsugaike",flag:"El más barato"},
+{z:"hakuba",r:13,n:"Wadano Forest Hotel",jp:"Wadano",f:"wforest-exterior",p:null,pt:"Por confirmar",
+ w:"24 habitaciones occidentales con baño propio, onsen, bar, restaurante y sala de juegos. A 500 m de los remontes.",
+ s:[["priv","♨️ Onsen"],["loc","🎿 500 m de pistas"]],
+ u:"https://hakuba.com/accommodation/hotels/wadano-forest-hotel/",m:"Wadano+Forest+Hotel+Hakuba"}
+];
+
+const Z={
+ shibu:{t:"♨️ Shibu Onsen",s:"Opción 1 · pueblo termal",c:"var(--torii)",
+   d:"Pueblo de 1.300 años con calles empedradas y casas de madera de época Edo. Los monos a 4 km y el esquí de Shiga Kogen a un autobús. <b>Dormir aquí da la llave de los nueve baños públicos del pueblo</b>, cerrados a todos los demás."},
+ yudanaka:{t:"🐒 Yudanaka y Kanbayashi",s:"Opción 1b · el pueblo de al lado",c:"var(--gold)",
+   d:"Pegado a Shibu, y donde está la entrada al parque de los monos."},
+ nozawa:{t:"🏘️ Nozawa Onsen",s:"Opción 2 · pueblo termal con estación propia",c:"var(--moss)",
+   d:"Trece baños públicos gratis, dos destilerías de sake y una microcervecería. El 40% de las pistas son fáciles y <b>es el único de los tres que acepta tatuajes sin discusión</b>. El pero: los monos quedan a casi cuatro horas."},
+ hakuba:{t:"🎿 Hakuba",s:"Opción 3 · valle de esquí",c:"var(--snow)",
+   d:"Diez estaciones y sede olímpica del 98. No es un pueblo sino un valle con núcleos separados: <b>Wadano</b> es el premium y el que más onsen tiene, <b>Happō</b> el centro, <b>Cortina</b> tiene los mejores baños y <b>Tsugaike</b> las pistas más fáciles."}
+};
+
+var orden="rec", filtro="all";
+function pinta(){
+ var app=document.getElementById("app"); app.innerHTML="";
+ ["shibu","yudanaka","nozawa","hakuba"].forEach(function(zk){
+  var z=Z[zk];
+  var items=D.filter(function(d){return d.z===zk;});
+  if(filtro!=="all") items=items.filter(function(d){return d.s.some(function(x){return x[0]===filtro;});});
+  if(!items.length) return;
+  items=items.slice();
+  if(orden==="pre") items.sort(function(a,b){return (a.p===null)-(b.p===null)||(a.p||0)-(b.p||0);});
+  else items.sort(function(a,b){return a.r-b.r;});
+  var sec=document.createElement("section");
+  sec.className="zone"; sec.id=zk; sec.style.setProperty("--zc",z.c);
+  sec.innerHTML='<div class="zone-t"><h2>'+z.t+'</h2><span>'+z.s+'</span></div><p class="zone-d">'+z.d+'</p>';
+  items.forEach(function(d,i){
+   var a=document.createElement("article");
+   a.className="card"+(i<3&&orden==="rec"?" top3":"");
+   a.innerHTML=
+    '<div class="shot"><img src="fotos/'+d.f+'.jpg" alt="'+d.n+'" loading="lazy">'+
+      '<span class="rank">'+(i+1)+'</span>'+
+      (d.flag&&orden==="rec"?'<span class="flag">'+d.flag+'</span>':'')+
+    '</div>'+
+    '<div class="info">'+
+      '<div class="name"><h3>'+d.n+'<span class="jp">'+d.jp+'</span></h3>'+
+      '<span class="eur'+(d.p===null?" na":"")+'">'+d.pt+'</span></div>'+
+      '<p class="why">'+d.w+'</p>'+
+      '<div class="specs">'+d.s.map(function(x){return '<span class="s s-'+x[0]+'">'+x[1]+'</span>';}).join('')+'</div>'+
+      '<p class="go"><a href="'+d.u+'" target="_blank" rel="noopener">Ver ficha</a>'+
+      '<a class="m" href="https://www.google.com/maps/search/?api=1&query='+d.m+'" target="_blank" rel="noopener">📍 Mapa</a></p>'+
+    '</div>';
+   sec.appendChild(a);
+  });
+  app.appendChild(sec);
+ });
+ if(!document.querySelector(".card")) app.innerHTML='<p style="padding:2rem 0;color:var(--slate)">Ningún alojamiento cumple ese filtro.</p>';
+}
+document.getElementById("o-rec").onclick=function(){orden="rec";document.getElementById("o-rec").setAttribute("aria-pressed","true");document.getElementById("o-pre").setAttribute("aria-pressed","false");pinta();};
+document.getElementById("o-pre").onclick=function(){orden="pre";document.getElementById("o-pre").setAttribute("aria-pressed","true");document.getElementById("o-rec").setAttribute("aria-pressed","false");pinta();};
+Array.prototype.forEach.call(document.querySelectorAll(".chip.f"),function(b){b.onclick=function(){
+ filtro=b.dataset.f;
+ Array.prototype.forEach.call(document.querySelectorAll(".chip.f"),function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+ pinta();
+};});
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+pinta();
 </script>
