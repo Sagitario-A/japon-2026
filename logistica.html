@@ -1,0 +1,298 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Logística del viaje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:60rem;margin-inline:auto;padding-inline:1rem;max-width:min(60rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:60ch}
+.hero .sub b{color:var(--ink)}
+
+/* Jump nav */
+.jump{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.jump a{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;text-decoration:none;color:var(--slate);background:var(--sunken);padding:.35rem .65rem;border-radius:3px}
+.jump a:hover{color:var(--ink)}
+
+section{padding-block:1.8rem;scroll-margin-top:1rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.7rem}
+
+/* Fix box (corrección) */
+.fixbox{background:var(--moss-soft);border:1px solid var(--moss);border-left-width:4px;border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.2rem}
+.fixbox .tag{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--moss)}
+.fixbox h3{font-size:1.2rem;font-weight:800;margin:.3rem 0 .6rem}
+.fixbox p{font-size:.92rem;color:var(--slate)}
+.fixbox p+p{margin-top:.5rem}
+.fixbox b{color:var(--ink)}
+
+/* Tabla comparativa */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--mist);border-radius:6px;background:var(--paper);margin:1rem 0}
+table{border-collapse:collapse;width:100%;min-width:38rem;font-size:.86rem}
+th,td{padding:.6rem .7rem;text-align:left;border-bottom:1px solid var(--hair);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunken)}
+td b{color:var(--ink)}
+td.win{color:var(--moss);font-weight:700}
+td.bad{color:var(--torii)}
+
+.q{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.8rem}
+.q h3{font-size:1.04rem;font-weight:700;margin-bottom:.5rem}
+.q p{font-size:.9rem;color:var(--slate)}
+.q p+p{margin-top:.5rem}
+.q b{color:var(--ink)}
+
+.facts{display:grid;grid-template-columns:1fr;gap:1.3rem;margin-top:.5rem}
+.fact h3{font-family:var(--f-body);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding-bottom:.4rem;border-bottom:1px solid var(--mist);margin-bottom:.5rem}
+.fact p{font-size:.92rem;color:var(--slate)}
+.fact p+p{margin-top:.5rem}
+.fact p b{color:var(--ink)}
+.fact ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.9rem;color:var(--slate);display:flex;flex-direction:column;gap:.4rem}
+.fact ul b{color:var(--ink)}
+.no{color:var(--torii);font-weight:700}
+
+.checklist{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.checklist li{font-size:.9rem;color:var(--slate);padding-left:1.5rem;position:relative}
+.checklist li:before{content:"☐";position:absolute;left:0;color:var(--faint)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .facts{grid-template-columns:1fr 1fr}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .fixbox,.q{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="ver.html">Qué ver</a>
+        <a href="calles.html">Calles y edificios</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="logistica.html" class="now">Logística</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Logística</h1>
+    <p class="sub">Lo que hay que resolver para que el viaje funcione sobre el terreno: trenes, equipaje, dinero, conectividad y trámites. Lo que decide el itinerario en sí está en <a href="festividades.html">festividades →</a>.</p>
+    <div class="jump">
+      <a href="#equipaje">🧳 Equipaje</a>
+      <a href="#trenes">🚅 Trenes</a>
+      <a href="#dinero">💴 Dinero</a>
+      <a href="#conectividad">📶 Conectividad</a>
+      <a href="#tramites">📋 Trámites</a>
+      <a href="#frio">🌡️ Frío</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section id="equipaje">
+  <p class="lead">La pregunta de Kiko</p>
+  <h2 class="big">🧳 Equipaje: los 9 días fuera de Tokio</h2>
+
+  <div class="fixbox">
+    <span class="tag">Corrige algo que este mismo sitio decía antes</span>
+    <h3>Sí se puede dejar el equipaje en Tokio los 9 días</h3>
+    <p>Del 21 al 30 de diciembre estáis fuera de Tokio (Kioto y la nieve). Se había dado por <b>imposible</b> dejar el equipaje esos 9 días — cierto solo para las <b>taquillas normales sin personal</b>, que se vacían a los pocos días. Hay mostradores <b>con personal</b> que sí lo hacen.</p>
+    <p>✅ <b>ecbo cloak, mostrador de información de visitantes de la estación de Tokio:</b> hasta <b>15 días seguidos</b>, <b>¥800 por bulto y día</b> (~¥7.200 los 9 días). 🚨 Límite de <b>20 kg por bulto</b> — vuestras maletas de bodega pueden llegar a 23 kg, hay que aligerar antes. Reserva obligatoria por app, con hasta 2 meses de antelación. Seguro incluido hasta ¥100.000 por bulto.</p>
+    <p>💭 <b>Esto cambia el plan:</b> si las maletas grandes se quedan en Tokio, a Kioto y a la nieve se viaja con bolsas de cabina — y es posible que <b>ya no haga falta el takkyubin</b> del último día de nieve, porque no hay nada pesado que enviar por delante.</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Opción</th><th>Días máx.</th><th>Precio</th><th>A favor</th><th>En contra</th></tr></thead>
+      <tbody>
+        <tr><td><b>ecbo cloak, mostrador de Tokio</b></td><td class="win">15</td><td>¥800/bulto/día (~¥7.200 los 9 días)</td><td>No ata a ningún hotel. Reserva desde España. Seguro incluido</td><td class="bad">Límite de 20 kg por bulto</td></tr>
+        <tr><td><b>Mismo hotel, Tokio I y II</b></td><td>Todo el viaje</td><td>⚠️ Gratis o casi, según el hotel</td><td class="win">El más barato, si el hotel lo hace gratis</td><td>Obliga a repetir hotel — cierra esa decisión abierta</td></tr>
+        <tr><td><b>JR East Logistics</b>, estación de Tokio/Ueno/Sendai</td><td class="win">30</td><td class="bad">⚠️ Precio real sin confirmar</td><td>Respaldo oficial de JR East</td><td>Precio desconocido, puede salir más caro</td></tr>
+        <tr><td>Taquillas normales de estación</td><td class="bad">~3</td><td>¥500-700/día aprox.</td><td>—</td><td class="bad">No sirve para 9 días</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.85rem;color:var(--slate)">💭 Mi recomendación: ecbo cloak. Es la única opción con precio, límite de días y condiciones verificados, y no depende de qué hotel se elija.</p>
+
+  <div class="q" style="margin-top:1.2rem">
+    <h3>📦 Takkyubin: una pieza distinta, dentro del bloque de nieve</h3>
+    <p>El servicio de mensajería que lleva el equipaje de un alojamiento al siguiente, ⚠️ por unos <b>¥2.000 por bulto</b> y normalmente en 24 h. No guarda equipaje 9 días quieto: lo manda de un sitio a otro en uno.</p>
+    <p>En el plan original hacía falta para enviar las maletas de la nieve a Tokio el día antes de ver los monos, y así hacer la caminata sin ir cargados. <b>Si ya vais con bolsas de cabina</b> porque las maletas grandes se quedaron en Tokio con ecbo cloak, es posible que este envío ya no haga falta.</p>
+  </div>
+
+  <div class="q">
+    <h3>Cuánto margen tenéis</h3>
+    <p><b>2 piezas de 23 kg en bodega por persona.</b> Entre los tres que vuelan desde Madrid, son 6 maletas facturadas más cabina.</p>
+    <p>💭 <b>No os las llevéis todas solo porque podéis.</b> Moverse por Japón con seis maletas grandes es un castigo: escaleras de metro, alojamientos pequeños, trenes con espacio limitado. La jugada buena es ir con menos a la ida y comprar una maleta barata allí para la vuelta.</p>
+  </div>
+
+  <div class="q">
+    <h3>⚠️ Equipaje grande en el shinkansen</h3>
+    <p>En las líneas Tokaido, Sanyo y Kyushu, las maletas cuya suma de dimensiones pasa de 160 cm exigen reservar plaza en la zona de equipaje voluminoso. Vuestras maletas de bodega pueden llegar a 158 cm, así que os afecta. Verificar el umbral exacto y cómo se reserva.</p>
+  </div>
+</section>
+
+<section id="trenes">
+  <p class="lead">Decisión ya tomada</p>
+  <h2 class="big">🚅 Trenes: sin JR Pass</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Trayecto</th><th>Coste aprox.</th></tr></thead>
+      <tbody>
+        <tr><td>Tokio → Kioto (21 dic)</td><td>⚠️ ~¥14.000</td></tr>
+        <tr><td>Kioto → nieve (27 dic)</td><td>⚠️ ~¥16.000</td></tr>
+        <tr><td>Nagano → Tokio (30 dic)</td><td>⚠️ ~¥8.000</td></tr>
+        <tr><td><b>Total billetes sueltos</b></td><td><b>⚠️ ~¥38.000</b></td></tr>
+        <tr><td>JR Pass, 7 días</td><td class="bad">¥50.000 (¥53.000 desde el 1 oct 2026)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="q">
+    <p><b>Dos motivos, y cualquiera de los dos basta:</b> sale más caro que los billetes sueltos, y aunque compensara, el pase dura 7 días y los tres trayectos están repartidos en 21.</p>
+  </div>
+  <div class="q">
+    <h3>🚨 Reservas: un mes antes, ni un día más</h3>
+    <p>Las reservas de shinkansen abren <b>un mes antes</b> de cada trayecto, y en Año Nuevo los asientos se agotan el mismo día que salen a la venta.</p>
+    <p>📅 Fechas para poner alarma: <b>21 de noviembre</b> (viaje del 21 dic) · <b>27 de noviembre</b> (viaje del 27 dic) · <b>30 de noviembre</b> (viaje del 30 dic)</p>
+  </div>
+</section>
+
+<section id="dinero">
+  <p class="lead">Sigue funcionando con efectivo</p>
+  <h2 class="big">💴 Dinero</h2>
+  <div class="facts">
+    <div class="fact">
+      <h3>La fecha dura</h3>
+      <p><b>Los bancos cierran del 29 de diciembre al 3 de enero</b> — justo vuestro tramo de nieve y Año Nuevo. Los cajeros de 7-Eleven siguen operativos.</p>
+      <p>💭 Llegad al 28 de diciembre con un colchón de efectivo generoso para los seis días siguientes. Es la única fecha "dura" de esta página.</p>
+    </div>
+    <div class="fact">
+      <h3>Dónde sacar dinero</h3>
+      <p>Los cajeros de <b>Seven Bank</b> (todos los 7-Eleven) y de <b>Japan Post</b> son los más fiables para tarjetas extranjeras. Seven Bank además acepta Amex y UnionPay, y no aplica recargo de fin de semana.</p>
+    </div>
+    <div class="fact">
+      <h3>Revolut siendo españoles</h3>
+      <ul>
+        <li>⚠️ Verificad los límites de vuestro plan concreto antes de salir — la app, no un foro</li>
+        <li><b>Cambiad divisa entre semana</b>, nunca en fin de semana: hay recargo</li>
+        <li><b>Pocas retiradas grandes, no muchas pequeñas</b> — el cajero japonés cobra su propia comisión aparte</li>
+        <li><b>Dos tarjetas de bancos distintos.</b> El consejo más importante: si una falla con los bancos cerrados, la segunda es el rescate</li>
+      </ul>
+    </div>
+    <div class="fact">
+      <h3>Lo que no hay que hacer</h3>
+      <p><span class="no">No</span> cambiar euros a yenes en España ni en el aeropuerto — mal tipo en los dos sitios. <span class="no">No</span> contar con pagar todo con tarjeta: en el gachapon de Akihabara, no.</p>
+    </div>
+  </div>
+</section>
+
+<section id="conectividad">
+  <p class="lead">La eSIM del billete no os vale</p>
+  <h2 class="big">📶 Conectividad</h2>
+  <p style="font-size:.92rem;color:var(--slate);margin-bottom:1rem">Iberia incluye 1 GB durante 24 h (Holafly) — sirve para aterrizar y poco más. 💭 Lo que de verdad importa en vuestro caso: la cobertura en la zona de nieve, sobre red <b>Docomo</b>.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Opción</th><th>Precio</th><th>Red</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td><b>Sakura Mobile</b> 💭 cero problemas</td><td class="win">¥14.850/30 días</td><td>Docomo</td><td>Ilimitado de verdad, sin ralentización. Soporte en inglés</td></tr>
+        <tr><td><b>Ubigi</b> 💭 la equilibrada</td><td>~65$/30 días</td><td>Docomo</td><td>⚠️ Se ralentiza a ~512kbps al pasar la cuota diaria</td></tr>
+        <tr><td>Airalo</td><td>~26$/20GB/30 días</td><td class="bad">Solo LTE</td><td>La más barata, suficiente para mapas y mensajería</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="q">
+    <p>💭 <b>eSIM individual, cada uno la suya.</b> El pocket wifi sale algo más barato, pero obliga a ir siempre juntos — en 21 días de tiendas y arcades os vais a separar.</p>
+  </div>
+</section>
+
+<section id="tramites">
+  <p class="lead">Antes de salir de casa</p>
+  <h2 class="big">📋 Trámites</h2>
+  <ul class="checklist">
+    <li>⚠️ Visado: los españoles no necesitan visado hasta 90 días. Vuestro viaje son 22 — entra de sobra. Verificar que no haya cambios antes de salir</li>
+    <li>Visit Japan Web: registro online previo de inmigración y aduanas, en los días previos al vuelo — cada minuto de cola ahorrado es un minuto de sueño</li>
+    <li>Confirmar vigencia de los tres pasaportes</li>
+    <li>Seguro de viaje que <b>cubra deportes de invierno</b> — muchas pólizas los excluyen por defecto</li>
+    <li>Comprobar que el móvil acepta eSIM y está liberado</li>
+    <li>Descargar mapas de Tokio, Kioto y Nagano sin conexión</li>
+  </ul>
+</section>
+
+<section id="frio">
+  <p class="lead">Es invierno de verdad en la nieve</p>
+  <h2 class="big">🌡️ Frío</h2>
+  <p style="font-size:.92rem;color:var(--slate);margin-bottom:.8rem">Tokio y Kioto son llevaderos con abrigo normal. La zona de nieve es otra cosa: Alpes japoneses en plena temporada, bajo cero.</p>
+  <div class="q">
+    <p>Lo fácil de olvidar en la maleta:</p>
+    <ul class="checklist" style="margin-top:.6rem">
+      <li>Calzado impermeable con suela decente para la caminata de los monos — hay nieve y hielo</li>
+      <li>Ropa térmica para esquiar — el material se alquila allí, la ropa interior no</li>
+      <li>💭 <b>Kairo</b>, las bolsitas de calor autoadhesivas de cualquier konbini por céntimos. En Japón las usa todo el mundo en invierno</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · fuente completa en la investigación del repositorio de trabajo</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>
