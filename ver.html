@@ -1,0 +1,298 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Qué ver sí o sí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:64rem;margin-inline:auto;padding-inline:1rem;max-width:min(64rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:60ch}
+.hero .sub b{color:var(--ink)}
+
+/* Leyenda de niveles */
+.levels{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.9rem}
+.lvl{display:flex;align-items:center;gap:.4rem;font-size:.82rem;background:var(--sunken);border-radius:4px;padding:.35rem .6rem .35rem .5rem}
+.lvl b{font-size:1rem}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.35rem}
+.sec-sub{color:var(--slate);font-size:.92rem;max-width:60ch;margin-bottom:1.1rem}
+
+/* Tabla resumen */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--mist);border-radius:6px;background:var(--paper);margin-bottom:1rem}
+table{border-collapse:collapse;width:100%;min-width:32rem;font-size:.87rem}
+th,td{padding:.6rem .7rem;text-align:left;border-bottom:1px solid var(--hair);vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunken)}
+tbody th{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.05em;text-transform:uppercase;color:var(--slate);font-weight:600;white-space:nowrap}
+
+/* Fichas */
+.it{background:var(--paper);border:1px solid var(--mist);border-left:5px solid var(--lc,var(--ai));border-radius:6px;margin-bottom:.85rem;overflow:hidden}
+.it-head{padding:.85rem 1.05rem .5rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem;align-items:baseline}
+.it-head h3{font-size:1.12rem;font-weight:800;color:var(--ink);margin-right:auto}
+.it-head .badge{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:.22rem .5rem;border-radius:3px;background:var(--lcs,var(--sunken));color:var(--lc,var(--slate));white-space:nowrap}
+.it-body{padding:0 1.05rem 1rem;display:flex;flex-direction:column;gap:.45rem}
+.it-body p{font-size:.9rem;color:var(--slate)}
+.it-body p b{color:var(--ink)}
+.it-meta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-family:var(--f-mono);font-size:.72rem;color:var(--faint)}
+.it-meta b{color:var(--ink);font-weight:700}
+
+.grid2{display:grid;gap:.85rem;grid-template-columns:1fr}
+
+.trash{background:var(--sunken);border-radius:6px;padding:1rem 1.1rem}
+.trash h3{font-size:1.05rem;font-weight:800;margin-bottom:.5rem}
+.trash ul{margin:0;padding-left:1.1rem;font-size:.88rem;color:var(--slate);display:flex;flex-direction:column;gap:.4rem}
+.trash ul b{color:var(--ink)}
+
+.q{background:var(--paper);border:1px solid var(--mist);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.8rem}
+.q h3{font-size:1.06rem;font-weight:700;margin-bottom:.5rem}
+.q p{font-size:.9rem;color:var(--slate)}
+.q b{color:var(--ink)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .grid2{grid-template-columns:1fr 1fr}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .it,.q,.trash{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="ver.html" class="now">Qué ver</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Qué ver sí o sí</h1>
+    <p class="sub">No es una lista turística genérica: cruza los clásicos de postal de Japón con lo que el propio grupo ya dijo que le importa —gachapon, arcades, manga, videojuegos—, con precio y horario verificados a hoy. El día a día que los encaja está en <a href="itinerario.html">el itinerario →</a></p>
+    <div class="levels">
+      <span class="lvl">🔒 <b>Innegociable</b> — ya decidido</span>
+      <span class="lvl">⭐ <b>Recomendación fuerte</b> — propuesta mía</span>
+      <span class="lvl">💭 <b>Opcional</b> — si sobra tiempo</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">De un vistazo</p>
+  <h2 class="big">La tabla resumen</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Nivel</th><th>Tokio</th><th>Kioto y alrededores</th></tr></thead>
+      <tbody>
+        <tr><th>🔒 Innegociable</th><td>Shibuya, Sensō-ji, Meiji Jingū</td><td>Fushimi Inari, bosque de bambú</td></tr>
+        <tr><th>⭐ Recomendación fuerte</th><td>Akihabara a fondo, Shinjuku de noche, Nakano Broadway, Ikebukuro, Gundam Odaiba</td><td>Kiyomizu-dera, Tenryū-ji, Kinkaku-ji, monos de Iwatayama, Nara, Gion</td></tr>
+        <tr><th>💭 Opcional</th><td>Skytree (redundante con Shibuya Sky)</td><td>Super Nintendo World (día propio), Den Den Town/Dōtonbori</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="q">
+    <p>💭 <b>Lo que salta a la vista:</b> entre lo innegociable y la recomendación fuerte, ya hay
+    más sitios que mañanas libres en el itinerario propuesto. La conversación real no es "qué
+    añadimos", es <b>qué se prioriza y qué se deja fuera</b> — y esa prioridad la pone el grupo.</p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Tokio</p>
+  <h2 class="big">🔒 Innegociables de postal</h2>
+  <div class="grid2">
+    <article class="it" style="--lc:var(--ai)">
+      <div class="it-head"><h3>Cruce de Shibuya + Hachikō</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>El Tokio que todo el mundo tiene en la cabeza. Verlo desde arriba en Shibuya Sky y cruzarlo a pie son dos experiencias distintas — merece hacer las dos.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--ai)">
+      <div class="it-head"><h3>Sensō-ji + Nakamise</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>El templo más fotografiado de Tokio. A las 8 de la mañana está casi vacío; a las 11, es una cola india.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--ai)">
+      <div class="it-head"><h3>Meiji Jingū</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>El santuario más importante de Tokio, en pleno bosque. Verlo un día normal y volver el 1 de enero para el <em>hatsumōde</em> son dos visitas completamente distintas.</p></div>
+    </article>
+  </div>
+
+  <h2 class="big" style="margin-top:1.6rem">⭐ Mi recomendación fuerte</h2>
+  <div class="grid2">
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Akihabara a fondo, no de paso</h3><span class="badge">Gasto según se juegue</span></div>
+      <div class="it-body"><p>Es el corazón de "el alma del viaje" del brief. Un día entero: <b>Super Potato</b> (retro), <b>Mandarake Complex</b> (manga y figuras de segunda mano en 8 plantas), salones de gachapon, y los arcades de <b>GiGO</b> y <b>Taito Station</b> — las dos cadenas siguen operando por separado.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Shinjuku de noche</h3><span class="badge">Gratis andar</span></div>
+      <div class="it-body"><p>Omoide Yokochō y Golden Gai: callejones de posguerra, yakitori humeante, barras de dos metros. El Tokio de las películas.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Nakano Broadway</h3><span class="badge">Gasto según se compre</span></div>
+      <div class="it-body"><p>El Akihabara "de verdad" para muchos otakus: menos turístico, más vintage. Mandarake tiene aquí su tienda madre repartida en plantas especializadas.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Ikebukuro: Otome Road + Sunshine City</h3><span class="badge">Gasto según se compre</span></div>
+      <div class="it-body"><p>El lado del manga y los videojuegos para un público distinto de Akihabara — más shōjo, más idol, Pokémon Center incluido.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Gundam de Odaiba</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>Estatua a tamaño real de 19,7 m con animaciones programadas varias veces al día. Está al lado de teamLab, no roba un día aparte.</p></div>
+    </article>
+  </div>
+
+  <h2 class="big" style="margin-top:1.6rem">💭 Opcional, con condición</h2>
+  <article class="it" style="--lc:var(--snow);--lcs:var(--snow-soft)">
+    <div class="it-head"><h3>Tokyo Skytree</h3><span class="badge">¥1.800–4.800</span></div>
+    <div class="it-body">
+      <p>🚨 <b>Precio nuevo desde abril de 2026: tarifa dinámica.</b> Ya no hay precio fijo por temporada — el Tenbo Deck (350 m) va de ¥1.800 a ¥3.600 según el día, y el combinado con el Tenbo Galleria (450 m) de ¥3.000 a ¥4.800.</p>
+      <p>💭 Con Shibuya Sky ya en el plan, un segundo mirador es redundante salvo que a alguien le tire mucho la silueta del propio Skytree.</p>
+    </div>
+  </article>
+</section>
+
+<section>
+  <p class="lead">Kioto y alrededores</p>
+  <h2 class="big">🔒 Innegociables de postal</h2>
+  <div class="grid2">
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>Fushimi Inari Taisha</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>Miles de torii bermellón subiendo la montaña. Gratis y abierto 24 horas, pero imprescindible ir <b>antes de las 8 de la mañana</b> — a las 10 la subida es una cola sin espacio para fotos.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>Bosque de bambú de Arashiyama</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>El otro icono absoluto de Kioto. Acceso libre, mejor a primera hora antes de los grupos.</p></div>
+    </article>
+  </div>
+
+  <h2 class="big" style="margin-top:1.6rem">⭐ Mi recomendación fuerte</h2>
+  <div class="grid2">
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Kiyomizu-dera</h3><span class="badge">¥500</span></div>
+      <div class="it-body"><p>El templo sobre pilotes de madera con la vista panorámica de Kioto, Patrimonio de la Humanidad. Se combina de camino con Sannenzaka y Ninenzaka.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Tenryū-ji</h3><span class="badge">¥500 + ¥300</span></div>
+      <div class="it-body"><p>El templo del propio Arashiyama, jardín del siglo XIV, Patrimonio de la Humanidad. Justo detrás del bosque de bambú.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Kinkaku-ji</h3><span class="badge">¥500</span></div>
+      <div class="it-body"><p>El Pabellón Dorado reflejado en su propio estanque — la imagen más repetida de Kioto en cualquier guía.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Iwatayama Monkey Park</h3><span class="badge">¥800</span></div>
+      <div class="it-body"><p>Otros monos de la nieve, estos sin nieve: viven en libertad con vistas a toda la ciudad. Subida de 20-30 min a pie.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Nara: Tōdai-ji + parque de los ciervos</h3><span class="badge">¥800 + ¥200</span></div>
+      <div class="it-body"><p>El Buda de bronce más grande de Japón dentro del edificio de madera más grande del mundo, y más de mil ciervos sagrados sueltos por el parque.</p></div>
+    </article>
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Gion al atardecer</h3><span class="badge">Gratis</span></div>
+      <div class="it-body"><p>El barrio de las geishas y los <em>machiya</em> de madera. No hace falta plan: caminar por Hanamikoji al anochecer.</p></div>
+    </article>
+  </div>
+
+  <h2 class="big" style="margin-top:1.6rem">💭 Opcional, con condición</h2>
+  <div class="grid2">
+    <article class="it" style="--lc:var(--snow);--lcs:var(--snow-soft)">
+      <div class="it-head"><h3>Super Nintendo World, USJ Osaka</h3><span class="badge">¥8.400–11.900</span></div>
+      <div class="it-body">
+        <p>🚨 <b>Sistema nuevo desde el 5 de enero de 2026:</b> ya no basta la entrada del parque — hace falta además una <b>franja horaria por la app oficial</b>, gratis pero limitada, o un Express Pass con Nintendo World (¥12.800–25.800). Las franjas de mañana se agotan en minutos.</p>
+        <p>💭 Encaja mejor como <b>día propio</b> que como añadido a Den Den Town/Dōtonbori: son ~47 min y ¥840 en tren desde Kioto, pero el parque entero se lleva un día.</p>
+      </div>
+    </article>
+    <article class="it" style="--lc:var(--snow);--lcs:var(--snow-soft)">
+      <div class="it-head"><h3>Den Den Town + Dōtonbori, Osaka</h3><span class="badge">Gasto según se compre</span></div>
+      <div class="it-body"><p>El Akihabara de Osaka, más pequeño y menos turístico, y el paseo nocturno con el cartel de Glico.</p></div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <p class="lead">La nieve</p>
+  <h2 class="big">🔒 Ya resuelto en el brief</h2>
+  <div class="q">
+    <p><b>Esquiar 2 días</b> y <b>ver los monos de Jigokudani</b> son innegociables. Lo que queda
+    abierto —baños públicos de Shibu, vida nocturna de Nozawa, qué estación de Hakuba— depende de
+    la zona que se elija: comparativa completa en <a href="zonas.html">Zonas de nieve →</a></p>
+  </div>
+</section>
+
+<section>
+  <p class="lead">Para no repetir el error</p>
+  <h2 class="big">Evaluado y descartado</h2>
+  <div class="trash">
+    <ul>
+      <li><b>Robot Restaurant</b> — cerró definitivamente en 2023. Sigue en guías desactualizadas, no existe</li>
+      <li><b>Tokyo Tower</b> — redundante con Skytree y Shibuya Sky, y peor vista de las tres</li>
+      <li><b>DisneySea / Disneyland Tokio</b> — no está en los intereses declarados del grupo, y un parque entero come dos días que no sobran con el ritmo pedido</li>
+      <li><b>Cafés de animales</b> (búhos, erizos, gatos) — cada vez más cuestionados por bienestar animal, y no estaban en los intereses del grupo</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · precios y horarios contrastados a hoy, con fuente en la investigación completa del repositorio de trabajo</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>
