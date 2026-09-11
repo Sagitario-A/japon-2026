@@ -1,0 +1,249 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Calles, barrios y edificios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDF1F6; --paper:#FFFFFF; --sunken:#F4F7FB;
+  --ink:#14202F; --slate:#4E6076; --faint:#8496AC;
+  --mist:#D4DEEA; --hair:#E7EDF4;
+  --ai:#1E4C82; --torii:#C0392B; --torii-soft:#FBEDEA;
+  --gold:#8A6A2F; --gold-soft:#FAF3E4;
+  --snow:#2E7AA8; --snow-soft:#E9F3F9;
+  --moss:#3F6B4A; --moss-soft:#EAF3EC;
+  --f-disp:"Shippori Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --ground:#101725; --paper:#18212F; --sunken:#1E2938;
+  --ink:#EAF0F7; --slate:#A7B6C8; --faint:#76889C;
+  --mist:#2D3949; --hair:#26313F;
+  --ai:#7FB0E6; --torii:#F07B66; --torii-soft:#38221E;
+  --gold:#DCBC79; --gold-soft:#312819;
+  --snow:#7FC2E4; --snow-soft:#152834;
+  --moss:#8CBE97; --moss-soft:#1A2B1E;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:64rem;margin-inline:auto;padding-inline:1rem;max-width:min(64rem,100%)}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--torii);outline-offset:2px}
+
+.hero{background:var(--paper);border-bottom:1px solid var(--mist)}
+.hero-in{padding-block:1.6rem 1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+.tabs a{flex-shrink:0;white-space:nowrap;text-decoration:none;color:var(--slate);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding-bottom:2px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--ink)}
+.tabs a.now{color:var(--torii);border-color:currentColor}
+.top button{font:inherit;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:.4rem .7rem;border:1px solid var(--mist);background:var(--paper);color:var(--slate);cursor:pointer;border-radius:3px;flex-shrink:0}
+.hero h1{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+.hero .sub{color:var(--slate);max-width:60ch}
+.hero .sub b{color:var(--ink)}
+
+section{padding-block:1.8rem}
+section+section{border-top:1px solid var(--mist)}
+.lead{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:.4rem}
+h2.big{font-size:clamp(1.4rem,5vw,1.9rem);font-weight:800;margin-bottom:.35rem}
+.sec-sub{color:var(--slate);font-size:.92rem;max-width:60ch;margin-bottom:1.1rem}
+.already{background:var(--sunken);border-radius:6px;padding:.85rem 1rem;font-size:.86rem;color:var(--slate);margin-bottom:1.1rem}
+.already b{color:var(--ink)}
+.already a{color:var(--ai)}
+
+.grid2{display:grid;gap:.85rem;grid-template-columns:1fr}
+.it{background:var(--paper);border:1px solid var(--mist);border-left:5px solid var(--lc,var(--ai));border-radius:6px;overflow:hidden}
+.it-head{padding:.85rem 1.05rem .5rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem;align-items:baseline}
+.it-head h3{font-size:1.1rem;font-weight:800;color:var(--ink);margin-right:auto}
+.it-head .badge{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:.22rem .5rem;border-radius:3px;background:var(--lcs,var(--sunken));color:var(--lc,var(--slate));white-space:nowrap}
+.it-body{padding:0 1.05rem 1rem;display:flex;flex-direction:column;gap:.45rem}
+.it-body p{font-size:.9rem;color:var(--slate)}
+.it-body p b{color:var(--ink)}
+.it-foot{font-family:var(--f-mono);font-size:.72rem;color:var(--faint);padding-top:.3rem;border-top:1px dashed var(--hair)}
+.it-foot b{color:var(--ink);font-weight:700}
+
+.trash{background:var(--sunken);border-radius:6px;padding:1rem 1.1rem}
+.trash h3{font-size:1.05rem;font-weight:800;margin-bottom:.5rem}
+.trash ul{margin:0;padding-left:1.1rem;font-size:.88rem;color:var(--slate);display:flex;flex-direction:column;gap:.4rem}
+.trash ul b{color:var(--ink)}
+
+footer{border-top:1px solid var(--mist);padding-block:1.4rem 2.5rem;font-size:.78rem;color:var(--faint)}
+
+@media (min-width:46rem){
+  .wrap{padding-inline:2rem}
+  section{padding-block:2.5rem}
+  .hero-in{padding-block:2.4rem 1.8rem}
+  .grid2{grid-template-columns:1fr 1fr}
+}
+@media print{
+  :root{--ground:#fff;--paper:#fff;--sunken:#f6f8fb;--ink:#111;--slate:#333;--faint:#666;--mist:#bbb;--hair:#ddd}
+  .it,.trash{break-inside:avoid}
+  body{font-size:9.5pt}@page{margin:12mm}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <nav class="top">
+      <div class="tabs">
+        <a href="index.html">Inicio</a>
+        <a href="itinerario.html">Itinerario</a>
+        <a href="ver.html">Qué ver</a>
+        <a href="calles.html" class="now">Calles y edificios</a>
+        <a href="zonas.html">Zonas de nieve</a>
+        <a href="alojamientos.html">Alojamiento</a>
+        <a href="festividades.html">Festividades</a>
+        <a href="reservas.html">Reservas</a>
+      </div>
+      <button id="theme" type="button">🌙 Oscuro</button>
+    </nav>
+    <h1>Calles, barrios y edificios</h1>
+    <p class="sub">No todo lo que merece la pena es un templo o un museo. Esto es <b>el tejido urbano</b>: calles con carácter para perderse sin plan, y edificios que valen por su arquitectura, no por lo que hay dentro. Complementa <a href="ver.html">qué ver sí o sí →</a>, no lo repite.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">Tokio</p>
+  <h2 class="big">Barrios y calles</h2>
+  <div class="already">💭 Ya están en <a href="ver.html">qué ver sí o sí</a> y no se repiten aquí: <b>Omoide Yokochō y Golden Gai</b> (Shinjuku de noche).</div>
+  <div class="grid2">
+
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Yanaka Ginza, en Yanesen</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>Calle comercial de 170 metros y unas 60 tiendas, en uno de los pocos barrios de Tokio que sobrevivió a los bombardeos de la guerra: casas bajas de madera, tiendas de toda la vida.</p>
+        <p>💭 Es el "Tokio de antes" que ya casi no existe: sin rascacielos, sin neón, con gatos de verdad viviendo en la calle. Al final, la escalinata <b>Yūyake Dandan</b> ("la escalera del atardecer") mira al oeste. Hay siete gatos de madera escondidos por la calle — encontrarlos todos da buena suerte, dicen.</p>
+      </div>
+      <p class="it-foot">📍 Estación Nippori, salida norte</p>
+    </article>
+
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Kagurazaka</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>El barrio francés de Tokio: alrededor de una cuarta parte de los franceses que viven en la ciudad residen aquí, por el Instituto Francés cercano. Fue un barrio de geishas, y las calles empedradas lo recuerdan.</p>
+        <p>💭 Bistrós franceses al lado de casas de té tradicionales, subiendo una cuesta de piedra. <b>Kakurenbo Yokochō</b> ("el callejón del escondite") conserva el empedrado y los muros negros del antiguo barrio de placer.</p>
+      </div>
+      <p class="it-foot">📍 Estación Kagurazaka o Iidabashi</p>
+    </article>
+
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Shimokitazawa</h3><span class="badge">Gratis andar</span></div>
+      <div class="it-body">
+        <p>El barrio de la ropa vintage, el teatro pequeño y la música indie desde los años setenta. Más de un centenar de tiendas de segunda mano concentradas en pocas manzanas.</p>
+        <p>💭 No es un barrio de postal, es un barrio para curiosear tiendas raras y parar en una cafetería. Si a alguien del grupo le va más el rollo alternativo que el gachapon, este es su sitio.</p>
+      </div>
+      <p class="it-foot">📍 Estación Shimokitazawa</p>
+    </article>
+
+    <article class="it" style="--lc:var(--gold);--lcs:var(--gold-soft)">
+      <div class="it-head"><h3>Arquitectura de Omotesandō</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>La avenida a la que llaman en broma "la sala de exposiciones de los arquitectos": <b>Prada Aoyama</b> (Herzog & de Meuron, fachada de rombos de cristal), <b>TOD'S Omotesandō</b> (Toyō Itō, la fachada imita las ramas de los árboles de la propia avenida), <b>Omotesandō Hills</b> (Tadao Andō, rampa en espiral con la misma pendiente que la calle) y <b>GYRE</b> (MVRDV).</p>
+        <p>💭 Se ve andando, gratis, y son diez minutos desde Harajuku/Takeshita-dōri — cero coste añadido si ya se está por la zona.</p>
+      </div>
+      <p class="it-foot">📍 Estación Omotesandō o Meiji-jingūmae</p>
+    </article>
+
+    <article class="it" style="--lc:var(--snow);--lcs:var(--snow-soft)">
+      <div class="it-head"><h3>Mirador del Ayuntamiento de Tokio</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>Mirador gratuito en la planta 45 del Tokyo Metropolitan Government Building, a 202 m de altura. Con día despejado de invierno se llega a ver el Fuji.</p>
+        <p>💭 La alternativa gratis a Shibuya Sky o al Skytree. No es la misma vista —está en Shinjuku, no en el centro—, pero por 0 yenes es difícil de superar.</p>
+      </div>
+      <p class="it-foot">🕐 9:30–22:00 · torre sur hasta las 17:30</p>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <p class="lead">Kioto y alrededores</p>
+  <h2 class="big">Barrios, calles y un edificio</h2>
+  <div class="already">💭 Ya están en <a href="ver.html">qué ver sí o sí</a> y no se repiten aquí: <b>Gion al atardecer</b>, <b>Sannenzaka/Ninenzaka</b>, <b>Nishiki Market</b>, <b>Teramachi/Shinkyōgoku</b>.</div>
+  <div class="grid2">
+
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>Pontochō</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>Uno de los cinco barrios de geishas de Kioto: un callejón de 550 metros de largo y apenas 2 de ancho, entre el río Kamo y Kawaramachi.</p>
+        <p>💭 Menos turístico que Gion y más íntimo. Al anochecer, cuando se encienden los farolillos, a veces se ve a una <em>maiko</em> de camino a una cita en una casa de té.</p>
+      </div>
+      <p class="it-foot">📍 A un paseo de Kawaramachi/Shijō</p>
+    </article>
+
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>El barrio sakero de Fushimi</h3><span class="badge">Gasto opcional</span></div>
+      <div class="it-body">
+        <p>🚨 <b>No es la misma zona que Fushimi Inari</b>, aunque comparta nombre — es fácil confundirlas. Es el barrio de <b>Gekkeikan</b> y <b>Kizakura</b>, dos de las marcas de sake más conocidas de Japón, con calles de canales y sauces.</p>
+        <p>💭 El Museo Gekkeikan Ōkura incluye cata. Hay también paseos en barca tradicional (<em>jikkoku-bune</em>) por el canal, según temporada.</p>
+      </div>
+      <p class="it-foot">🕐 ~30 min desde la estación de Kioto vía Keihan, bajar en Chūshojima</p>
+    </article>
+
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>El Camino del Filósofo</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>Sendero de 2 km junto a un canal, entre Ginkaku-ji y Nanzen-ji, con unos 400 cerezos plantados. El nombre viene del filósofo Nishida Kitarō, que paseaba aquí a diario.</p>
+        <p>⚠️ En diciembre no hay cerezos —eso es primavera—, pero conecta dos templos que también merecen la pena, y en invierno está mucho más tranquilo que en abril.</p>
+      </div>
+      <p class="it-foot">📍 Entre Ginkaku-ji y Nanzen-ji</p>
+    </article>
+
+    <article class="it" style="--lc:var(--torii)">
+      <div class="it-head"><h3>La estación de Kioto, el edificio</h3><span class="badge">Gratis</span></div>
+      <div class="it-body">
+        <p>Obra del arquitecto Hara Hiroshi (1997), 70 m de alto y 470 m de largo. La gran nave de acero visto se llama "La Matriz" y su rejilla imita el trazado en cuadrícula de las calles de Kioto.</p>
+        <p>💭 Dos miradores gratis dentro de la propia estación: el pasillo de cristal <b>Skyway</b> (planta 11) y la terraza <b>Sky Garden</b> (planta 15) — nadie los busca porque están escondidos dentro de un centro comercial.</p>
+      </div>
+      <p class="it-foot">🕐 Skyway 10:00–22:00</p>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <p class="lead">Osaka</p>
+  <h2 class="big">Un edificio de ciencia ficción</h2>
+  <div class="already">💭 Ya están en <a href="ver.html">qué ver sí o sí</a>: <b>Den Den Town</b> y <b>Dōtonbori</b>. Shinsekai también, como barrio retro.</div>
+  <article class="it" style="--lc:var(--moss);--lcs:var(--moss-soft)">
+    <div class="it-head"><h3>Umeda Sky Building, el Jardín Flotante</h3><span class="badge">¥2.000</span></div>
+    <div class="it-body">
+      <p>Dos torres de 173 m unidas por un mirador circular abierto en lo alto — arquitectura que parece sacada de una película de ciencia ficción de los ochenta.</p>
+      <p>⚠️ El 1 de enero de 2026 abrió especial de 6:00 a 8:00 para el primer amanecer del año. 💭 Si repiten el patrón en 2027, sería una alternativa a Shibuya Sky sin el aforo tan limitado — hay que confirmarlo más adelante.</p>
+    </div>
+    <p class="it-foot">🕐 9:30–22:30</p>
+  </article>
+</section>
+
+<section>
+  <p class="lead">Para no repetir el error</p>
+  <h2 class="big">Evaluado y descartado</h2>
+  <div class="trash">
+    <ul>
+      <li><b>Nakagin Capsule Tower</b> — 🚨 ya no existe, se demolió en 2022. Sigue en listas y artículos como si se pudiera visitar</li>
+      <li><b>Meguro River (Nakameguro)</b> — es un paseo de cerezos; en diciembre es un canal sin más. Solo compensa en primavera</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <p>Actualizado el 11 de septiembre de 2026 · precios y horarios contrastados a hoy, con fuente en la investigación completa del repositorio de trabajo</p>
+</footer>
+
+<script>
+(function(){var b=document.getElementById("theme"),r=document.documentElement;
+ function set(t){r.setAttribute("data-theme",t);b.textContent=t==="dark"?"☀️ Claro":"🌙 Oscuro";try{localStorage.setItem("tema",t)}catch(e){}}
+ var s=null;try{s=localStorage.getItem("tema")}catch(e){}
+ set(s==="dark"?"dark":"light");
+ b.onclick=function(){set(r.getAttribute("data-theme")==="dark"?"light":"dark");};})();
+</script>
